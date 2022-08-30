@@ -1,0 +1,103 @@
+.layout {
+  height: 100vh;
+
+  [nz-menu] {
+    overflow: auto;
+    height: calc(100vh - 64px);
+  }
+
+
+  .logo {
+    //height: 32px;
+    //background: rgba(255, 255, 255, 0.2);
+    //margin: 16px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  nz-header {
+    background: #fff;
+    padding: 0;
+
+    .header {
+      background-color: #0F57BF;
+      display: flex;
+      justify-content: space-between;
+      height: 64px;
+
+      .trigger {
+        font-size: 18px;
+        line-height: 64px;
+        cursor: pointer;
+        color: #ffffff;
+        margin-right: 16px;
+      }
+
+      .trigger:hover {
+        color: #1890ff;
+      }
+
+      .title {
+        margin-left: 16px;
+        font-weight: bold;
+        font-size: 22px;
+        color: #ffffff;
+      }
+
+      .operate {
+        text-align: right;
+        min-width: 471px;
+
+        a {
+          margin-right: 16px;
+          color: #79BEE9;
+        }
+
+        .out-db-ui{
+          height:40px;
+          line-height:30px;
+          padding: 5px 14px;
+          margin-right:16px;
+          display: inline-block;
+          color:#eee;
+          background-color: #1890ff;
+          border-radius: 3px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  nz-content {
+    margin: 0 16px;
+  }
+
+  .inner-content {
+    //padding: 24px;
+  }
+
+  nz-footer {
+    text-align: center;
+  }
+}
+
+
+.active-dashboard {
+  nz-content {
+    margin: 0;
+  }
+
+  nz-header {
+    // .header {
+    //   height: (64px + 170px);
+    // }
+
+    //.operate {
+    //  background-image: url("../../assets/images/banner.png");
+    //}
+  }
+
+
+}
