@@ -1,0 +1,98 @@
+<nz-layout class="layout" [ngClass]="{'active-dashboard':isDashboard}">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" nzWidth="260px" [nzTrigger]="null">
+    <div class="logo">
+      <img src="assets/images/logo.png" height="40" width="112.5" *ngIf="!isCollapsed"/>
+      <img src="assets/images/logo2.png" height="40" width="40" *ngIf="isCollapsed"/>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <ng-template ngFor let-item [ngForOf]="menu" let-i="index">
+        <ng-template [ngIf]="item.show">
+          <li nz-submenu [nzTitle]="item.title" [nzIcon]="item.icon"
+              *ngIf="item.children && item.children.length > 0">
+            <ul>
+              <ng-template ngFor let-citem [ngForOf]="item.children" let-i="index">
+                <!-- <li nz-menu-item *ngIf="c.show" [routerLink]="c.routerLink" nzMatchRouter>
+                  <i nz-icon [nzType]="c.icon"></i>
+                  <span>{{c.title}}</span>
+                </li> -->
+                <!-- // 3级菜单 -->
+                <ng-template [ngIf]="citem.show">
+                  <li nz-submenu [nzTitle]="citem.title" [nzIcon]="citem.icon"
+                      *ngIf="citem.children && citem.children.length > 0">
+                    <ul>
+                      <ng-template ngFor let-c [ngForOf]="citem.children" let-i="index">
+                        <li nz-menu-item *ngIf="c.show" [routerLink]="c.routerLink" nzMatchRouter>
+                          <i nz-icon [nzType]="c.icon"></i>
+                          <span>{{c.title}}</span>
+                        </li>
+                      </ng-template>
+                    </ul>
+                  </li>
+                  <li nz-menu-item *ngIf="!citem.children || citem.children.length === 0" [routerLink]="citem.routerLink"
+                      nzMatchRouter>
+                    <i nz-icon [nzType]="citem.icon"></i>
+                    <span>{{citem.title}}</span>
+                  </li>
+                </ng-template>
+
+              </ng-template>
+            </ul>
+          </li>
+          <li nz-menu-item *ngIf="!item.children || item.children.length === 0" [routerLink]="item.routerLink"
+              nzMatchRouter>
+            <i nz-icon [nzType]="item.icon"></i>
+            <span>{{item.title}}</span>
+          </li>
+        </ng-template>
+      </ng-template>
+    </ul>
+  </nz-sider>
+
+  <nz-layout>
+    <nz-header>
+      <div class="header">
+        <div class="title">
+          <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+             (click)="isCollapsed = !isCollapsed"></i>数据中心智能运维系统
+        </div>
+        <div class="operate">
+          <!--<a style="cursor: auto">{{user.name}}</a>
+          <app-notification></app-notification>
+          <a nz-dropdown [nzDropdownMenu]="dropdownMenu" [nzPlacement]="'bottomRight'">
+            {{getRoleName(user.currentUserRoleVo)}}
+            <i nz-icon nzType="down"></i>
+          </a>
+          <nz-dropdown-menu #dropdownMenu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              <li nz-menu-item *ngFor="let userRole of user.userRoleVos" (click)="switchUserRole(userRole)">
+                <i nz-icon nzType="user-switch" nzTheme="outline"></i>&nbsp;{{getRoleName(userRole)}}
+              </li>
+              <li nz-menu-divider></li>
+              <li nz-menu-item (click)="openUserInfo()">
+                <i nz-icon nzType="user" nzTheme="outline"></i>&nbsp;Change user info
+              </li>
+              <li nz-menu-item (click)="openChangePassword()">
+                <i nz-icon nzType="lock" nzTheme="outline"></i>&nbsp;Change password
+              </li>
+              <li nz-menu-item (click)="logout()">
+                <i nz-icon nzType="logout" nzTheme="outline"></i>&nbsp;Sign Out
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+          <a style="cursor: auto">Online: {{onlineNum}}</a>
+          <a href="assets/智能物料管理系统（IMMS）V2操作指南1.0.doc" download="智能物料管理系统（IMMS）V2操作指南1.0.doc" style="cursor: help">Help</a>-->
+        </div>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <!--    <nz-footer>Copyright © 武汉烽火技术服务有限公司 2019. All Rights Reserved.</nz-footer>-->
+  </nz-layout>
+</nz-layout>
+
+
+
+
