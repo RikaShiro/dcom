@@ -1,0 +1,140 @@
+.container {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 12px;
+
+
+  .headers {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    margin: 12px 0;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 12px;
+
+    .title {
+      font-weight: 600;
+      font-size: 16px;
+      text-indent: 1em;
+    }
+
+    .run-group {
+      display: flex;
+      flex-direction: row;
+
+      .run-info {
+        margin-right: 12px;
+        width: auto;
+        display: flex;
+        flex-direction: column;
+
+        .run-time, .run-rate{
+          height:25px;
+          line-height: 25px;
+          text-align: right;
+          width: 100%;
+        }
+        .run-rate{
+
+        }
+      }
+
+      .run-bt {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        .span-icon-bt{
+          font-size: 30px;
+          line-height: 50px;
+          cursor: pointer;
+        }
+      }
+    }
+
+  }
+
+  .model-select{
+    height: 50px;
+    width: 100%;
+    line-height: 50px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .select-group{
+      width: auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .select-title{
+        width: auto;
+        margin-right: 12px;
+      }
+      .select-input{
+        width: 300px;
+        nz-select{
+          width: 100%;
+        }
+      }
+    }
+
+    .level-group{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .level-block{
+        margin-right:12px;
+        height: 25px;
+        line-height: 50px;
+        &:last-child{
+          .level-type{
+            border-right: none;
+          }
+        }
+
+        .level-title{
+
+        }
+        .level-type{
+          font-weight: 600;
+          border-right: 2px solid #999;
+          padding-right:12px;
+        }
+        .level1{
+          color: rgba(217, 0, 27, 0.866666);
+        }
+        .level2{
+          color: rgba(245, 154, 35, 0.866666);
+        }
+        .level3{
+          color: rgba(132, 0, 255, 0.866666);
+        }
+        .level4{
+          color: rgba(0, 0, 255, 0.996078);
+        }
+      }
+    }
+  }
+
+  .table{
+    height: calc(100% - 120px);
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+}
+

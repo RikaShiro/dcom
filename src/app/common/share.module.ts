@@ -46,6 +46,11 @@ import {NzCarouselModule} from 'ng-zorro-antd/carousel';
 import {NzDrawerModule} from 'ng-zorro-antd/drawer';
 import {NzTagModule} from 'ng-zorro-antd/tag';
 import {NzStepsModule} from 'ng-zorro-antd/steps';
+import {SimpleBarComponent} from '../layout/public/simple-bar/simple-bar.component';
+import {HoopPieComponent} from '../layout/public/hoop-pie/hoop-pie.component';
+import {LineChartComponent} from '../layout/public/line-chart/line-chart.component';
+import {LineStepComponent} from '../layout/public/line-step/line-step.component';
+import {NgxEchartsModule} from 'ngx-echarts';
 
 
 @NgModule({
@@ -53,12 +58,17 @@ import {NzStepsModule} from 'ng-zorro-antd/steps';
     FileSizePipe,
     ValueToTextPipe,
     ValueToLabelPipe,
+    SimpleBarComponent,
+    HoopPieComponent,
+    LineChartComponent,
+    LineStepComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgxEchartsModule,
     // NgZorroAntdModule,
     HttpClientModule,
     NzAlertModule,
@@ -144,7 +154,11 @@ import {NzStepsModule} from 'ng-zorro-antd/steps';
     NzCarouselModule,
     NzDrawerModule,
     NzTagModule,
-    NzStepsModule
+    NzStepsModule,
+    SimpleBarComponent,
+    HoopPieComponent,
+    LineChartComponent,
+    LineStepComponent
 
   ]
 })

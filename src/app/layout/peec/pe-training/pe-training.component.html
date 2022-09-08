@@ -1,1 +1,111 @@
-<p>pe-training works!</p>
+<div  class="container">
+  <div class="headers">
+    <span class="title">
+      模型训练
+    </span>
+    <div class="run-group">
+      <div class="run-info">
+        <span class="run-time">最近训练时间：2022/04/22 12:20:00</span>
+        <span class="run-rate">MAE：0.0035  |  MSE：2.5524e-05</span>
+      </div>
+      <div class="run-bt">
+        <span nz-icon nzType="play-circle" nzTheme="outline" class="span-icon-bt"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="time-groups">
+    <div class="sub-block">
+      <span class="block-title">训练集划分</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <span class="block-title">metric</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+  </div>
+
+  <div class="setting-groups">
+
+    <div class="sub-block">
+      <span class="block-title">learning_rate</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">num_leaves</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">subsample_freq</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <span class="block-title">feature_fraction</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">bagging_fraction</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">iterations</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="charts-groups">
+    <div class="half-block">
+      <app-line-chart [title]="'Iterations'"></app-line-chart>
+    </div>
+    <div class="half-block">
+      <app-line-step [title]="'Iterations'"></app-line-step>
+    </div>
+  </div>
+
+  <div class="table-groups">
+    <nz-table #bomTable  nzSize="small"
+              nzTableLayout="fixed"
+              [nzScroll]="{y: '160px'}"
+              [nzData]="list" [nzShowPagination]="false" [nzFrontPagination]="false"
+              nzBordered>
+      <thead>
+      <tr>
+        <th [nzWidth]="'80px'" nzLeft></th>
+        <th [nzWidth]="'120px'">MAE</th>
+        <th [nzWidth]="'120px'">MSE</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of bomTable.data,index as i" [ngClass]="{'table-odd-row':i%2 !== 0}">
+        <td nzLeft>{{ data.name }}</td>
+        <td >
+          <span>{{ data.id }}</span>
+        </td>
+        <td >{{ data.id }}</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
+</div>

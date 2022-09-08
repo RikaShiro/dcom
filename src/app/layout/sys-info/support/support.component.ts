@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {downloadFileByUrl} from '../../../common/utils/utils';
 
 @Component({
   selector: 'app-support',
@@ -11,5 +12,7 @@ export class SupportComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  downloadFile() {
+    downloadFileByUrl('url', '操作手册.doc');
+  }
 }

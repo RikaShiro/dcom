@@ -1,0 +1,60 @@
+.container {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 12px;
+
+  .headers {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    margin: 12px 0;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 12px;
+
+    .title {
+      font-weight: 600;
+      font-size: 16px;
+      text-indent: 1em;
+    }
+
+  }
+
+  .des-content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+    box-sizing: border-box;
+    color: #212121;
+
+    .des-img{
+      height: 128px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .des-text{
+      width: 100%;
+      height:25px;
+      line-height: 25px;
+      text-align: center;
+    }
+    .des-download{
+      color: rgba(0, 0, 255, 0.866666);
+      text-decoration: underline;
+      margin: 24px 0;
+      cursor: pointer;
+    }
+  }
+}
