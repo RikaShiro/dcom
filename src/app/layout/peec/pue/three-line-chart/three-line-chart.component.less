@@ -1,0 +1,52 @@
+:host{
+  width: 100%;
+  position: relative;
+  .chart-title{
+    position: absolute;
+    bottom: 0;
+    height: 30px;
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .custom-legend{
+    position: absolute;
+    bottom: 60px;
+    right: 20px;
+    border: 1px solid #ddd;
+    width: 200px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding:6px 12px;
+    background-color: #fff;
+
+    .legend-block{
+      width: 100%;
+      height:20px;
+      line-height: 20px;
+      font-size: 14px;
+      display: flex;
+      flex-direction: row;
+      text-align: center;
+      justify-content: center;
+
+      .legend-title{
+
+      }
+      .legend-value{
+        font-weight: 600;
+      }
+      .origin-text{
+        color: #70b603;
+      }
+      .changed-text{
+        color: #3f51b5;
+      }
+      .ref-text{
+        color: #f59a23;
+      }
+    }
+  }
+}

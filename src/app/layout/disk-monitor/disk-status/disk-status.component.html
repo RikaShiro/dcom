@@ -1,1 +1,64 @@
-<p>disk-status works!</p>
+<div class="container">
+  <div class="headers">
+    <span class="title">
+      硬盘状态
+    </span>
+    <div class="select-group">
+      <span class="select-title">时间段:</span>
+      <nz-select [(ngModel)]="date" [nzPlaceHolder]="'选择时间段'" class="select-ui">
+        <nz-option *ngFor="let o of rangeList" [nzValue]="o.value" [nzLabel]="o.label"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+
+  <div class="chart-block">
+    <div class="sub-block">
+      <app-simple-bar [title]="'硬盘故障次数统计'"></app-simple-bar>
+    </div>
+    <div class="sub-block">
+      <app-simple-bar  [title]="'硬盘故障次数统计'"></app-simple-bar>
+    </div>
+    <div class="sub-block">
+      <app-simple-bar [selfColors]="['#4472c4']"  [title]="'硬盘故障次数统计'"
+                      [hasLine]="hasLine" [showLabel]="showLabel"></app-simple-bar>
+    </div>
+  </div>
+  <div class="chart-block">
+    <div class="pie-block">
+      <app-hoop-pie></app-hoop-pie>
+    </div>
+    <div class="pie-block">
+      <app-hoop-pie></app-hoop-pie>
+    </div>
+    <div class="pie-block">
+      <app-hoop-pie></app-hoop-pie>
+    </div>
+    <div class="pie-block">
+      <app-hoop-pie></app-hoop-pie>
+    </div>
+  </div>
+  <div class="chart-block">
+    <div class="sub-block">
+      <app-simple-bar  [title]="'硬盘故障次数统计'"></app-simple-bar>
+    </div>
+    <div class="sub-block">
+      <app-simple-bar  [title]="'硬盘故障次数统计'"></app-simple-bar>
+    </div>
+    <div class="sub-block">
+      <app-simple-bar  [title]="'硬盘故障次数统计'"></app-simple-bar>
+    </div>
+  </div>
+  <div class="chart-block">
+    <div class="short-block">
+      <app-simple-bar  [showLabel]="showLabel"  [title]="'硬盘故障次数周分布统计(最近1年）'"></app-simple-bar>
+    </div>
+    <div class="long-block">
+      <app-simple-bar  [title]="'硬盘故障次数年分布统计(最近1年）'"></app-simple-bar>
+    </div>
+  </div>
+  <div class="chart-block">
+    <div class="whole-block">
+      <app-simple-bar [selfColors]="['#008000']"  [title]="'硬盘故障次数月分布统计(最近1年）'"></app-simple-bar>
+    </div>
+  </div>
+</div>

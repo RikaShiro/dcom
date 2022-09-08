@@ -1,1 +1,84 @@
-<p>fault-forecast works!</p>
+<div  class="container">
+  <div class="headers">
+    <span class="title">
+      故障预测
+    </span>
+    <div class="run-group">
+      <div class="run-info">
+        <span class="run-time">最近预测时间：2022/04/22 12:20:00</span>
+        <span class="run-rate">最近预测选择模型：ACC：98.85%  |  AUC：94.36%  （2022/04/22 12:20:00)</span>
+      </div>
+      <div class="run-bt">
+        <span nz-icon nzType="sync" nzTheme="outline" class="span-icon-bt"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="model-select">
+    <div class="select-group">
+      <span class="select-title">模型选择</span>
+      <div class="select-input">
+        <nz-select [(ngModel)]="selectedModel" (ngModelChange)="modelChange($event)">
+          <nz-option *ngFor="let p of modelData" [nzValue]="p" [nzLabel]="p"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+
+    <div class="level-group">
+      <div class="level-block">
+        <span class="level-title">故障：</span>
+        <span class="level-type level1">1</span>
+      </div>
+      <div class="level-block">
+        <span class="level-title">风险：</span>
+        <span class="level-type level2">2</span>
+      </div>
+      <div class="level-block">
+        <span class="level-title">存疑：</span>
+        <span class="level-type level3">3</span>
+      </div>
+      <div class="level-block">
+        <span class="level-title">正常：</span>
+        <span class="level-type level4">4</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="table">
+    <nz-table #bomTable  nzSize="small"
+              nzTableLayout="fixed"
+              [nzScroll]="{y: 'calc(100vh - 370px)'}"
+              [nzData]="list" [nzShowPagination]="false" [nzFrontPagination]="false"
+              nzBordered>
+      <thead>
+      <tr>
+        <th [nzWidth]="'80px'" nzLeft>NO.</th>
+        <th [nzWidth]="'120px'">ItemID</th>
+        <th [nzWidth]="'120px'">TriggerID</th>
+        <th [nzWidth]="'100px'" >HostID</th>
+        <th [nzWidth]="'100px'" >Valuetype</th>
+        <th [nzWidth]="'120px'">Serial_number</th>
+        <th [nzWidth]="'150px'">Model</th>
+        <th [nzWidth]="'150px'">Capcity_bytes</th>
+        <th [nzWidth]="'250px'">VaR in the next 3 days （%）</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of bomTable.data,index as i" [ngClass]="{'table-odd-row':i%2 !== 0}">
+        <td nzLeft>{{ i + 1 }}</td>
+        <td >
+          <span>{{ data.id }}</span>
+
+        </td>
+        <td >{{ data.id }}</td>
+        <td>{{data.id}}</td>
+        <td>{{data.id}}</td>
+        <td>{{data.id}}</td>
+        <td>{{data.id}}</td>
+        <td>{{data.id}}</td>
+        <td>{{data.id}}</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

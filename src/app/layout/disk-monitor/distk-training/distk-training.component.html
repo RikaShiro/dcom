@@ -1,1 +1,158 @@
-<p>distk-training works!</p>
+<div  class="container">
+  <div class="headers">
+    <span class="title">
+      模型训练
+    </span>
+    <div class="run-group">
+      <div class="run-info">
+        <span class="run-time">最近训练时间：2022/04/22 12:20:00</span>
+        <span class="run-rate">ACC：98.85%  |  AUC：94.36%</span>
+      </div>
+      <div class="run-bt">
+        <span nz-icon nzType="play-circle" nzTheme="outline" class="span-icon-bt"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="time-groups">
+    <div class="half-block">
+      <span class="block-title">训练集时间段</span>
+      <div class="block-input">
+        <nz-range-picker
+          [nzShowTime]="{ nzFormat: 'HH:mm' }"
+          nzFormat="yyyy-MM-dd HH:mm"
+          [(ngModel)]="range"
+        ></nz-range-picker>
+      </div>
+    </div>
+
+    <div class="half-block">
+      <span class="block-title">测试集时间段</span>
+      <div class="block-input">
+        <nz-range-picker
+          [nzShowTime]="{ nzFormat: 'HH:mm' }"
+          nzFormat="yyyy-MM-dd HH:mm"
+          [(ngModel)]="range"
+        ></nz-range-picker>
+      </div>
+    </div>
+
+    <div class="half-block">
+      <span class="block-title">正样本填充时间段</span>
+      <div class="block-input">
+        <nz-range-picker
+          [nzShowTime]="{ nzFormat: 'HH:mm' }"
+          nzFormat="yyyy-MM-dd HH:mm"
+          [(ngModel)]="range"
+        ></nz-range-picker>
+      </div>
+    </div>
+  </div>
+
+  <div class="setting-groups">
+
+    <div class="sub-block">
+      <span class="block-title">num_leaves</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">min_data_in_leaf</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">objective</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <span class="block-title">max_depth</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">learning_rate</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">min_sum_hessian_in_leaf</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <span class="block-title">boosting</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">feature_fraction</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">bagging_freq</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <span class="block-title">lambda_l1</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">random_state</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">iterations</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+
+    <div class="sub-block">
+      <span class="block-title">early_stoppoing_rounds</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+  </div>
+
+  <div class="other-groups">
+    <div class="sub-block">
+      <span class="block-title">构建新特征</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+  </div>
+
+  <div class="charts-groups">
+    <div class="half-block">
+      <app-line-chart [title]="'Iterations'"></app-line-chart>
+    </div>
+    <div class="half-block">
+      <app-line-step [title]="'FPR'"></app-line-step>
+    </div>
+  </div>
+
+</div>

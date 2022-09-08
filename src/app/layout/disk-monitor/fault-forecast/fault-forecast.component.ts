@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FaultForecastComponent implements OnInit {
 
+  selectedModel = null;
+  modelData = [];
+  list = [{id:12}, {id:12}, {id:12}, {id:12}, {id:12}, {id:12}, {id:12}, {id:12}, {id:12}];
   constructor() { }
 
   ngOnInit(): void {
   }
 
+
+  modelChange(event: any) {}
 }

@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DistkTrainingComponent implements OnInit {
 
+  range = [];
+  value = 'A-213';
   constructor() { }
 
   ngOnInit(): void {

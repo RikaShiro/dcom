@@ -1,0 +1,115 @@
+.container {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 12px;
+
+
+  .headers {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    margin: 12px 0;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .title {
+      font-weight: 600;
+      font-size: 16px;
+      text-indent: 1em;
+    }
+
+    .run-group {
+      display: flex;
+      flex-direction: row;
+
+      .run-info {
+        margin-right: 12px;
+        width: auto;
+        display: flex;
+        flex-direction: column;
+
+        .run-time, .run-rate{
+          height:25px;
+          line-height: 25px;
+          text-align: right;
+          width: 100%;
+        }
+        .run-rate{
+
+        }
+      }
+
+      .run-bt {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        .span-icon-bt{
+          font-size: 30px;
+          line-height: 50px;
+          cursor: pointer;
+        }
+      }
+    }
+
+  }
+
+
+  .time-groups, .setting-groups, .table-groups, .charts-groups{
+    width: 100%;
+    height:auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #ddd;
+    padding: 12px 0;
+
+    .sub-block, .half-block{
+      height: 50px;
+      line-height: 50px;
+      display: flex;
+      flex-direction: row;
+    }
+    .sub-block{
+      width: 33.3%;
+    }
+    .half-block{
+      width: 50%;
+    }
+    .block-title{
+      width: 180px;
+      text-align: right;
+      margin-right: 12px;
+    }
+    .block-input{
+      width: calc(~"100% - 180px");
+    }
+  }
+  .time-groups{
+    justify-content: flex-start;
+  }
+
+  .charts-groups{
+    padding-bottom: 24px;
+    .half-block{
+      height:350px;
+    }
+  }
+  .table-groups{
+    width: 100%;
+    height: 200px;
+    padding: 24px 12px;
+    box-sizing: border-box;
+
+  }
+}
+

@@ -1,1 +1,85 @@
-<p>pue works!</p>
+<div  class="container">
+  <div class="headers">
+    <span class="title">
+      故障预测
+    </span>
+    <div class="run-group">
+      <div class="run-info">
+        <span class="run-time">最近预测时间：2022/04/22 12:20:00</span>
+        <span class="run-rate">最近预测选择模型：ACC：98.85%  |  AUC：94.36%  （2022/04/22 12:20:00)</span>
+      </div>
+      <div class="run-bt">
+        <span nz-icon nzType="sync" nzTheme="outline" class="span-icon-bt"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="model-select">
+    <div class="select-group">
+      <span class="select-title">模型选择</span>
+      <div class="select-input">
+        <nz-select [(ngModel)]="selectedModel" (ngModelChange)="modelChange($event)">
+          <nz-option *ngFor="let p of modelData" [nzValue]="p" [nzLabel]="p"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+
+    <div class="level-group">
+      <div class="level-block">
+        <span class="level-title">故障：</span>
+        <span class="level-type level1">1</span>
+      </div>
+      <div class="level-block">
+        <span class="level-title">风险：</span>
+        <span class="level-type level2">2</span>
+      </div>
+      <div class="level-block">
+        <span class="level-title">存疑：</span>
+        <span class="level-type level3">3</span>
+      </div>
+      <div class="level-block">
+        <span class="level-title">正常：</span>
+        <span class="level-type level4">4</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="table">
+    <nz-table #bomTable  nzSize="small"
+              nzTableLayout="fixed"
+              [nzScroll]="{y: 'auto'}"
+              [nzData]="list" [nzShowPagination]="false" [nzFrontPagination]="false">
+      <thead>
+      <tr>
+        <th [nzWidth]="'120px'" nzLeft>可调特征</th>
+        <th [nzWidth]="'120px'">调整范围</th>
+        <th [nzWidth]="'120px'">设置值</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of bomTable.data,index as i">
+        <td nzLeft>{{ data.typeName }}</td>
+        <td >
+          <span>{{ data.range }}</span>
+
+        </td>
+        <td >
+          <nz-input-number [(ngModel)]="data.value" class="table-input"
+                           placeholder="0" [nzMin]="data.min" [nzMax]="data.max" [nzStep]="0.01"></nz-input-number>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
+  <div class="line-chart-ui">
+    <app-three-line-chart  [title]="'PUE能效分析：调节前后以及相同环境下的PUE值变化预测'"></app-three-line-chart>
+  </div>
+  <div class="line-chart-ui">
+    <app-three-line-chart  [title]="'总能耗节能分析：调节前后以及相同环境下的总能耗值变化预测'"></app-three-line-chart>
+  </div>
+  <div class="line-chart-ui">
+    <app-three-line-chart  [title]="'制冷设备节能分析：调节前后以及相同环境下的制冷设备能耗值变化预测'"></app-three-line-chart>
+  </div>
+
+</div>

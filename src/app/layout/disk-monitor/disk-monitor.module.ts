@@ -6,6 +6,7 @@ import {DistkTrainingComponent} from './distk-training/distk-training.component'
 import {FaultForecastComponent} from './fault-forecast/fault-forecast.component';
 import {DiskMonitorRoutesModule} from './disk-monitor-routes.module';
 import {ShareModule} from '../../common/share.module';
+import {NgxEchartsModule} from 'ngx-echarts';
 
 
 
@@ -18,6 +19,7 @@ import {ShareModule} from '../../common/share.module';
   ],
   imports: [
     CommonModule,
+    NgxEchartsModule,
     ShareModule,
     DiskMonitorRoutesModule
   ]
