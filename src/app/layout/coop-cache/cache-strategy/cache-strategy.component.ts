@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CacheStrategyComponent implements OnInit {
 
+
+  selectedModel = null;
+  modelData = [];
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  modelChange(event: any) {}
 }

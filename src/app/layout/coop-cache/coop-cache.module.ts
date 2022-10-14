@@ -6,6 +6,9 @@ import {CoopCacheRoutesModule} from './coop-cache-routes.module';
 import {ShareModule} from '../../common/share.module';
 import {CoopTrainingComponent} from './coop-training/coop-training.component';
 import {CacheStrategyComponent} from './cache-strategy/cache-strategy.component';
+import {NgxEchartsModule} from 'ngx-echarts';
+import {SymbolLineComponent} from './coop-training/symbol-line/symbol-line.component';
+import {FlowLineComponent} from './coop-training/flow-line/flow-line.component';
 
 
 
@@ -14,12 +17,15 @@ import {CacheStrategyComponent} from './cache-strategy/cache-strategy.component'
     CoopCacheComponent,
     DataStatusComponent,
     CoopTrainingComponent,
-    CacheStrategyComponent
+    CacheStrategyComponent,
+    SymbolLineComponent,
+    FlowLineComponent
   ],
   imports: [
     CommonModule,
     ShareModule,
-    CoopCacheRoutesModule
+    CoopCacheRoutesModule,
+    NgxEchartsModule,
   ]
 })
 export class CoopCacheModule { }

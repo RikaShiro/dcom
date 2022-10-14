@@ -45,7 +45,9 @@ export class LayoutComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.router.navigate(['./layout/disk-monitor/disk-status']);
+    console.log(window.location.href);
+    // this.router.navigate(['./layout/disk-monitor/disk-status']);
   }
+
 
 }

@@ -51,6 +51,7 @@ import {HoopPieComponent} from '../layout/public/hoop-pie/hoop-pie.component';
 import {LineChartComponent} from '../layout/public/line-chart/line-chart.component';
 import {LineStepComponent} from '../layout/public/line-step/line-step.component';
 import {NgxEchartsModule} from 'ngx-echarts';
+import {LinesChartComponent} from '../layout/peec/cost-status/lines-chart/lines-chart.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import {NgxEchartsModule} from 'ngx-echarts';
     SimpleBarComponent,
     HoopPieComponent,
     LineChartComponent,
-    LineStepComponent
+    LineStepComponent,
+    LinesChartComponent,
   ],
   imports: [
     CommonModule,
@@ -158,7 +160,8 @@ import {NgxEchartsModule} from 'ngx-echarts';
     SimpleBarComponent,
     HoopPieComponent,
     LineChartComponent,
-    LineStepComponent
+    LineStepComponent,
+    LinesChartComponent,
 
   ]
 })

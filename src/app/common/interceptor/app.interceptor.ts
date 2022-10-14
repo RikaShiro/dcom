@@ -39,13 +39,13 @@ export class AppInterceptor implements HttpInterceptor {
               const body = event.body;
               if (body instanceof Blob) {                 // 文件流不拦截  业务需求
                 return event;
-              } else if (body.msgCode === '-3') {
+              } else if (body.code === '-3') {
                 this.message.remove();
                 this.message.error(body.msg);
                 this.router.navigate(['/login']).then(() => {
                   // this.appService.clearSystem();
                 });
-              } else if (body.msgCode !== '0') {
+              } else if (body.code !== 200) {
                 this.message.error(body.msg);
               }
             }

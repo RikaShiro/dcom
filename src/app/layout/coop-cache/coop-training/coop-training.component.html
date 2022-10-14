@@ -1,1 +1,202 @@
-<p>coop-training works!</p>
+<div  class="container">
+  <div class="headers">
+    <span class="title">
+      流量预测模型训练
+    </span>
+    <div class="run-group">
+      <div class="run-info">
+        <span class="run-time">最近训练时间：2022/04/22 12:20:00</span>
+        <span class="run-rate">MSE：0.201</span>
+      </div>
+      <div class="run-bt">
+        <span nz-icon nzType="play-circle" nzTheme="outline" class="span-icon-bt"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="time-groups">
+    <div class="sub-block">
+      <span class="block-title">训练集划分</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <span class="block-title">optimizer</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <span class="block-title">loss</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <span class="block-title">input_size</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <span class="block-title">hidden_size</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <span class="block-title">look_back</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <span class="block-title">Epochs</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <span class="block-title">batch_size</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+  </div>
+
+  <div class="charts-groups">
+    <div class="whole-block">
+      <app-flow-line [title]="'Iterations'" [selfColors]="['#1f77b4', '#ff0000']"></app-flow-line>
+    </div>
+  </div>
+
+  <div class="headers">
+    <span class="title">
+      协作缓存与负载均衡模型训练
+    </span>
+    <div class="run-group">
+      <div class="run-info">
+        <span class="run-time">最近训练时间：2022/04/22 12:20:00</span>
+        <span class="run-rate">缓存利用率OPT：40.01%</span>
+      </div>
+      <div class="run-bt">
+        <span nz-icon nzType="play-circle" nzTheme="outline" class="span-icon-bt"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="setting-groups">
+
+    <div class="sub-block">
+      <span class="block-title">learning_rate</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">num_leaves</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">subsample_freq</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <span class="block-title">feature_fraction</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">bagging_fraction</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">iterations</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <span class="block-title">learning_rate</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">num_leaves</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">subsample_freq</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <span class="block-title">feature_fraction</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">bagging_fraction</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">iterations</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+
+    <div class="sub-block">
+      <span class="block-title">iterations</span>
+      <div class="block-input">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+      </div>
+    </div>
+
+  </div>
+
+  <div class="charts-groups">
+    <div class="half-block">
+      <app-symbol-line [title]="'缓存利用率性能评估'" [names]="['协作缓存', '随机缓存']"></app-symbol-line>
+    </div>
+    <div class="half-block">
+      <app-symbol-line [title]="'平均延迟性能评估'" [names]="['协作缓存', '随机缓存']"></app-symbol-line>
+    </div>
+    <div class="half-block">
+      <app-symbol-line [title]="'缓存击中流量性能评估'" [names]="['协作缓存击中', '随机缓存击中', '用户请求']"></app-symbol-line>
+    </div>
+    <div class="half-block">
+      <app-symbol-line [title]="'缓存击中率性能评估'" [names]="['协作缓存', '随机缓存']"></app-symbol-line>
+    </div>
+  </div>
+
+
+
+</div>

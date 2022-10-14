@@ -54,6 +54,7 @@ export class LineChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.mergeOption.color = this.selfColors;
     /*const line = {
       type: 'line',
       data: [30, 32, 34, 45, 23, 34, 54],

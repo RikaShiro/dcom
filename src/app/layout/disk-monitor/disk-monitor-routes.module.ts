@@ -6,7 +6,13 @@ import {DiskStatusComponent} from './disk-status/disk-status.component';
 import {DistkTrainingComponent} from './distk-training/distk-training.component';
 import {FaultForecastComponent} from './fault-forecast/fault-forecast.component';
 
-const routerConfig: Routes = [{
+const routerConfig: Routes = [
+  {
+    path: '',
+    redirectTo: 'disk-status',
+    pathMatch: 'full'
+  },
+  {
   path: '',
   component: DiskMonitorComponent,
   children: [
