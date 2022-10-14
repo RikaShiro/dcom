@@ -7,7 +7,13 @@ import {DiskMonitorModule} from './disk-monitor/disk-monitor.module';
 import {PeecModule} from './peec/peec.module';
 import {SysInfoModule} from './sys-info/sys-info.module';
 
-const routerConfig: Routes = [{
+const routerConfig: Routes = [
+  {
+    path: '',
+    redirectTo: 'disk-monitor',
+    pathMatch: 'full'
+  },
+  {
   path: '',
   component: LayoutComponent,
   children: [

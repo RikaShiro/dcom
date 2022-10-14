@@ -19,7 +19,6 @@ import {ThreeLineChartComponent} from './pue/three-line-chart/three-line-chart.c
     CostStatusComponent,
     PeTrainingComponent,
     PueComponent,
-    LinesChartComponent,
     StackBarComponent,
     ThreeLineChartComponent
   ],

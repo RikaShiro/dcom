@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PueService} from './pue.service';
 
 class PueValue {
   id?: any;
@@ -57,9 +58,22 @@ export class PueComponent implements OnInit {
     {id:12, typeName: '3号冷却塔积水盘温度(℃)', range: '11.89 ~ 21.28', value: 14, min: 11.89, max: 21.28},
     {id:12, typeName: '4号冷却塔积水盘温度(℃)', range: '11.67 ~ 20.5', value: 13.4, min: 11.67, max: 20.5}
     ];
-  constructor() { }
+
+  loading = false;
+  constructor(private service: PueService) { }
 
   ngOnInit(): void {
+    this.getDataList({});
+  }
+
+  getDataList(condition: any) {
+    this.loading = true;
+    this.service.getDataList(condition).subscribe(res => {
+      this.loading = false;
+      if (res.code === 200) {
+        console.log(res.data);
+      }
+    });
   }
 
   modelChange(event: any) {}

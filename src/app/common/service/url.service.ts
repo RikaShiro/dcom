@@ -6,7 +6,7 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class UrlService {
 
-  private host = '/fibergen-api';
+  private host = '/api';
 
 
   constructor() {
