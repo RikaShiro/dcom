@@ -1,4 +1,4 @@
-<div  class="container">
+<div class="container">
   <div class="headers">
     <span class="title">
       流量预测模型训练
@@ -184,19 +184,18 @@
 
   <div class="charts-groups">
     <div class="half-block">
-      <app-symbol-line [title]="'缓存利用率性能评估'" [names]="['协作缓存', '随机缓存']"></app-symbol-line>
+      <app-symbol-line [title]="'缓存利用率性能评估'" [names]="['协作缓存', '随机缓存']" [lines]="lines['utility']"></app-symbol-line>
     </div>
     <div class="half-block">
-      <app-symbol-line [title]="'平均延迟性能评估'" [names]="['协作缓存', '随机缓存']"></app-symbol-line>
+      <app-symbol-line [title]="'平均延迟性能评估'" [names]="['协作缓存', '随机缓存']" [lines]="lines['delay']"></app-symbol-line>
     </div>
     <div class="half-block">
-      <app-symbol-line [title]="'缓存击中流量性能评估'" [names]="['协作缓存击中', '随机缓存击中', '用户请求']"></app-symbol-line>
+      <app-symbol-line [title]="'缓存击中流量性能评估'" [names]="['协作缓存击中', '随机缓存击中', '用户请求']" [lines]="lines['hitTraffic']"></app-symbol-line>
     </div>
     <div class="half-block">
-      <app-symbol-line [title]="'缓存击中率性能评估'" [names]="['协作缓存', '随机缓存']"></app-symbol-line>
+      <app-symbol-line [title]="'缓存击中率性能评估'" [names]="['协作缓存', '随机缓存']" [lines]="lines['hitRate']"></app-symbol-line>
     </div>
   </div>
-
 
 
 </div>
