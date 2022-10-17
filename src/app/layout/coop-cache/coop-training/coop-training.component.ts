@@ -20,7 +20,7 @@ export class CoopTrainingComponent implements OnInit {
     utility: [] as number[][],
     hitTraffic: [] as number[][],
   };
-  
+
   constructor(private service: CoopTrainingService) {}
 
   ngOnInit(): void {
@@ -33,16 +33,16 @@ export class CoopTrainingComponent implements OnInit {
       this.loading = false;
       if (res.code === 200) {
         // console.log(res.data);
-        const temp = res.data;
-        this.lines.delay = [temp['ad_ADL'], temp['ad_ADL_ran']];
-        this.lines.hitRate = [temp['ad_HIT'], temp['ad_HIT_ran']];
-        this.lines.utility = [temp['ad_UTIL'], temp['ad_UTIL_ran']];
+        const D = res.data;
+        this.lines.delay = [D['ad_ADL'], D['ad_ADL_ran']];
+        this.lines.hitRate = [D['ad_HIT'], D['ad_HIT_ran']];
+        this.lines.utility = [D['ad_UTIL'], D['ad_UTIL_ran']];
         this.lines.hitTraffic = [
-          temp['ad_hitTraffic'],
-          temp['ad_hitTraffic_ran'],
-          temp['ad_reTraffic'],
+          D['ad_hitTraffic'],
+          D['ad_hitTraffic_ran'],
+          D['ad_reTraffic'],
         ];
-        console.log(this.lines.delay, this.lines.hitRate)
+        console.log(this.lines.delay)
       }
     });
   }

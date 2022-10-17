@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { EChartsOption } from 'echarts';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-symbol-line',
@@ -31,8 +32,8 @@ export class SymbolLineComponent implements OnInit {
   @Input() lines: number[][] = [];
 
   private _barData = null;
-  dataLoading = true;
-  // dataLoading = false;
+  // dataLoading = true;
+  dataLoading = false;
   mergeOption: EChartsOption = {};
   data = [];
   option: EChartsOption = {
@@ -59,8 +60,8 @@ export class SymbolLineComponent implements OnInit {
     },
     yAxis: {
       type: 'value',
-      max: 5,
-      min: 0,
+      max: 1000,
+      min: 500,
     },
     color: this.selfColors,
     grid: {
@@ -76,17 +77,16 @@ export class SymbolLineComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.lines, this.names);
-    const [data1, data2] = [this.lines[0], this.lines[1]];
+    // const [data1, data2] = [this.lines[0], this.lines[1]];
     const names = [];
-    // const data1 = [];
-    // const data2 = [];
-    // const data3 = [];
+    const data1 = [];
+    const data2 = [];
+    const data3 = [];
     for (let i = 0; i < 15; i++) {
       names.push(i + '');
-      // data1.push(Math.random() * 300 + 600);
-      // data2.push(Math.random() * 300 + 600);
-      // data3.push(Math.random() * 300 + 600);
+      data1.push(Math.random() * 300 + 600);
+      data2.push(Math.random() * 300 + 600);
+      data3.push(Math.random() * 300 + 600);
     }
 
     this.mergeOption.xAxis = {
@@ -129,7 +129,7 @@ export class SymbolLineComponent implements OnInit {
     ];
     if (this.names.length === 3) {
       list.push({
-        data: this.lines[2],
+        data: data3,
         type: 'line',
         name: this.names[3],
         symbol: 'diamond',
