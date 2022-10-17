@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { EChartsOption } from 'echarts';
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-symbol-line',
@@ -30,9 +30,9 @@ export class SymbolLineComponent implements OnInit {
   ];
 
   @Input() lines: number[][] = [];
+  @Input() xAxis: number[] = [];
 
   private _barData = null;
-  // dataLoading = true;
   dataLoading = false;
   mergeOption: EChartsOption = {};
   data = [];
@@ -74,28 +74,16 @@ export class SymbolLineComponent implements OnInit {
     },
     series: [],
   };
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
-    // const [data1, data2] = [this.lines[0], this.lines[1]];
-    const names = [];
-    const data1 = [];
-    const data2 = [];
-    const data3 = [];
-    for (let i = 0; i < 15; i++) {
-      names.push(i + '');
-      data1.push(Math.random() * 300 + 600);
-      data2.push(Math.random() * 300 + 600);
-      data3.push(Math.random() * 300 + 600);
-    }
-
     this.mergeOption.xAxis = {
       type: 'category',
-      data: names,
+      data: this.xAxis,
     };
     const list = [
       {
-        data: data1,
+        data: this.lines[0],
         type: 'line',
         name: this.names[0],
         symbol: 'triangle',
@@ -111,7 +99,7 @@ export class SymbolLineComponent implements OnInit {
         },
       },
       {
-        data: data2,
+        data: this.lines[1],
         type: 'line',
         name: this.names[1],
         symbol: 'rect',
@@ -129,7 +117,7 @@ export class SymbolLineComponent implements OnInit {
     ];
     if (this.names.length === 3) {
       list.push({
-        data: data3,
+        data: this.lines[2],
         type: 'line',
         name: this.names[3],
         symbol: 'diamond',
@@ -146,5 +134,20 @@ export class SymbolLineComponent implements OnInit {
       });
     }
     this.mergeOption.series = <any[]>list;
+    this.mergeOption.xAxis = {
+      type: 'category',
+      data: this.xAxis,
+    };
+
+    const max = Math.max(...this.lines.flat());
+    const min = Math.min(...this.lines.flat());
+    const step = (max - min) / 3;
+    const upperBound = Number((max + step).toFixed(1));
+    const lowerBound = Math.max(Number((min - step).toFixed(1)), 0);
+    this.option.yAxis = {
+      type: 'value',
+      max: upperBound > 10 ? Math.ceil(upperBound) : upperBound,
+      min: lowerBound
+    };
   }
 }
