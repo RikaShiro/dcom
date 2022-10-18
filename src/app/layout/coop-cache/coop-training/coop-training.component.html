@@ -182,18 +182,18 @@
 
   </div>
 
-  <div class="charts-groups" *ngIf="!loading">
+  <div class="charts-groups">
     <div class="half-block">
-      <app-symbol-line [title]="'缓存利用率性能评估'" [names]="['协作缓存', '随机缓存']" [lines]="lines['utility']" [xAxis]="xAxis"></app-symbol-line>
+      <app-symbol-line [title]="'缓存利用率性能评估'" [names]="['协作缓存', '随机缓存']" *ngIf="!loading[0]" [lines]="lines[0]" [xAxis]="xAxis"></app-symbol-line>
     </div>
     <div class="half-block">
-      <app-symbol-line [title]="'平均延迟性能评估'" [names]="['协作缓存', '随机缓存']" [lines]="lines['delay']" [xAxis]="xAxis"></app-symbol-line>
+      <app-symbol-line [title]="'平均延迟性能评估'" [names]="['协作缓存', '随机缓存']" *ngIf="!loading[1]" [lines]="lines[1]" [xAxis]="xAxis"></app-symbol-line>
     </div>
     <div class="half-block">
-      <app-symbol-line [title]="'缓存击中流量性能评估'" [names]="['协作缓存击中', '随机缓存击中', '用户请求']" [lines]="lines['hitTraffic']" [xAxis]="xAxis"></app-symbol-line>
+      <app-symbol-line [title]="'缓存击中流量性能评估'" [names]="['协作缓存击中', '随机缓存击中', '用户请求']" *ngIf="!loading[2]" [lines]="lines[2]" [xAxis]="xAxis"></app-symbol-line>
     </div>
     <div class="half-block">
-      <app-symbol-line [title]="'缓存击中率性能评估'" [names]="['协作缓存', '随机缓存']" [lines]="lines['hitRate']" [xAxis]="xAxis"></app-symbol-line>
+      <app-symbol-line [title]="'缓存击中率性能评估'" [names]="['协作缓存', '随机缓存']" *ngIf="!loading[3]" [lines]="lines[3]" [xAxis]="xAxis"></app-symbol-line>
     </div>
   </div>
 

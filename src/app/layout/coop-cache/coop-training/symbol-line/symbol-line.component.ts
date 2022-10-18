@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { EChartsOption } from 'echarts';
-// import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-symbol-line',
@@ -33,7 +32,7 @@ export class SymbolLineComponent implements OnInit {
   @Input() xAxis: number[] = [];
 
   private _barData = null;
-  dataLoading = false;
+  dataLoading: boolean = true;
   mergeOption: EChartsOption = {};
   data = [];
   option: EChartsOption = {
