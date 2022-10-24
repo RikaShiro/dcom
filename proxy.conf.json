@@ -1,0 +1,26 @@
+{
+  "/api/*": {
+    "target3": "http://10.31.109.16:9999",
+    "target": "http://150.158.31.178:5050",
+    "target8": "https://immtest.fiberhome.work",
+    "changeOrigin": true,
+    "secure": true
+  },
+  "/websocket/*": {
+    "target": "http://10.31.109.18:32301",
+    "secure": true,
+    "changeOrigin": true,
+    "ws": true
+  },
+  "/mio/*": {
+    "target": "http://10.31.109.3:8888",
+    "secure": true,
+    "changeOrigin": true,
+    "ws": true
+  },
+  "/fibergen-api2/*": {
+    "target": "http://10.31.109.31:30202",
+    "secure": true,
+    "changeOrigin": true
+  }
+}
