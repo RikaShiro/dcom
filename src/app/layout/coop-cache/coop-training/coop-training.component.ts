@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { assert } from 'console';
 import { CoopTrainingService } from './coop-training.service';
 
 @Component({
@@ -14,11 +13,12 @@ export class CoopTrainingComponent implements OnInit {
     { id: 12, name: '训练集' },
     { id: 12, name: '测试集' },
   ];
-  loading: boolean[] = [];
-  lines: number[][][] = [];
-  xAxis: number[]= [];
-  MSE: number = 0;
+  loading = false;
 
+  cacheData: any = {};
+  cacheDataLoading: boolean = true;
+  trafficData: any = {};
+  trafficDataLoading: boolean = true;
   constructor(private service: CoopTrainingService) {}
 
   ngOnInit(): void {
@@ -27,47 +27,52 @@ export class CoopTrainingComponent implements OnInit {
   }
 
   getCacheData() {
-    this.loading = new Array(4).fill(true);
+    this.cacheDataLoading = true;
     this.service.getCacheData().subscribe((res) => {
-      if (res.code !== 200) return;
-      const data = res.data;
-      this.xAxis = data['xAxis'];
-      if (!this.validate(this.xAxis)) return;
-      this.lines[0] = [data['ad_UTIL'], data['ad_UTIL_ran']];
-      this.lines[1] = [data['ad_ADL'], data['ad_ADL_ran']];
-      this.lines[2] = [
-        data['ad_hitTraffic'],
-        data['ad_hitTraffic_ran'],
-        data['ad_reTraffic'],
-      ];
-      this.lines[3] = [data['ad_HIT'], data['ad_HIT_ran']];
-      for (let i = 0; i < this.lines.length; i++) {
-        this.loading[i] = !this.validate(this.lines[i]);
+      if (res.code === 200) {
+        const $ = res.data
+        this.cacheData.delay = [
+          $.ad_ADL,
+          $.ad_ADL_ran,
+        ];
+        this.cacheData.hit = [
+          $.ad_HIT,
+          $.ad_HIT_ran,
+        ]
+        this.cacheData.util = [
+          $.ad_UTIL,
+          $.ad_UTIL_ran
+        ]
+        this.cacheData.traffic = [
+          $.ad_hitTraffic,
+          $.ad_hitTraffic_ran,
+          $.ad_reTraffic
+        ]
+        for (let k in this.cacheData) {
+          this.cacheData[k].push($.xAxis)
+        }
+        this.cacheDataLoading = false;
       }
     });
   }
 
   getTrafficData() {
+    this.trafficDataLoading = true;
     this.service.getTrafficData().subscribe((res) => {
-      if (res.code !== 200) return;
-      console.log(res.data);
-      const data = res.data;
-      assert('MSE' in data);
-    });
-  }
-
-  getDataList(condition: any) {
-    // this.loading = true;
-    this.service.getDataList(condition).subscribe((res) => {
-      // this.loading = false;
       if (res.code === 200) {
-        console.log(res.data);
+        this.trafficData = res.data;
+        this.trafficDataLoading = false;
       }
     });
   }
 
-  validate(arr: any): boolean {
-    arr = arr.flat();
-    return Array.isArray(arr) && arr.length > 0 && typeof arr[0] === 'number';
+  getDataList(condition: any) {
+    this.loading = true;
+    this.service.getDataList(condition).subscribe((res) => {
+      this.loading = false;
+      if (res.code === 200) {
+        console.log(res.data);
+      }
+    });
   }
 }

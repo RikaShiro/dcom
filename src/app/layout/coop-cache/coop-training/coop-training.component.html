@@ -74,9 +74,10 @@
   </div>
 
   <!-- 流量预测模型训练 与 协作缓存与负载均衡模型训练 中间的图 -->
-  <div class="charts-groups">
+  <div class="charts-groups" *ngIf="!trafficDataLoading">
     <div class="whole-block">
-      <app-flow-line [title]="'Iterations'" [selfColors]="['#1f77b4', '#ff0000']"></app-flow-line>
+      <app-flow-line [title]="'Iterations'" [selfColors]="['#1f77b4', '#ff0000']" [barData]="trafficData">
+      </app-flow-line>
     </div>
   </div>
 
@@ -183,18 +184,19 @@
 
   </div>
 
-  <div class="charts-groups">
+  <div class="charts-groups" *ngIf="!cacheDataLoading">
     <div class="half-block">
-      <app-symbol-line [title]="'缓存利用率性能评估'" [names]="['协作缓存', '随机缓存']" *ngIf="!loading[0]" [lines]="lines[0]" [xAxis]="xAxis"></app-symbol-line>
+      <app-symbol-line [title]="'缓存利用率性能评估'" [names]="['协作缓存', '随机缓存']" [barData]="cacheData.util"></app-symbol-line>
     </div>
     <div class="half-block">
-      <app-symbol-line [title]="'平均延迟性能评估'" [names]="['协作缓存', '随机缓存']" *ngIf="!loading[1]" [lines]="lines[1]" [xAxis]="xAxis"></app-symbol-line>
+      <app-symbol-line [title]="'平均延迟性能评估'" [names]="['协作缓存', '随机缓存']" [barData]="cacheData.delay"></app-symbol-line>
     </div>
     <div class="half-block">
-      <app-symbol-line [title]="'缓存击中流量性能评估'" [names]="['协作缓存击中', '随机缓存击中', '用户请求']" *ngIf="!loading[2]" [lines]="lines[2]" [xAxis]="xAxis"></app-symbol-line>
+      <app-symbol-line [title]="'缓存击中流量性能评估'" [names]="['协作缓存击中', '随机缓存击中', '用户请求']" [barData]="cacheData.traffic">
+      </app-symbol-line>
     </div>
     <div class="half-block">
-      <app-symbol-line [title]="'缓存击中率性能评估'" [names]="['协作缓存', '随机缓存']" *ngIf="!loading[3]" [lines]="lines[3]" [xAxis]="xAxis"></app-symbol-line>
+      <app-symbol-line [title]="'缓存击中率性能评估'" [names]="['协作缓存', '随机缓存']" [barData]="cacheData.hit"></app-symbol-line>
     </div>
   </div>
 

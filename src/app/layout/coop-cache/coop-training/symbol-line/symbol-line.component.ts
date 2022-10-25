@@ -28,9 +28,6 @@ export class SymbolLineComponent implements OnInit {
     '#4AC2A8',
   ];
 
-  @Input() lines: number[][] = [];
-  @Input() xAxis: number[] = [];
-
   private _barData = null;
   dataLoading: boolean = true;
   mergeOption: EChartsOption = {};
@@ -73,16 +70,16 @@ export class SymbolLineComponent implements OnInit {
     },
     series: [],
   };
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.mergeOption.xAxis = {
       type: 'category',
-      data: this.xAxis,
+      data: this.barData.xAxis,
     };
     const list = [
       {
-        data: this.lines[0],
+        data: this.barData[0],
         type: 'line',
         name: this.names[0],
         symbol: 'triangle',
@@ -98,7 +95,7 @@ export class SymbolLineComponent implements OnInit {
         },
       },
       {
-        data: this.lines[1],
+        data: this.barData[1],
         type: 'line',
         name: this.names[1],
         symbol: 'rect',
@@ -114,9 +111,10 @@ export class SymbolLineComponent implements OnInit {
         },
       },
     ];
-    if (this.names.length === 3) {
+    const len = this.barData.length;
+    if (len === 4) {
       list.push({
-        data: this.lines[2],
+        data: this.barData[2],
         type: 'line',
         name: this.names[3],
         symbol: 'diamond',
@@ -135,18 +133,18 @@ export class SymbolLineComponent implements OnInit {
     this.mergeOption.series = <any[]>list;
     this.mergeOption.xAxis = {
       type: 'category',
-      data: this.xAxis,
+      data: this.barData.xAxis,
     };
 
-    const max = Math.max(...this.lines.flat());
-    const min = Math.min(...this.lines.flat());
+    const max = Math.max(...this.barData.slice(0, len - 1).flat());
+    const min = Math.min(...this.barData.slice(0, len - 1).flat());
     const step = (max - min) / 3;
     const upperBound = Number((max + step).toFixed(1));
     const lowerBound = Math.max(Number((min - step).toFixed(1)), 0);
     this.option.yAxis = {
       type: 'value',
       max: upperBound > 10 ? Math.ceil(upperBound) : upperBound,
-      min: lowerBound
+      min: lowerBound,
     };
   }
 }
