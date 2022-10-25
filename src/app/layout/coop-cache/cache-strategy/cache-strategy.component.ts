@@ -9,19 +9,25 @@ import { CacheStrategyService } from './cache-strategy.service';
 export class CacheStrategyComponent implements OnInit {
   selectedModel = null;
   modelData = [];
-  constructor(private service: CacheStrategyService) {}
+  predictData = {};
+  loading = true;
 
+  constructor(private service: CacheStrategyService) {}
   ngOnInit(): void {
-    this.getPredictData()
+    this.getPredictData();
   }
   getPredictData() {
+    this.loading = true;
     this.service.getPredictData().subscribe((res) => {
       if (res.code === 200) {
-        console.log(res.data);
-        // misspell moduleList -> modelList
-        const $ = res.data
-        this.modelData = $.moduleList
-        this.selectedModel = this.modelData[0]
+        const $ = res.data;
+        this.modelData = $.moduleList;
+        this.selectedModel = this.modelData[0];
+        this.predictData = {
+          dataSource: $.dataSource,
+          xAxis: $.xAxis
+        };
+        this.loading = false;
       }
     });
   }
