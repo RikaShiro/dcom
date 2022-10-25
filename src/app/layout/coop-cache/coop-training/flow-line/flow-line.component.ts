@@ -18,6 +18,9 @@ export class FlowLineComponent implements OnInit {
   @Input() title: string = '';
   @Input() names: string[] = [];
   @Input() selfColors: string[] = ['#6b9bc3', '#ff9537', '#35EAED', '#459CF4', '#3B54EC', '#A45CEF', '#4AC2A8'];
+
+  @Input() MSE: number = 0
+
   private _barData = null;
   dataLoading = false;
   mergeOption: EChartsOption = {};

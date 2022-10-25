@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { assert } from 'console';
 import { CoopTrainingService } from './coop-training.service';
 
 @Component({
@@ -14,36 +15,44 @@ export class CoopTrainingComponent implements OnInit {
     { id: 12, name: '测试集' },
   ];
   loading: boolean[] = [];
-
   lines: number[][][] = [];
-  xAxis = [] as number[];
+  xAxis: number[]= [];
+  MSE: number = 0;
 
   constructor(private service: CoopTrainingService) {}
 
   ngOnInit(): void {
     this.getCacheData();
+    this.getTrafficData();
   }
 
   getCacheData() {
     this.loading = new Array(4).fill(true);
     this.service.getCacheData().subscribe((res) => {
-      if (res.code === 200) {
-        const D = res.data;
-        this.xAxis = D['xAxis'];
-        if (!this.validate(this.xAxis)) return;
-        this.lines[0] = [D['ad_UTIL'], D['ad_UTIL_ran']];
-        this.lines[1] = [D['ad_ADL'], D['ad_ADL_ran']];
-        this.lines[2] = [
-          D['ad_hitTraffic'],
-          D['ad_hitTraffic_ran'],
-          D['ad_reTraffic'],
-        ];
-        this.lines[3] = [D['ad_HIT'], D['ad_HIT_ran']];
-        for (let i = 0; i < this.lines.length; i++) {
-          this.loading[i] = !this.validate(this.lines[i]);
-        }
-        console.log(this.loading)
+      if (res.code !== 200) return;
+      const data = res.data;
+      this.xAxis = data['xAxis'];
+      if (!this.validate(this.xAxis)) return;
+      this.lines[0] = [data['ad_UTIL'], data['ad_UTIL_ran']];
+      this.lines[1] = [data['ad_ADL'], data['ad_ADL_ran']];
+      this.lines[2] = [
+        data['ad_hitTraffic'],
+        data['ad_hitTraffic_ran'],
+        data['ad_reTraffic'],
+      ];
+      this.lines[3] = [data['ad_HIT'], data['ad_HIT_ran']];
+      for (let i = 0; i < this.lines.length; i++) {
+        this.loading[i] = !this.validate(this.lines[i]);
       }
+    });
+  }
+
+  getTrafficData() {
+    this.service.getTrafficData().subscribe((res) => {
+      if (res.code !== 200) return;
+      console.log(res.data);
+      const data = res.data;
+      assert('MSE' in data);
     });
   }
 
