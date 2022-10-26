@@ -10,6 +10,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { SymbolLineComponent } from './coop-training/symbol-line/symbol-line.component';
 import { FlowLineComponent } from './coop-training/flow-line/flow-line.component';
 import { LineChartVComponent } from './cache-strategy/line-chart-v/line-chart-v.component';
+import { DoubleYaxisChartComponent } from './data-status/double-yaxis-chart/double-yaxis-chart.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { LineChartVComponent } from './cache-strategy/line-chart-v/line-chart-v.
     CacheStrategyComponent,
     SymbolLineComponent,
     FlowLineComponent,
-    LineChartVComponent
+    LineChartVComponent,
+    DoubleYaxisChartComponent
   ],
   imports: [CommonModule, ShareModule, CoopCacheRoutesModule, NgxEchartsModule],
 })

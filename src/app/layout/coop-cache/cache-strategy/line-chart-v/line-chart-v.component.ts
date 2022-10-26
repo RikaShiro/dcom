@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EChartsOption } from 'echarts';
+import { EChartsOption, SeriesOption } from 'echarts';
 
 @Component({
   selector: 'app-line-chart-v',
@@ -30,15 +30,16 @@ export class LineChartVComponent implements OnInit {
   dataLoading = false;
   mergeOption: EChartsOption = {};
   data = [];
-  option: EChartsOption = {}
+  option: EChartsOption = {};
 
   constructor() {}
 
   ngOnInit(): void {
+    const len = this.barData.xAxis.length;
     this.option = {
       xAxis: {
         type: 'category',
-        data: this.barData.xAxis.slice(0, 100),
+        data: this.barData.xAxis,
       },
       yAxis: {
         type: 'value',
@@ -47,19 +48,41 @@ export class LineChartVComponent implements OnInit {
       grid: {
         left: 50,
         right: 20,
-        bottom: 50,
+        bottom: 80,
         borderWidth: 1,
         borderColor: '#ddd',
         show: true,
       },
-      series: [
-        {
-          data: this.barData.dataSource.slice(0, 100),
+    };
+    const series = [];
+    if (Array.isArray(this.barData.data)) {
+      const seriesOption: SeriesOption = {
+        data: this.barData.data,
+        type: 'line',
+        smooth: true,
+      };
+      series.push(seriesOption);
+    } else {
+      for (const k in this.barData.data) {
+        const seriesOption: SeriesOption = {
+          data: this.barData.data[k],
           type: 'line',
           smooth: true,
-        },
-      ],
-    };
+        };
+        series.push(seriesOption);
+      }
+    }
+    if (len > 300) {
+      this.option.dataZoom = {
+        show: true,
+        realtime: true,
+        type: 'slider',
+        height: 20,
+        start: 40,
+        end: 60,
+      };
+    }
+    this.option.series = series;
     this.mergeOption.color = this.selfColors;
   }
 }

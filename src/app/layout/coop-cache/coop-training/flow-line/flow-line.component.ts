@@ -71,6 +71,7 @@ export class FlowLineComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    const len = this.barData.xAxis.length;
     this.mergeOption.xAxis = {
       type: 'category',
       data: this.barData.xAxis,
@@ -97,6 +98,16 @@ export class FlowLineComponent implements OnInit {
         },
       },
     ];
+    if (len > 300) {
+      this.option.dataZoom = {
+        show: true,
+        realtime: true,
+        type: 'inside',
+        height: 20,
+        start: 40,
+        end: 60,
+      };
+    }
     this.mergeOption.series = <any[]>list;
     this.mergeOption.color = this.selfColors;
   }

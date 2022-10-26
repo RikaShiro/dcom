@@ -24,7 +24,7 @@ export class CacheStrategyComponent implements OnInit {
         this.modelData = $.moduleList;
         this.selectedModel = this.modelData[0];
         this.predictData = {
-          dataSource: $.dataSource,
+          data: $.dataSource,
           xAxis: $.xAxis
         };
         this.loading = false;

@@ -56,8 +56,6 @@ export class SymbolLineComponent implements OnInit {
     },
     yAxis: {
       type: 'value',
-      max: 1000,
-      min: 500,
     },
     color: this.selfColors,
     grid: {
@@ -134,17 +132,6 @@ export class SymbolLineComponent implements OnInit {
     this.mergeOption.xAxis = {
       type: 'category',
       data: this.barData.xAxis,
-    };
-
-    const max = Math.max(...this.barData.slice(0, len - 1).flat());
-    const min = Math.min(...this.barData.slice(0, len - 1).flat());
-    const step = (max - min) / 3;
-    const upperBound = Number((max + step).toFixed(1));
-    const lowerBound = Math.max(Number((min - step).toFixed(1)), 0);
-    this.option.yAxis = {
-      type: 'value',
-      max: upperBound > 10 ? Math.ceil(upperBound) : upperBound,
-      min: lowerBound,
     };
   }
 }
