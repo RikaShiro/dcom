@@ -55,20 +55,26 @@ export class DoubleYaxisChartComponent implements OnInit {
     };
     const series: SeriesOption[] = [];
     const yAxis: YAXisComponentOption[] = [];
+    const legendData = [];
     let idx = 0;
     const len = this.barData.xAxis.length;
     for (const k in this.barData.data) {
+      legendData.push(k);
       yAxis.push({
         type: 'value',
         position: idx === 0 ? 'left' : 'right',
         name: k,
         axisLine: {
           show: true,
+          lineStyle: {
+            color: !idx ? this.selfColors[0]: this.selfColors[1],
+          },
         },
       });
       series.push({
+        name: k,
         data: this.barData.data[k],
-        type: len > 12 ? 'line' : 'bar',
+        type: idx ? 'line' : 'bar',
         smooth: true,
         yAxisIndex: idx,
       });
@@ -76,6 +82,9 @@ export class DoubleYaxisChartComponent implements OnInit {
     }
     this.option.yAxis = yAxis;
     this.option.series = series;
+    this.option.legend = {
+      data: legendData,
+    };
     this.mergeOption.color = this.selfColors;
   }
 }
