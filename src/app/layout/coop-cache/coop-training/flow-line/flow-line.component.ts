@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EChartsOption } from 'echarts';
+import { EChartsOption, SeriesOption } from 'echarts';
+import { TranslationService } from 'src/app/common/service/translation.servcice';
 
 @Component({
   selector: 'app-flow-line',
@@ -66,47 +67,38 @@ export class FlowLineComponent implements OnInit {
       borderColor: '#ddd',
       show: true,
     },
-    series: [],
+    dataZoom: {
+      show: true,
+      realtime: true,
+      type: 'slider',
+      height: 20,
+      start: 40,
+      end: 60,
+    },
   };
-  constructor() {}
+  constructor(private service: TranslationService) {}
 
   ngOnInit(): void {
-    const len = this.barData.xAxis.length;
+    if ('MSE' in this.barData) {
+      this.barData.MSE = this.barData.MSE.toFixed(4);
+    }
     this.mergeOption.xAxis = {
       type: 'category',
       data: this.barData.xAxis,
     };
-    const list = [
-      {
-        data: this.barData.dataSource,
+    const list: SeriesOption[] = [];
+    for (const k in this.barData.data) {
+      const option = {
+        data: this.barData.data[k],
         type: 'line',
-        name: '原始数据集',
-        showSymbol: false,
+        name: this.service.getTranslation(k),
+        showLabel: false,
         smooth: false,
         lineStyle: {
           width: 2,
         },
-      },
-      {
-        data: this.barData.predict,
-        type: 'line',
-        name: '模型预测',
-        showSymbol: false,
-        smooth: false,
-        lineStyle: {
-          width: 2,
-        },
-      },
-    ];
-    if (len > 300) {
-      this.option.dataZoom = {
-        show: true,
-        realtime: true,
-        type: 'inside',
-        height: 20,
-        start: 40,
-        end: 60,
       };
+      list.push(option as SeriesOption)
     }
     this.mergeOption.series = <any[]>list;
     this.mergeOption.color = this.selfColors;

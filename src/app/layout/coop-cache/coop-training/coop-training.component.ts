@@ -17,7 +17,7 @@ export class CoopTrainingComponent implements OnInit {
 
   cacheData: any = {};
   cacheDataLoading: boolean = true;
-  trafficData: any = {};
+  trafficData = {};
   trafficDataLoading: boolean = true;
   constructor(private service: CoopTrainingService) {}
 
@@ -60,7 +60,15 @@ export class CoopTrainingComponent implements OnInit {
     this.trafficDataLoading = true;
     this.service.getTrafficData().subscribe((res) => {
       if (res.code === 200) {
-        this.trafficData = res.data;
+        const $ = res.data;
+        this.trafficData = {
+          xAxis: $.xAxis,
+          data: {
+            dataSource: $.dataSource,
+            predict: $.predict
+          },
+          MSE: $.MSE
+        }
         this.trafficDataLoading = false;
       }
     });
