@@ -10,7 +10,7 @@ export class TranslationService {
     dataSource: '原始数据集',
     predict: '模型预测',
     cache: '缓存',
-    utility: '利用率'
+    utility: '利用率',
   } as any;
   constructor() {}
 

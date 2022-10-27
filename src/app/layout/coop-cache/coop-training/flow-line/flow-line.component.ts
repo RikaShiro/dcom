@@ -62,7 +62,7 @@ export class FlowLineComponent implements OnInit {
     grid: {
       left: 50,
       right: 20,
-      bottom: 60,
+      bottom: 75,
       borderWidth: 1,
       borderColor: '#ddd',
       show: true,

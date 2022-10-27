@@ -22,7 +22,7 @@
   </div>
   <div class="chart-block" *ngIf="!loading">
     <div class="whole-block">
-      <app-line-chart-v [title]="'缓存利用率趋势图'" [barData]="cacheData"></app-line-chart-v>
+      <app-line-chart-no-slider [title]="'缓存利用率趋势图'" [barData]="cacheData"></app-line-chart-no-slider>
     </div>
   </div>
   <div class="chart-block" *ngIf="!loading">

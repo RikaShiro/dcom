@@ -47,6 +47,7 @@ export class DataStatusComponent implements OnInit {
             request: $.traffic_request.request,
             traffic: $.traffic_request.traffic,
           },
+          line: true,
         };
         this.dayData = {
           xAxis: $.day_dis.xAxis,
