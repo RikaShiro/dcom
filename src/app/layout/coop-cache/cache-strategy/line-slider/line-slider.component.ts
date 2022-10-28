@@ -8,11 +8,11 @@ import { EChartsOption } from 'echarts';
 })
 export class LineSliderComponent implements OnInit {
   @Input()
-  get barData(): any {
-    return this._barData;
+  get $(): any {
+    return this._$;
   }
-  set barData(barData: any) {
-    this._barData = barData ? barData : null;
+  set $($: any) {
+    this._$ = $ ? $ : null;
   }
   @Input() hasLine: boolean = true;
   @Input() showLabel: boolean = false;
@@ -26,7 +26,7 @@ export class LineSliderComponent implements OnInit {
     '#A45CEF',
     '#4AC2A8',
   ];
-  private _barData = null;
+  private _$ = null;
   dataLoading = false;
   mergeOption: EChartsOption = {};
   option: EChartsOption = {};
@@ -37,7 +37,7 @@ export class LineSliderComponent implements OnInit {
     this.option = {
       xAxis: {
         type: 'category',
-        data: this.barData.xAxis,
+        data: this.$.xAxis,
       },
       yAxis: {
         type: 'value',
@@ -60,7 +60,7 @@ export class LineSliderComponent implements OnInit {
         end: 60,
       },
       series: {
-        data: this.barData.data,
+        data: this.$.data,
         type: 'line',
         smooth: true,
       },

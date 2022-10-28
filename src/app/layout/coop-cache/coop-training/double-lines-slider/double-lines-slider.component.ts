@@ -9,11 +9,11 @@ import { TranslationService } from 'src/app/common/service/translation.servcice'
 })
 export class DoubleLinesSliderComponent implements OnInit {
   @Input()
-  get barData(): any {
-    return this._barData;
+  get $(): any {
+    return this._$;
   }
-  set barData(barData: any) {
-    this._barData = barData ? barData : null;
+  set $($: any) {
+    this._$ = $ ? $ : null;
   }
   @Input() hasLine: boolean = true;
   @Input() showLabel: boolean = false;
@@ -29,14 +29,19 @@ export class DoubleLinesSliderComponent implements OnInit {
     '#4AC2A8',
   ];
 
-  private _barData = null;
+  private _$ = null;
   dataLoading = false;
   mergeOption: EChartsOption = {};
-  data = [];
+
   option: EChartsOption = {
-    xAxis: {
-      type: 'category',
-      data: [],
+    color: this.selfColors,
+    grid: {
+      left: 50,
+      right: 25,
+      bottom: 75,
+      borderWidth: 1,
+      borderColor: '#ddd',
+      show: true,
     },
     legend: {
       top: 65,
@@ -47,25 +52,8 @@ export class DoubleLinesSliderComponent implements OnInit {
       itemHeight: 10,
       orient: 'horizontal',
     },
-    title: {
-      text: '',
-      show: false,
-      left: 'center',
-      textStyle: {
-        fontSize: 16,
-      },
-    },
     yAxis: {
       type: 'value',
-    },
-    color: this.selfColors,
-    grid: {
-      left: 50,
-      right: 25,
-      bottom: 75,
-      borderWidth: 1,
-      borderColor: '#ddd',
-      show: true,
     },
     dataZoom: {
       show: true,
@@ -79,17 +67,17 @@ export class DoubleLinesSliderComponent implements OnInit {
   constructor(private service: TranslationService) {}
 
   ngOnInit(): void {
-    if ('MSE' in this.barData) {
-      this.barData.MSE = this.barData.MSE.toFixed(4);
+    if ('MSE' in this.$) {
+      this.$.MSE = this.$.MSE.toFixed(4);
     }
     this.mergeOption.xAxis = {
       type: 'category',
-      data: this.barData.xAxis,
+      data: this.$.xAxis,
     };
     const series: SeriesOption[] = [];
-    for (const k in this.barData.data) {
+    for (const k in this.$.data) {
       const option = {
-        data: this.barData.data[k],
+        data: this.$.data[k],
         type: 'line',
         name: this.service.getTranslation(k),
         showLabel: false,

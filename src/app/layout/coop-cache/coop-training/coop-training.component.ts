@@ -31,25 +31,33 @@ export class CoopTrainingComponent implements OnInit {
     this.service.getCacheData().subscribe((res) => {
       if (res.code === 200) {
         const $ = res.data
-        this.cacheData.delay = [
-          $.ad_ADL,
-          $.ad_ADL_ran,
-        ];
-        this.cacheData.hit = [
-          $.ad_HIT,
-          $.ad_HIT_ran,
-        ]
-        this.cacheData.util = [
-          $.ad_UTIL,
-          $.ad_UTIL_ran
-        ]
-        this.cacheData.traffic = [
-          $.ad_hitTraffic,
-          $.ad_hitTraffic_ran,
-          $.ad_reTraffic
-        ]
+        this.cacheData.delay = {
+          data: {
+            cooperateCache: $.ad_ADL,
+            randomCache: $.ad_ADL_ran,
+          },
+        };
+        this.cacheData.hit = {
+          data: {
+            cooperateCache: $.ad_HIT,
+            randomCache: $.ad_HIT_ran,
+          },
+        };
+        this.cacheData.util = {
+          data: {
+            cooperateCache: $.ad_UTIL,
+            randomCache: $.ad_UTIL_ran,
+          },
+        };
+        this.cacheData.traffic = {
+          data: {
+            cooperateCacheHit: $.ad_hitTraffic,
+            randomCacheHit: $.ad_hitTraffic_ran,
+            userRequest: $.ad_reTraffic,
+          },
+        };
         for (let k in this.cacheData) {
-          this.cacheData[k].push($.xAxis)
+          this.cacheData[k].xAxis = $.xAxis;
         }
         this.cacheDataLoading = false;
       }

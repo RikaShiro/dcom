@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { EChartsOption, SeriesOption } from 'echarts';
+import { TranslationService } from 'src/app/common/service/translation.servcice';
 
 @Component({
   selector: 'app-symbol-line',
@@ -8,34 +9,32 @@ import { EChartsOption, SeriesOption } from 'echarts';
 })
 export class SymbolLineComponent implements OnInit {
   @Input()
-  get barData(): any {
-    return this._barData;
+  get $(): any {
+    return this._$;
   }
-  set barData(barData: any) {
-    this._barData = barData ? barData : null;
+  set $($: any) {
+    this._$ = $ ? $ : null;
   }
   @Input() hasLine: boolean = true;
   @Input() showLabel: boolean = false;
   @Input() title: string = '';
   @Input() names: string[] = [];
-  @Input() selfColors: string[] = [
-    '#6b9bc3',
-    '#ff9537',
-    '#35EAED',
-    '#459CF4',
-    '#3B54EC',
-    '#A45CEF',
-    '#4AC2A8',
-  ];
+  @Input() selfColors: string[] = ['#3cb371', '#9370db', '#DAA520'];
+  @Input() symbols: string[] = ['triangle', 'rect', 'diamond'];
+  @Input() unit: string = '';
 
-  private _barData = null;
-  dataLoading: boolean = true;
+  private _$ = null;
   mergeOption: EChartsOption = {};
-  data = [];
+
   option: EChartsOption = {
-    xAxis: {
-      type: 'category',
-      data: [],
+    color: this.selfColors,
+    grid: {
+      left: 50,
+      right: 20,
+      bottom: 60,
+      borderWidth: 1,
+      borderColor: '#ddd',
+      show: true,
     },
     legend: {
       top: 70,
@@ -46,93 +45,43 @@ export class SymbolLineComponent implements OnInit {
       itemHeight: 10,
       orient: 'horizontal',
     },
-    title: {
-      text: '',
-      show: false,
-      left: 'center',
-      textStyle: {
-        fontSize: 16,
-      },
-    },
-    yAxis: {
-      type: 'value',
-    },
-    color: this.selfColors,
-    grid: {
-      left: 50,
-      right: 20,
-      bottom: 60,
-      borderWidth: 1,
-      borderColor: '#ddd',
-      show: true,
-    },
-    series: [],
   };
-  constructor() {}
+  constructor(private service: TranslationService) {}
 
   ngOnInit(): void {
     this.mergeOption.xAxis = {
       type: 'category',
-      data: this.barData.xAxis,
+      data: this.$.xAxis,
     };
-    const list: SeriesOption[] = [
-      {
-        data: this.barData[0],
-        type: 'line',
-        name: this.names[0],
-        symbol: 'triangle',
-        symbolSize: 8,
-        lineStyle: {
-          color: '#3cb371',
-          width: 1,
-        },
-        itemStyle: {
-          borderWidth: 1,
-          borderColor: '#3cb371',
-          color: '#3cb371',
-        },
+    this.mergeOption.yAxis = {
+      type: 'value',
+      axisLabel: {
+        formatter: '{value}' + this.unit,
       },
-      {
-        data: this.barData[1],
+    };
+    const list: SeriesOption[] = [];
+    let idx = 0;
+    for (const k in this.$.data) {
+      const color = this.selfColors[idx];
+      const seriesOption: SeriesOption = {
+        data: this.$.data[k],
         type: 'line',
-        name: this.names[1],
-        symbol: 'rect',
+        name: this.service.getTranslation(k),
+        symbol: this.symbols[idx],
         symbolSize: 8,
         lineStyle: {
-          color: '#9370db',
+          color,
           width: 1,
         },
         itemStyle: {
           borderWidth: 1,
-          borderColor: '#9370db',
-          color: '#9370db',
+          borderColor: color,
+          color,
         },
-      },
-    ];
-
-    const len = this.barData.length;
-    if (len === 4) {
-      list.push({
-        data: this.barData[2],
-        type: 'line',
-        name: this.names[3],
-        symbol: 'diamond',
-        symbolSize: 8,
-        lineStyle: {
-          color: '#DAA520',
-          width: 1,
-        },
-        itemStyle: {
-          borderWidth: 1,
-          borderColor: '#DAA520',
-          color: '#DAA520',
-        },
-      });
+      };
+      list.push(seriesOption);
+      idx++;
     }
     this.mergeOption.series = list;
-    this.mergeOption.xAxis = {
-      type: 'category',
-      data: this.barData.xAxis,
-    };
   }
 }
