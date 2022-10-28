@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EChartsOption, SeriesOption } from 'echarts';
+import { EChartsOption } from 'echarts';
 
 @Component({
-  selector: 'app-line-chart-no-slider',
-  templateUrl: './line-chart-no-slider.component.html',
-  styleUrls: ['./line-chart-no-slider.component.less'],
+  selector: 'app-line-slider',
+  templateUrl: './line-slider.component.html',
+  styleUrls: ['./line-slider.component.less'],
 })
-export class LineChartNoSliderComponent implements OnInit {
+export class LineSliderComponent implements OnInit {
   @Input()
   get barData(): any {
     return this._barData;
@@ -29,7 +29,6 @@ export class LineChartNoSliderComponent implements OnInit {
   private _barData = null;
   dataLoading = false;
   mergeOption: EChartsOption = {};
-  data = [];
   option: EChartsOption = {};
 
   constructor() {}
@@ -42,30 +41,30 @@ export class LineChartNoSliderComponent implements OnInit {
       },
       yAxis: {
         type: 'value',
-        axisLabel: {
-          formatter: '{value}%',
-        },
       },
       color: this.selfColors,
       grid: {
         left: 50,
-        right: 20,
-        bottom: 50,
+        right: 25,
+        bottom: 75,
         borderWidth: 1,
         borderColor: '#ddd',
         show: true,
       },
-    };
-    const series = [];
-    for (const k in this.barData.data) {
-      const seriesOption: SeriesOption = {
-        data: this.barData.data[k],
+      dataZoom: {
+        show: true,
+        realtime: true,
+        type: 'slider',
+        height: 20,
+        start: 40,
+        end: 60,
+      },
+      series: {
+        data: this.barData.data,
         type: 'line',
         smooth: true,
-      };
-      series.push(seriesOption);
-    }
-    this.option.series = series;
+      },
+    };
     this.mergeOption.color = this.selfColors;
   }
 }

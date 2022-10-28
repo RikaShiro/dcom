@@ -3,11 +3,11 @@ import { EChartsOption, SeriesOption, YAXisComponentOption } from 'echarts';
 import { TranslationService } from 'src/app/common/service/translation.servcice';
 
 @Component({
-  selector: 'app-double-yaxis-chart',
-  templateUrl: './double-yaxis-chart.component.html',
-  styleUrls: ['./double-yaxis-chart.component.less'],
+  selector: 'app-double-y-axes',
+  templateUrl: './double-y-axes.component.html',
+  styleUrls: ['./double-y-axes.component.less'],
 })
-export class DoubleYaxisChartComponent implements OnInit {
+export class DoubleYAxesComponent implements OnInit {
   @Input()
   get barData(): any {
     return this._barData;
@@ -39,8 +39,8 @@ export class DoubleYaxisChartComponent implements OnInit {
     this.option = {
       color: this.selfColors,
       grid: {
-        left: 50,
-        right: 50,
+        left: 60,
+        right: 60,
         bottom: 50,
         borderWidth: 1,
         borderColor: '#ddd',

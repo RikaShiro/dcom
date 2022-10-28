@@ -17,32 +17,32 @@
 
   <div class="chart-block" *ngIf="!loading">
     <div class="whole-block">
-      <app-double-yaxis-chart [title]="'流量与请求次数趋势图'" [barData]="trafficData"></app-double-yaxis-chart>
+      <app-double-y-axes [title]="'流量与请求次数趋势图'" [barData]="trafficData"></app-double-y-axes>
     </div>
   </div>
   <div class="chart-block" *ngIf="!loading">
     <div class="whole-block">
-      <app-line-chart-no-slider [title]="'缓存利用率趋势图'" [barData]="cacheData"></app-line-chart-no-slider>
+      <app-double-lines [title]="'缓存利用率趋势图'" [barData]="cacheData"></app-double-lines>
     </div>
   </div>
   <div class="chart-block" *ngIf="!loading">
     <div class="short-block">
-      <app-double-yaxis-chart [title]="'近1年 流量与请求次数日分布统计'" [selfColors]="colors" [barData]="dayData">
-      </app-double-yaxis-chart>
+      <app-double-y-axes [title]="'近1年 流量与请求次数日分布统计'" [selfColors]="colors" [barData]="dayData">
+      </app-double-y-axes>
     </div>
     <div class="long-block">
-      <app-double-yaxis-chart [title]="'近1年 流量与请求次数月分布统计'" [selfColors]="colors" [barData]="monthData">
-      </app-double-yaxis-chart>
+      <app-double-y-axes [title]="'近1年 流量与请求次数月分布统计'" [selfColors]="colors" [barData]="monthData">
+      </app-double-y-axes>
     </div>
   </div>
   <div class="chart-block" *ngIf="!loading">
     <div class="short-block">
-      <app-double-yaxis-chart [title]="'近1年 流量与请求次数周分布统计'" [selfColors]="colors" [barData]="weekData">
-      </app-double-yaxis-chart>
+      <app-double-y-axes [title]="'近1年 流量与请求次数周分布统计'" [selfColors]="colors" [barData]="weekData">
+      </app-double-y-axes>
     </div>
     <div class="long-block">
-      <app-double-yaxis-chart [title]="'近1年 流量与请求次数年分布统计'" [selfColors]="colors" [barData]="yearData">
-      </app-double-yaxis-chart>
+      <app-double-y-axes [title]="'近1年 流量与请求次数年分布统计'" [selfColors]="colors" [barData]="yearData">
+      </app-double-y-axes>
     </div>
   </div>
 </div>

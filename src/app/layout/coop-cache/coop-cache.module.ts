@@ -8,10 +8,10 @@ import { CoopTrainingComponent } from './coop-training/coop-training.component';
 import { CacheStrategyComponent } from './cache-strategy/cache-strategy.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { SymbolLineComponent } from './coop-training/symbol-line/symbol-line.component';
-import { FlowLineComponent } from './coop-training/flow-line/flow-line.component';
-import { DoubleYaxisChartComponent } from './data-status/double-yaxis-chart/double-yaxis-chart.component';
-import { LineChartNoSliderComponent } from './data-status/line-chart-no-slider/line-chart-no-slider.component';
-import { LineChartSliderComponent } from './cache-strategy/line-chart-slider/line-chart-slider.component';
+import { DoubleYAxesComponent } from './data-status/double-y-axes/double-y-axes.component';
+import { DoubleLinesComponent } from './data-status/double-lines/double-lines.component';
+import { LineSliderComponent } from './cache-strategy/line-slider/line-slider.component';
+import { DoubleLinesSliderComponent } from './coop-training/double-lines-slider/double-lines-slider.component';
 
 @NgModule({
   declarations: [
@@ -20,10 +20,10 @@ import { LineChartSliderComponent } from './cache-strategy/line-chart-slider/lin
     CoopTrainingComponent,
     CacheStrategyComponent,
     SymbolLineComponent,
-    FlowLineComponent,
-    DoubleYaxisChartComponent,
-    LineChartNoSliderComponent,
-    LineChartSliderComponent
+    DoubleLinesComponent,
+    DoubleYAxesComponent,
+    LineSliderComponent,
+    DoubleLinesSliderComponent,
   ],
   imports: [CommonModule, ShareModule, CoopCacheRoutesModule, NgxEchartsModule],
 })

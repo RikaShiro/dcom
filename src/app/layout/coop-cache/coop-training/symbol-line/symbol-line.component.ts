@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EChartsOption } from 'echarts';
+import { EChartsOption, SeriesOption } from 'echarts';
 
 @Component({
   selector: 'app-symbol-line',
@@ -75,7 +75,7 @@ export class SymbolLineComponent implements OnInit {
       type: 'category',
       data: this.barData.xAxis,
     };
-    const list = [
+    const list: SeriesOption[] = [
       {
         data: this.barData[0],
         type: 'line',
@@ -109,6 +109,7 @@ export class SymbolLineComponent implements OnInit {
         },
       },
     ];
+
     const len = this.barData.length;
     if (len === 4) {
       list.push({
@@ -128,7 +129,7 @@ export class SymbolLineComponent implements OnInit {
         },
       });
     }
-    this.mergeOption.series = <any[]>list;
+    this.mergeOption.series = list;
     this.mergeOption.xAxis = {
       type: 'category',
       data: this.barData.xAxis,

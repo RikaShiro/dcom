@@ -3,11 +3,11 @@ import { EChartsOption, SeriesOption } from 'echarts';
 import { TranslationService } from 'src/app/common/service/translation.servcice';
 
 @Component({
-  selector: 'app-flow-line',
-  templateUrl: './flow-line.component.html',
-  styleUrls: ['./flow-line.component.less'],
+  selector: 'app-double-lines-slider',
+  templateUrl: './double-lines-slider.html',
+  styleUrls: ['./double-lines-slider.less'],
 })
-export class FlowLineComponent implements OnInit {
+export class DoubleLinesSliderComponent implements OnInit {
   @Input()
   get barData(): any {
     return this._barData;
@@ -39,7 +39,7 @@ export class FlowLineComponent implements OnInit {
       data: [],
     },
     legend: {
-      top: 70,
+      top: 65,
       right: 30,
       borderWidth: 1,
       borderRadius: 5,
@@ -61,7 +61,7 @@ export class FlowLineComponent implements OnInit {
     color: this.selfColors,
     grid: {
       left: 50,
-      right: 20,
+      right: 25,
       bottom: 75,
       borderWidth: 1,
       borderColor: '#ddd',
@@ -86,7 +86,7 @@ export class FlowLineComponent implements OnInit {
       type: 'category',
       data: this.barData.xAxis,
     };
-    const list: SeriesOption[] = [];
+    const series: SeriesOption[] = [];
     for (const k in this.barData.data) {
       const option = {
         data: this.barData.data[k],
@@ -98,9 +98,9 @@ export class FlowLineComponent implements OnInit {
           width: 2,
         },
       };
-      list.push(option as SeriesOption)
+      series.push(option as SeriesOption);
     }
-    this.mergeOption.series = <any[]>list;
+    this.mergeOption.series = series;
     this.mergeOption.color = this.selfColors;
   }
 }

@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { EChartsOption, SeriesOption } from 'echarts';
 
 @Component({
-  selector: 'app-line-chart-slider',
-  templateUrl: './line-chart-slider.component.html',
-  styleUrls: ['./line-chart-slider.component.less'],
+  selector: 'app-double-lines',
+  templateUrl: './double-lines.component.html',
+  styleUrls: ['./double-lines.component.less'],
 })
-export class LineChartSliderComponent implements OnInit {
+export class DoubleLinesComponent implements OnInit {
   @Input()
   get barData(): any {
     return this._barData;
@@ -42,30 +42,30 @@ export class LineChartSliderComponent implements OnInit {
       },
       yAxis: {
         type: 'value',
+        axisLabel: {
+          formatter: '{value}%',
+        },
       },
       color: this.selfColors,
       grid: {
-        left: 50,
-        right: 20,
-        bottom: 75,
+        left: 60,
+        right: 60,
+        bottom: 50,
         borderWidth: 1,
         borderColor: '#ddd',
         show: true,
       },
-      dataZoom: {
-        show: true,
-        realtime: true,
-        type: 'slider',
-        height: 20,
-        start: 40,
-        end: 60,
-      },
-      series: {
-        data: this.barData.data,
+    };
+    const series = [];
+    for (const k in this.barData.data) {
+      const seriesOption: SeriesOption = {
+        data: this.barData.data[k],
         type: 'line',
         smooth: true,
-      },
-    };
+      };
+      series.push(seriesOption);
+    }
+    this.option.series = series;
     this.mergeOption.color = this.selfColors;
   }
 }

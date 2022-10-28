@@ -76,8 +76,8 @@
   <!-- 流量预测模型训练 与 协作缓存与负载均衡模型训练 中间的图 -->
   <div class="charts-groups" *ngIf="!trafficDataLoading">
     <div class="whole-block">
-      <app-flow-line [title]="'Iterations'" [selfColors]="['#1f77b4', '#ff0000']" [barData]="trafficData">
-      </app-flow-line>
+      <app-double-lines-slider [title]="'Iterations'" [selfColors]="['#1f77b4', '#ff0000']" [barData]="trafficData">
+      </app-double-lines-slider>
     </div>
   </div>
 
