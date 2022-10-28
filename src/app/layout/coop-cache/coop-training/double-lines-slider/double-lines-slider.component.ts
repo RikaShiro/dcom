@@ -67,14 +67,8 @@ export class DoubleLinesSliderComponent implements OnInit {
   constructor(private service: TranslationService) {}
 
   ngOnInit(): void {
-    if ('MSE' in this.$) {
-      this.$.MSE = this.$.MSE.toFixed(4);
-    }
-    this.mergeOption.xAxis = {
-      type: 'category',
-      data: this.$.xAxis,
-    };
-    const series: SeriesOption[] = [];
+    this.$.MSE = this.$.MSE.toFixed(4);
+    const series = [];
     for (const k in this.$.data) {
       const option = {
         data: this.$.data[k],
@@ -88,7 +82,12 @@ export class DoubleLinesSliderComponent implements OnInit {
       };
       series.push(option as SeriesOption);
     }
-    this.mergeOption.series = series;
-    this.mergeOption.color = this.selfColors;
+    this.mergeOption = {
+      xAxis: {
+        type: 'category',
+        data: this.$.xAxis,
+      },
+      series,
+    };
   }
 }

@@ -9,11 +9,11 @@ import { TranslationService } from 'src/app/common/service/translation.servcice'
 })
 export class DoubleYAxesComponent implements OnInit {
   @Input()
-  get barData(): any {
-    return this._barData;
+  get $(): any {
+    return this._$;
   }
-  set barData(barData: any) {
-    this._barData = barData ? barData : null;
+  set $($: any) {
+    this._$ = $ ? $ : null;
   }
   @Input() hasLine: boolean = true;
   @Input() showLabel: boolean = false;
@@ -27,70 +27,69 @@ export class DoubleYAxesComponent implements OnInit {
     '#A45CEF',
     '#4AC2A8',
   ];
-  private _barData = null;
+  private _$ = null;
   dataLoading = false;
   mergeOption: EChartsOption = {};
-  data = [];
-  option: EChartsOption = {};
+  option: EChartsOption = {
+    color: this.selfColors,
+    grid: {
+      left: 60,
+      right: 60,
+      bottom: 50,
+      borderWidth: 1,
+      borderColor: '#ddd',
+      show: true,
+    },
+  };
 
   constructor(private service: TranslationService) {}
 
   ngOnInit(): void {
-    this.option = {
-      color: this.selfColors,
-      grid: {
-        left: 60,
-        right: 60,
-        bottom: 50,
-        borderWidth: 1,
-        borderColor: '#ddd',
-        show: true,
-      },
-      xAxis: {
-        type: 'category',
-        data: this.barData.xAxis,
-        axisTick: {
-          alignWithLabel: true,
-        },
-      },
-    };
-    const series: SeriesOption[] = [];
-    const yAxis: YAXisComponentOption[] = [];
+    const series = [];
+    const yAxis = [];
     const legendData = [];
     let idx = 0;
-    for (const k in this.barData.data) {
+    for (const k in this.$.data) {
       const name = this.service.getTranslation(k);
       legendData.push(name);
       yAxis.push({
         type: 'value',
         name: name,
-        position: idx === 0 ? 'left' : 'right',
+        position: idx ? 'right' : 'left',
         axisLine: {
           show: true,
           lineStyle: {
-            color: !idx ? this.selfColors[0] : this.selfColors[1],
+            color: idx ? this.selfColors[1] : this.selfColors[0],
           },
         },
         alignTicks: true,
-      });
-      const seriesOption = {
+      } as YAXisComponentOption);
+      const option = {
         type: idx ? 'line' : 'bar',
         name: name,
-        data: this.barData.data[k],
+        data: this.$.data[k],
         smooth: true,
         yAxisIndex: idx,
       };
-      if (this.barData.line) {
-        seriesOption.type = 'line';
+      if (this.$.line) {
+        option.type = 'line';
       }
-      series.push(seriesOption as SeriesOption);
+      series.push(option as SeriesOption);
       idx++;
     }
-    this.option.yAxis = yAxis;
-    this.option.series = series;
-    this.option.legend = {
-      data: legendData,
+    this.mergeOption = {
+      legend: {
+        data: legendData,
+      },
+      xAxis: {
+        type: 'category',
+        data: this.$.xAxis,
+        axisTick: {
+          alignWithLabel: true,
+        },
+      },
+      yAxis,
+      series,
     };
-    this.mergeOption.color = this.selfColors;
   }
 }

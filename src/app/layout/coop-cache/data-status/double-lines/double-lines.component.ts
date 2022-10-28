@@ -8,11 +8,11 @@ import { EChartsOption, SeriesOption } from 'echarts';
 })
 export class DoubleLinesComponent implements OnInit {
   @Input()
-  get barData(): any {
-    return this._barData;
+  get $(): any {
+    return this._$;
   }
-  set barData(barData: any) {
-    this._barData = barData ? barData : null;
+  set $($: any) {
+    this._$ = $ ? $ : null;
   }
   @Input() hasLine: boolean = true;
   @Input() showLabel: boolean = false;
@@ -26,46 +26,45 @@ export class DoubleLinesComponent implements OnInit {
     '#A45CEF',
     '#4AC2A8',
   ];
-  private _barData = null;
+  private _$ = null;
   dataLoading = false;
   mergeOption: EChartsOption = {};
-  data = [];
-  option: EChartsOption = {};
+  option: EChartsOption = {
+    color: this.selfColors,
+    grid: {
+      left: 60,
+      right: 60,
+      bottom: 50,
+      borderWidth: 1,
+      borderColor: '#ddd',
+      show: true,
+    },
+    yAxis: {
+      type: 'value',
+      axisLabel: {
+        formatter: '{value}%',
+      },
+    },
+  };
 
   constructor() {}
 
   ngOnInit(): void {
-    this.option = {
-      xAxis: {
-        type: 'category',
-        data: this.barData.xAxis,
-      },
-      yAxis: {
-        type: 'value',
-        axisLabel: {
-          formatter: '{value}%',
-        },
-      },
-      color: this.selfColors,
-      grid: {
-        left: 60,
-        right: 60,
-        bottom: 50,
-        borderWidth: 1,
-        borderColor: '#ddd',
-        show: true,
-      },
-    };
     const series = [];
-    for (const k in this.barData.data) {
-      const seriesOption: SeriesOption = {
-        data: this.barData.data[k],
+    for (const k in this.$.data) {
+      const option = {
+        data: this.$.data[k],
         type: 'line',
         smooth: true,
       };
-      series.push(seriesOption);
+      series.push(option as SeriesOption);
     }
-    this.option.series = series;
-    this.mergeOption.color = this.selfColors;
+    this.mergeOption = {
+      xAxis: {
+        type: 'category',
+        data: this.$.xAxis,
+      },
+      series
+    };
   }
 }

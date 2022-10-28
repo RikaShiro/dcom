@@ -23,9 +23,8 @@ export class SymbolLineComponent implements OnInit {
   @Input() symbols: string[] = ['triangle', 'rect', 'diamond'];
   @Input() unit: string = '';
 
-  private _$ = null;
+  private _$: any = null;
   mergeOption: EChartsOption = {};
-
   option: EChartsOption = {
     color: this.selfColors,
     grid: {
@@ -49,21 +48,11 @@ export class SymbolLineComponent implements OnInit {
   constructor(private service: TranslationService) {}
 
   ngOnInit(): void {
-    this.mergeOption.xAxis = {
-      type: 'category',
-      data: this.$.xAxis,
-    };
-    this.mergeOption.yAxis = {
-      type: 'value',
-      axisLabel: {
-        formatter: '{value}' + this.unit,
-      },
-    };
-    const list: SeriesOption[] = [];
+    const series = [];
     let idx = 0;
     for (const k in this.$.data) {
       const color = this.selfColors[idx];
-      const seriesOption: SeriesOption = {
+      const option = {
         data: this.$.data[k],
         type: 'line',
         name: this.service.getTranslation(k),
@@ -79,9 +68,21 @@ export class SymbolLineComponent implements OnInit {
           color,
         },
       };
-      list.push(seriesOption);
+      series.push(option as SeriesOption);
       idx++;
     }
-    this.mergeOption.series = list;
+    this.mergeOption = {
+      xAxis: {
+        type: 'category',
+        data: this.$.xAxis,
+      },
+      yAxis: {
+        type: 'value',
+        axisLabel: {
+          formatter: '{value}' + this.unit,
+        },
+      },
+      series,
+    };;
   }
 }

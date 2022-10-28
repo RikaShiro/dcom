@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EChartsOption } from 'echarts';
+import { EChartsOption, SeriesOption } from 'echarts';
 
 @Component({
   selector: 'app-line-slider',
@@ -14,8 +14,6 @@ export class LineSliderComponent implements OnInit {
   set $($: any) {
     this._$ = $ ? $ : null;
   }
-  @Input() hasLine: boolean = true;
-  @Input() showLabel: boolean = false;
   @Input() title: string = '';
   @Input() selfColors: string[] = [
     '#6b9bc3',
@@ -29,35 +27,36 @@ export class LineSliderComponent implements OnInit {
   private _$ = null;
   dataLoading = false;
   mergeOption: EChartsOption = {};
-  option: EChartsOption = {};
+  option: EChartsOption = {
+    color: this.selfColors,
+    grid: {
+      left: 50,
+      right: 25,
+      bottom: 75,
+      borderWidth: 1,
+      borderColor: '#ddd',
+      show: true,
+    },
+    yAxis: {
+      type: 'value',
+    },
+    dataZoom: {
+      show: true,
+      realtime: true,
+      type: 'slider',
+      height: 20,
+      start: 40,
+      end: 60,
+    },
+  };
 
   constructor() {}
 
   ngOnInit(): void {
-    this.option = {
+    this.mergeOption = {
       xAxis: {
         type: 'category',
         data: this.$.xAxis,
-      },
-      yAxis: {
-        type: 'value',
-      },
-      color: this.selfColors,
-      grid: {
-        left: 50,
-        right: 25,
-        bottom: 75,
-        borderWidth: 1,
-        borderColor: '#ddd',
-        show: true,
-      },
-      dataZoom: {
-        show: true,
-        realtime: true,
-        type: 'slider',
-        height: 20,
-        start: 40,
-        end: 60,
       },
       series: {
         data: this.$.data,
@@ -65,6 +64,5 @@ export class LineSliderComponent implements OnInit {
         smooth: true,
       },
     };
-    this.mergeOption.color = this.selfColors;
   }
 }
