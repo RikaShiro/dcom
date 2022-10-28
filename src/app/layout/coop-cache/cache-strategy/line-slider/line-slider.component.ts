@@ -37,9 +37,6 @@ export class LineSliderComponent implements OnInit {
       borderColor: '#ddd',
       show: true,
     },
-    yAxis: {
-      type: 'value',
-    },
     dataZoom: {
       show: true,
       realtime: true,
@@ -58,6 +55,9 @@ export class LineSliderComponent implements OnInit {
         type: 'category',
         data: this.$.xAxis,
       },
+      yAxis: {
+        type: 'value',
+      },
       series: {
         data: this.$.data,
         type: 'line',
@@ -66,3 +66,5 @@ export class LineSliderComponent implements OnInit {
     };
   }
 }
+
+// note: xAxis和yAxis要同时放进option里。否则console有静默错误

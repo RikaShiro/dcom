@@ -52,9 +52,6 @@ export class DoubleLinesSliderComponent implements OnInit {
       itemHeight: 10,
       orient: 'horizontal',
     },
-    yAxis: {
-      type: 'value',
-    },
     dataZoom: {
       show: true,
       realtime: true,
@@ -86,6 +83,9 @@ export class DoubleLinesSliderComponent implements OnInit {
       xAxis: {
         type: 'category',
         data: this.$.xAxis,
+      },
+      yAxis: {
+        type: 'value',
       },
       series,
     };

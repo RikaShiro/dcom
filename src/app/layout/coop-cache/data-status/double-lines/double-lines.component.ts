@@ -39,12 +39,6 @@ export class DoubleLinesComponent implements OnInit {
       borderColor: '#ddd',
       show: true,
     },
-    yAxis: {
-      type: 'value',
-      axisLabel: {
-        formatter: '{value}%',
-      },
-    },
   };
 
   constructor() {}
@@ -52,19 +46,25 @@ export class DoubleLinesComponent implements OnInit {
   ngOnInit(): void {
     const series = [];
     for (const k in this.$.data) {
-      const option = {
+      const option: SeriesOption = {
         data: this.$.data[k],
         type: 'line',
         smooth: true,
       };
-      series.push(option as SeriesOption);
+      series.push(option);
     }
     this.mergeOption = {
       xAxis: {
         type: 'category',
         data: this.$.xAxis,
       },
-      series
+      yAxis: {
+        type: 'value',
+        axisLabel: {
+          formatter: '{value}%',
+        },
+      },
+      series,
     };
   }
 }

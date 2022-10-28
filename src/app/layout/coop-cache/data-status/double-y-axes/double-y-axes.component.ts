@@ -54,7 +54,7 @@ export class DoubleYAxesComponent implements OnInit {
       legendData.push(name);
       yAxis.push({
         type: 'value',
-        name: name,
+        name,
         position: idx ? 'right' : 'left',
         axisLine: {
           show: true,
@@ -66,7 +66,7 @@ export class DoubleYAxesComponent implements OnInit {
       } as YAXisComponentOption);
       const option = {
         type: idx ? 'line' : 'bar',
-        name: name,
+        name,
         data: this.$.data[k],
         smooth: true,
         yAxisIndex: idx,
