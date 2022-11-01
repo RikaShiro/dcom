@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { EChartsOption, SeriesOption } from 'echarts';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { EChartsOption } from 'echarts';
 
 @Component({
   selector: 'app-line-slider',
   templateUrl: './line-slider.component.html',
   styleUrls: ['./line-slider.component.less'],
 })
-export class LineSliderComponent implements OnInit {
+export class LineSliderComponent implements OnChanges {
   @Input()
   get $(): any {
     return this._$;
@@ -24,8 +24,9 @@ export class LineSliderComponent implements OnInit {
     '#A45CEF',
     '#4AC2A8',
   ];
+
   private _$ = null;
-  dataLoading = false;
+  isLoading = true;
   mergeOption: EChartsOption = {};
   option: EChartsOption = {
     color: this.selfColors,
@@ -49,7 +50,9 @@ export class LineSliderComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    const dataUpdate = '$' in changes && 'loading' in changes;
+    if (!dataUpdate) return;
     this.mergeOption = {
       xAxis: {
         type: 'category',
@@ -66,5 +69,4 @@ export class LineSliderComponent implements OnInit {
     };
   }
 }
-
-// note: xAxis和yAxis要同时放进option里。否则console有静默错误
+// xAxis和yAxis要同时放进option里。否则console有静默错误
