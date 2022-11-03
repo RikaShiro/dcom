@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { EChartsOption, SeriesOption, YAXisComponentOption } from 'echarts';
 import { TranslationService } from 'src/app/common/service/translation.servcice';
 
@@ -7,7 +7,7 @@ import { TranslationService } from 'src/app/common/service/translation.servcice'
   templateUrl: './double-y-axes.component.html',
   styleUrls: ['./double-y-axes.component.less'],
 })
-export class DoubleYAxesComponent implements OnInit {
+export class DoubleYAxesComponent implements OnChanges {
   @Input()
   get $(): any {
     return this._$;
@@ -27,8 +27,9 @@ export class DoubleYAxesComponent implements OnInit {
     '#A45CEF',
     '#4AC2A8',
   ];
+  @Input() loading: boolean = true;
+
   private _$ = null;
-  dataLoading = false;
   mergeOption: EChartsOption = {};
   option: EChartsOption = {
     color: this.selfColors,
@@ -44,7 +45,9 @@ export class DoubleYAxesComponent implements OnInit {
 
   constructor(private service: TranslationService) {}
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    const dataUpdate = '$' in changes && 'loading' in changes;
+    if (!dataUpdate) return;
     const series = [];
     const yAxis = [];
     const legendData = [];

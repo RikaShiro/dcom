@@ -24,9 +24,8 @@ export class LineSliderComponent implements OnChanges {
     '#A45CEF',
     '#4AC2A8',
   ];
-
+  @Input() loading: boolean = true;
   private _$ = null;
-  isLoading = true;
   mergeOption: EChartsOption = {};
   option: EChartsOption = {
     color: this.selfColors,

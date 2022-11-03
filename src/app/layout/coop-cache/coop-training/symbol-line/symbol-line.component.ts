@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { EChartsOption, SeriesOption } from 'echarts';
 import { TranslationService } from 'src/app/common/service/translation.servcice';
 
@@ -7,7 +7,7 @@ import { TranslationService } from 'src/app/common/service/translation.servcice'
   templateUrl: './symbol-line.component.html',
   styleUrls: ['./symbol-line.component.less'],
 })
-export class SymbolLineComponent implements OnInit {
+export class SymbolLineComponent implements OnChanges {
   @Input()
   get $(): any {
     return this._$;
@@ -22,6 +22,7 @@ export class SymbolLineComponent implements OnInit {
   @Input() selfColors: string[] = ['#3cb371', '#9370db', '#DAA520'];
   @Input() symbols: string[] = ['triangle', 'rect', 'diamond'];
   @Input() unit: string = '';
+  @Input() loading: boolean = true;
 
   private _$: any = null;
   mergeOption: EChartsOption = {};
@@ -47,7 +48,9 @@ export class SymbolLineComponent implements OnInit {
   };
   constructor(private service: TranslationService) {}
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    const dataUpdate = '$' in changes && 'loading' in changes;
+    if (!dataUpdate) return;
     const series = [];
     let idx = 0;
     for (const k in this.$.data) {
@@ -83,6 +86,6 @@ export class SymbolLineComponent implements OnInit {
         },
       },
       series,
-    };;
+    };
   }
 }

@@ -73,9 +73,9 @@
 
   </div>
 
-  <div class="charts-groups" *ngIf="!trafficDataLoading">
+  <div class="charts-groups">
     <div class="whole-block">
-      <app-double-lines-slider [title]="'Iterations'" [selfColors]="['#1f77b4', '#ff0000']" [$]="trafficData">
+      <app-double-lines-slider [title]="'Iterations'" [selfColors]="['#1f77b4', '#ff0000']" [$]="trafficData" [loading]="trafficDataLoading">
       </app-double-lines-slider>
     </div>
   </div>
@@ -183,19 +183,19 @@
 
   </div>
 
-  <div class="charts-groups" *ngIf="!cacheDataLoading">
+  <div class="charts-groups">
     <div class="half-block">
-      <app-symbol-line [title]="'缓存利用率性能评估'" [names]="['协作缓存', '随机缓存']" [$]="cacheData.util" [unit]="'%'"></app-symbol-line>
+      <app-symbol-line [title]="'缓存利用率性能评估'" [names]="['协作缓存', '随机缓存']" [$]="cacheData.util" [unit]="'%'" [loading]="cacheDataLoading"></app-symbol-line>
     </div>
     <div class="half-block">
-      <app-symbol-line [title]="'平均延迟性能评估'" [names]="['协作缓存', '随机缓存']" [$]="cacheData.delay"></app-symbol-line>
+      <app-symbol-line [title]="'平均延迟性能评估'" [names]="['协作缓存', '随机缓存']" [$]="cacheData.delay" [loading]="cacheDataLoading"></app-symbol-line>
     </div>
     <div class="half-block">
-      <app-symbol-line [title]="'缓存击中流量性能评估'" [names]="['协作缓存击中', '随机缓存击中', '用户请求']" [$]="cacheData.traffic">
+      <app-symbol-line [title]="'缓存击中流量性能评估'" [names]="['协作缓存击中', '随机缓存击中', '用户请求']" [$]="cacheData.traffic" [loading]="cacheDataLoading">
       </app-symbol-line>
     </div>
     <div class="half-block">
-      <app-symbol-line [title]="'缓存击中率性能评估'" [names]="['协作缓存', '随机缓存']" [$]="cacheData.hit" [unit]="'%'"></app-symbol-line>
+      <app-symbol-line [title]="'缓存击中率性能评估'" [names]="['协作缓存', '随机缓存']" [$]="cacheData.hit" [unit]="'%'" [loading]="cacheDataLoading"></app-symbol-line>
     </div>
   </div>
 

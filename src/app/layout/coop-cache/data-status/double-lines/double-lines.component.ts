@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { EChartsOption, SeriesOption } from 'echarts';
 
 @Component({
@@ -6,7 +6,7 @@ import { EChartsOption, SeriesOption } from 'echarts';
   templateUrl: './double-lines.component.html',
   styleUrls: ['./double-lines.component.less'],
 })
-export class DoubleLinesComponent implements OnInit {
+export class DoubleLinesComponent implements OnChanges {
   @Input()
   get $(): any {
     return this._$;
@@ -26,6 +26,8 @@ export class DoubleLinesComponent implements OnInit {
     '#A45CEF',
     '#4AC2A8',
   ];
+  @Input() loading: boolean = true;
+
   private _$ = null;
   dataLoading = false;
   mergeOption: EChartsOption = {};
@@ -43,7 +45,9 @@ export class DoubleLinesComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    const dataUpdate = '$' in changes && 'loading' in changes;
+    if (!dataUpdate) return;
     const series = [];
     for (const k in this.$.data) {
       const option: SeriesOption = {

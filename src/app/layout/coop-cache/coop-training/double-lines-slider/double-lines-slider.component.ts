@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { EChartsOption, SeriesOption } from 'echarts';
 import { TranslationService } from 'src/app/common/service/translation.servcice';
 
@@ -7,7 +7,7 @@ import { TranslationService } from 'src/app/common/service/translation.servcice'
   templateUrl: './double-lines-slider.html',
   styleUrls: ['./double-lines-slider.less'],
 })
-export class DoubleLinesSliderComponent implements OnInit {
+export class DoubleLinesSliderComponent implements OnChanges {
   @Input()
   get $(): any {
     return this._$;
@@ -28,9 +28,9 @@ export class DoubleLinesSliderComponent implements OnInit {
     '#A45CEF',
     '#4AC2A8',
   ];
+  @Input() loading = true;
 
   private _$ = null;
-  dataLoading = false;
   mergeOption: EChartsOption = {};
 
   option: EChartsOption = {
@@ -63,7 +63,9 @@ export class DoubleLinesSliderComponent implements OnInit {
   };
   constructor(private service: TranslationService) {}
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    const dataUpdate = '$' in changes && 'loading' in changes;
+    if (!dataUpdate) return;
     this.$.MSE = this.$.MSE.toFixed(4);
     const series = [];
     for (const k in this.$.data) {

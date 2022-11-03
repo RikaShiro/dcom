@@ -13,7 +13,6 @@ export class CoopTrainingComponent implements OnInit {
     { id: 12, name: '训练集' },
     { id: 12, name: '测试集' },
   ];
-  loading = false;
 
   cacheData: any = {};
   cacheDataLoading: boolean = true;
@@ -81,14 +80,13 @@ export class CoopTrainingComponent implements OnInit {
       }
     });
   }
-
-  getDataList(condition: any) {
-    this.loading = true;
-    this.service.getDataList(condition).subscribe((res) => {
-      this.loading = false;
-      if (res.code === 200) {
-        console.log(res.data);
-      }
-    });
-  }
+  // getDataList(condition: any) {
+  //   this.loading = true;
+  //   this.service.getDataList(condition).subscribe((res) => {
+  //     this.loading = false;
+  //     if (res.code === 200) {
+  //       console.log(res.data);
+  //     }
+  //   });
+  // }
 }
