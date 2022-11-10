@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EChartsOption} from 'echarts';
+import {ChartType} from '../../../../common/const/ChartType';
 
 @Component({
   selector: 'app-lines-chart',
@@ -17,42 +18,41 @@ export class LinesChartComponent implements OnInit {
   @Input() title: string = '';
   @Input() selfColors: string[] = ['#6b9bc3', '#ff9537', '#35EAED', '#459CF4', '#3B54EC', '#A45CEF', '#4AC2A8'];
   private _barData = null;
-  dataLoading = false;
+  dataLoading = true;
   mergeOption: EChartsOption = {};
   data = [];
-  option: EChartsOption = {
-    xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    },
-    yAxis: {
-      type: 'value'
-    },
-    color: this.selfColors,
-    grid: {
-      left: 50,
-      right: 20,
-      bottom: 50,
-      borderWidth: 1,
-      borderColor: '#ddd',
-      show: true
-    },
-    series: [
-      {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: 'line',
-        smooth: true
-      },
-      {
-        data: [820, 832, 701, 734, 990, 830, 720],
-        type: 'line',
-        smooth: true
-      }
-    ]
-  };
+  option: EChartsOption = {};
   constructor() { }
 
   ngOnInit(): void {
+    /*this.mergeOption.series = this.barData.data;
+    this.mergeOption.xAxis = {
+      data :  this.barData.xAxis
+    };*/
   }
 
+  setConfig(chart: ChartType) {
+    this.option = {
+      xAxis: {
+        type: 'category',
+        data: chart.xAxis
+      },
+      yAxis: {
+        type: 'value',
+      },
+      legend: {
+        show: true
+      },
+      color: this.selfColors,
+      grid: {
+        left: 50,
+        right: 20,
+        bottom: 50,
+        borderWidth: 1,
+        borderColor: '#ddd',
+        show: true
+      },
+      series: chart.data
+    }
+  }
 }

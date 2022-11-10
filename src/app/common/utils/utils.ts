@@ -81,3 +81,41 @@ export function trimAllString(condition?: { [key: string]: any }) {
   }
   return condition;
 }
+
+export function formatNumber(value: number) {
+  if (value || value === 0) {
+    return value.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  } else {
+    return '-';
+  }
+}
+
+export function formatNumberWidth(value: number, num: number = 2) {
+  if (value || value === 0) {
+    return value.toLocaleString(undefined, {minimumFractionDigits: num, maximumFractionDigits: num});
+  } else {
+    return '-';
+  }
+}
+
+export function formatPercent(value: number) {
+  if (value || value === 0) {
+    return (value * 100).toFixed(2) + '%';
+  } else {
+    return '-';
+  }
+}
+export function formatPercentWithout(value: number) {
+  if (value || value === 0) {
+    return value.toFixed(2) + '%';
+  } else {
+    return '-';
+  }
+}
+export function formatPercentWithoutDot(value: number) {
+  if (value || value === 0) {
+    return (value * 100).toFixed(0) + '%';
+  } else {
+    return '-';
+  }
+}

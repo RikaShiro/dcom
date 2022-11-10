@@ -1,19 +1,53 @@
 <div echarts [options]="option" [merge]="mergeOption"
      style="height: 100%; width: 100%;" [loading]="dataLoading"></div>
 <div class="chart-title">{{title}}</div>
-<div class="custom-legend">
+<div class="custom-legend" *ngIf="type === 0">
   <div class="legend-block">
     <span class="legend-title">相同环境PUE值=</span>
-    <span class="legend-value origin-text">1.34</span>
+    <span class="legend-value origin-text">{{legends.average_predictPUE}}</span>
   </div>
 
   <div class="legend-block">
     <span class="legend-title">调节之前PUE值=</span>
-    <span class="legend-value changed-text">1.34</span>
+    <span class="legend-value changed-text">{{legends.average_orginPUE}}</span>
   </div>
 
   <div class="legend-block">
     <span class="legend-title">调节之后PUE值=</span>
-    <span class="legend-value ref-text">1.34</span>
+    <span class="legend-value ref-text">{{legends.average_referencePUE}}</span>
+  </div>
+</div>
+
+<div class="custom-legend" *ngIf="type === 1">
+  <div class="legend-block">
+    <span class="legend-title">相同环境总能耗=</span>
+    <span class="legend-value origin-text">{{legends.average_predict_total_energy}}</span>
+  </div>
+
+  <div class="legend-block">
+    <span class="legend-title">调节之前总能耗=</span>
+    <span class="legend-value changed-text">{{legends.average_orgin_total_energy}}</span>
+  </div>
+
+  <div class="legend-block">
+    <span class="legend-title">调节之后总能耗=</span>
+    <span class="legend-value ref-text">{{legends.average_reference_total_energy}}</span>
+  </div>
+</div>
+
+<div class="custom-legend" *ngIf="type === 2">
+  <div class="legend-block">
+    <span class="legend-title">相同环境制冷能耗=</span>
+    <span class="legend-value origin-text">{{legends.average_predict_other_energy}}</span>
+  </div>
+
+  <div class="legend-block">
+    <span class="legend-title">调节之前制冷能耗=</span>
+    <span class="legend-value changed-text">{{legends.average_orgin_other_energy}}</span>
+  </div>
+
+  <div class="legend-block">
+    <span class="legend-title">调节之后制冷能耗=</span>
+    <span class="legend-value ref-text">{{legends.average_reference_other_energy}}</span>
   </div>
 </div>

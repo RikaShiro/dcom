@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EChartsOption} from 'echarts';
+import {ChartType} from '../../../../common/const/ChartType';
+import {PueChart} from '../../model/Pue';
 
 @Component({
   selector: 'app-three-line-chart',
@@ -16,8 +18,10 @@ export class ThreeLineChartComponent implements OnInit {
   @Input() hasLine: boolean = true;
   @Input() showLabel: boolean = false;
   @Input() title: string = '';
-  @Input() selfColors: string[] = ['#6b9bc3', '#ff9537', '#35EAED', '#459CF4', '#3B54EC', '#A45CEF', '#4AC2A8'];
+  @Input() selfColors: string[] = ['#6b9bc3', '#ff9537', '#70b603', '#459CF4', '#3B54EC', '#A45CEF', '#4AC2A8'];
+  @Input() type: number = 0;
   private _barData = null;
+  legends = new PueChart();
   dataLoading = false;
   mergeOption: EChartsOption = {};
   data = [];
@@ -42,8 +46,12 @@ export class ThreeLineChartComponent implements OnInit {
     },
     yAxis: {
       type: 'value',
-      max: 1000,
-      min: 500
+      max: function (value) {
+        return value.max * 1.1;
+      },
+      min: function (value) {
+        return value.min * 0.9;
+      }
     },
     color: this.selfColors,
     grid: {
@@ -60,47 +68,58 @@ export class ThreeLineChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    const names = [];
-    const data1 = [];
-    const data2 = [];
-    const data3 = [];
-    for (let i = 0; i < 200; i++) {
-      names.push(i + '');
-      data1.push(Math.random() * 300 + 600);
-      data2.push(Math.random() * 300 + 600);
-      data3.push(Math.random() * 300 + 600);
-    }
+  }
 
-    this.mergeOption.xAxis = {
-      type: 'category',
-      data: names
-    };
-    this.mergeOption.series = [
-      {
-        data: data1,
-        type: 'line',
-        name: 'origin_PUE',
-        showSymbol: false,
-        step: 'start',
-        smooth: true
+  setConfig(chart: ChartType, legend: PueChart, name: string) {
+    this.legends = legend;
+    this.option = {
+      title: {
+        text: name,
+        left: 'center'
       },
-      {
-        data: data2,
-        type: 'line',
-        name: 'changed_PUE',
-        step: 'start',
-        showSymbol: false,
-        smooth: true
+      xAxis: {
+        data: chart.xAxis,
+        splitNumber:5,
+        axisLine: {
+          lineStyle: {
+            color: '#ddd'
+          }
+        },
+        axisLabel: {
+          color: '#999',
+          rotate: chart.xAxis ? (chart.xAxis.length > 7 ? 30 : 0) : 0,
+          fontSize: 10
+        }
       },
-      {
-        data: data3,
-        type: 'line',
-        name: 'reference_PUE',
-        showSymbol: false,
-        step: 'start',
-        smooth: true
-      }
-    ]
+      legend: {
+        data: chart.legend,
+        left: 'right'
+      },
+      color: this.selfColors,
+      grid: {
+        left: 50,
+        right: 20,
+        bottom: 60,
+        top: 30,
+        borderWidth: 1,
+        borderColor: '#212121',
+        show: true
+      },
+      yAxis: {
+        type: 'value',
+        max: function (value) {
+          return value.max * 1.1;
+        },
+        min: function (value) {
+          return value.min * 0.9;
+        },
+        axisLabel: {
+          showMinLabel: false,
+          showMaxLabel: false
+        }
+      },
+      series: chart.data
+    }
   }
 
 }

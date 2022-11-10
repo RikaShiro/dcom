@@ -16,35 +16,49 @@
 
   <div class="time-groups">
     <div class="half-block">
+      <span class="block-title">数据集选择</span>
+      <div class="block-input">
+        <nz-select [(ngModel)]="selectedModel" (ngModelChange)="modelChange($event)">
+          <nz-option *ngFor="let p of paramsList" [nzValue]="p.value" [nzLabel]="p.train_data"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+    <div class="half-block">
       <span class="block-title">训练集时间段</span>
       <div class="block-input">
-        <nz-range-picker
+        <!--<nz-range-picker
           [nzShowTime]="{ nzFormat: 'HH:mm' }"
           nzFormat="yyyy-MM-dd HH:mm"
           [(ngModel)]="range"
-        ></nz-range-picker>
+        ></nz-range-picker>-->
+        <input nz-input  [(ngModel)]="currentParams.train_data_start" class="time-block"/>-
+        <input nz-input  [(ngModel)]="currentParams.train_data_finish" class="time-block"/>
       </div>
     </div>
 
     <div class="half-block">
       <span class="block-title">测试集时间段</span>
       <div class="block-input">
-        <nz-range-picker
+        <input nz-input  [(ngModel)]="currentParams.test_data_start" class="time-block"/>-
+        <input nz-input  [(ngModel)]="currentParams.test_data_finish" class="time-block"/>
+        <!--<nz-range-picker
           [nzShowTime]="{ nzFormat: 'HH:mm' }"
           nzFormat="yyyy-MM-dd HH:mm"
           [(ngModel)]="range"
-        ></nz-range-picker>
+        ></nz-range-picker>-->
       </div>
     </div>
 
     <div class="half-block">
       <span class="block-title">正样本填充时间段</span>
       <div class="block-input">
-        <nz-range-picker
+        <input nz-input  [(ngModel)]="currentParams.time_period_start" class="time-block"/>-
+        <input nz-input  [(ngModel)]="currentParams.time_period_finish" class="time-block"/>
+        <!--<nz-range-picker
           [nzShowTime]="{ nzFormat: 'HH:mm' }"
           nzFormat="yyyy-MM-dd HH:mm"
           [(ngModel)]="range"
-        ></nz-range-picker>
+        ></nz-range-picker>-->
       </div>
     </div>
   </div>
@@ -54,76 +68,76 @@
     <div class="sub-block">
       <span class="block-title">num_leaves</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Basic usage" [(ngModel)]="currentParams.num_leaves" />
       </div>
     </div>
     <div class="sub-block">
       <span class="block-title">min_data_in_leaf</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Basic usage" [(ngModel)]="currentParams.min_data_in_leaf" />
       </div>
     </div>
     <div class="sub-block">
       <span class="block-title">objective</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Basic usage" [(ngModel)]="currentParams.objective" />
       </div>
     </div>
 
     <div class="sub-block">
       <span class="block-title">max_depth</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Basic usage" [(ngModel)]="currentParams.max_depth" />
       </div>
     </div>
     <div class="sub-block">
       <span class="block-title">learning_rate</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Basic usage" [(ngModel)]="currentParams.learning_rate" />
       </div>
     </div>
     <div class="sub-block">
       <span class="block-title">min_sum_hessian_in_leaf</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Basic usage" [(ngModel)]="currentParams.min_sum_hessian_in_leaf" />
       </div>
     </div>
 
     <div class="sub-block">
       <span class="block-title">boosting</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Basic usage" [(ngModel)]="currentParams.boosting" />
       </div>
     </div>
     <div class="sub-block">
       <span class="block-title">feature_fraction</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Basic usage" [(ngModel)]="currentParams.feature_fraction" />
       </div>
     </div>
     <div class="sub-block">
       <span class="block-title">bagging_freq</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Basic usage" [(ngModel)]="currentParams.bagging_freq" />
       </div>
     </div>
 
     <div class="sub-block">
       <span class="block-title">lambda_l1</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Basic usage" [(ngModel)]="currentParams.lambda_l1" />
       </div>
     </div>
     <div class="sub-block">
       <span class="block-title">random_state</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Basic usage" [(ngModel)]="currentParams.random_state" />
       </div>
     </div>
     <div class="sub-block">
       <span class="block-title">iterations</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Basic usage" [(ngModel)]="currentParams.iterations" />
       </div>
     </div>
 
@@ -131,7 +145,7 @@
     <div class="sub-block">
       <span class="block-title">early_stoppoing_rounds</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Basic usage" [(ngModel)]="currentParams.early_stoppoing_rounds" />
       </div>
     </div>
 
@@ -141,18 +155,19 @@
     <div class="sub-block">
       <span class="block-title">构建新特征</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Basic usage" [(ngModel)]="currentParams.new_features" />
       </div>
     </div>
   </div>
 
   <div class="charts-groups">
     <div class="half-block">
-      <app-line-chart [title]="'Iterations'"></app-line-chart>
+      <app-disk-line-chart [title]="'Iterations'" #lineChart></app-disk-line-chart>
     </div>
     <div class="half-block">
-      <app-line-step [title]="'FPR'"></app-line-step>
+      <app-disk-line-step [title]="'FPR'" #lineStep></app-disk-line-step>
     </div>
+    <nz-spin nzSimple *ngIf="chartLoading" class="loading-ui"></nz-spin>
   </div>
 
 </div>

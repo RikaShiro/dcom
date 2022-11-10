@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EChartsOption} from 'echarts';
+import {ChartType} from '../../../../common/const/ChartType';
 
 @Component({
   selector: 'app-stack-bar',
@@ -23,7 +24,7 @@ export class StackBarComponent implements OnInit {
   data = [];
   data2 = [0, 0, 0, 0, 0, 0, 0];
   colors = ['#6b9bc3', '#FB765E', '#35EAED', '#459CF4', '#3B54EC', '#A45CEF', '#4AC2A8'];
-  xName = ['APD', 'RFC', 'GAC To', 'MOD To', 'CME TEAM', 'EXCA', 'ERECTION'];
+  xName = [];
   option: EChartsOption = {
     title: {
       text: 'line Chart',
@@ -59,7 +60,7 @@ export class StackBarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    const bar = {
+    /*const bar = {
       type: 'bar',
       barMaxWidth: 35,
       data: [30, 32, 34, 45, 23, 34, 54],
@@ -117,7 +118,37 @@ export class StackBarComponent implements OnInit {
     series.push(bar4);
     series.push(bar5);
     this.mergeOption.series = series;
-    this.mergeOption.color = this.selfColors;
+    this.mergeOption.color = this.selfColors;*/
   }
 
+
+  setConfig(chart: ChartType) {
+    this.option = {
+      xAxis: {
+        data: chart.xAxis,
+        axisLine: {
+          lineStyle: {
+            color: '#ddd'
+          }
+        },
+        axisLabel: {
+          color: '#999',
+          rotate: chart.xAxis ? (chart.xAxis.length > 7 ? 30 : 0) : 0,
+          fontSize: 10
+        }
+      },
+      grid: {
+        left: 50,
+        right: 20,
+        bottom: 60,
+        borderWidth: 1,
+        borderColor: '#ddd',
+        show: true
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: chart.data
+    }
+  }
 }

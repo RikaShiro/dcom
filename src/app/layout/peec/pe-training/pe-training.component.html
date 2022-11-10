@@ -16,16 +16,25 @@
 
   <div class="time-groups">
     <div class="sub-block">
+      <span class="block-title">train_time</span>
+      <div class="block-input">
+        <nz-select [(ngModel)]="selectedModel" (ngModelChange)="modelChange($event)">
+          <nz-option *ngFor="let p of trainingTimeList" [nzValue]="p.value" [nzLabel]="p.label"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+
+    <div class="sub-block">
       <span class="block-title">训练集划分</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Please input" [(ngModel)]="currentParams.train_data" />
       </div>
     </div>
 
     <div class="sub-block">
       <span class="block-title">metric</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Please input" [(ngModel)]="currentParams.metric" />
       </div>
     </div>
 
@@ -36,38 +45,38 @@
     <div class="sub-block">
       <span class="block-title">learning_rate</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Please input" [(ngModel)]="currentParams.learinin_rate" />
       </div>
     </div>
     <div class="sub-block">
       <span class="block-title">num_leaves</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Please input" [(ngModel)]="currentParams.num_leaves" />
       </div>
     </div>
     <div class="sub-block">
       <span class="block-title">subsample_freq</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Please input" [(ngModel)]="currentParams.subsample_freq" />
       </div>
     </div>
 
     <div class="sub-block">
       <span class="block-title">feature_fraction</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Please input" [(ngModel)]="currentParams.feature_fraction" />
       </div>
     </div>
     <div class="sub-block">
       <span class="block-title">bagging_fraction</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Please input" [(ngModel)]="currentParams.bagging_fraction" />
       </div>
     </div>
     <div class="sub-block">
       <span class="block-title">iterations</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <input nz-input placeholder="Please input" [(ngModel)]="currentParams.iterations" />
       </div>
     </div>
 
@@ -76,16 +85,18 @@
 
   <div class="charts-groups">
     <div class="half-block">
-      <app-line-chart [title]="'Iterations'"></app-line-chart>
+      <app-pe-line-chart [title]="'Iterations'" #lineChart1></app-pe-line-chart>
     </div>
     <div class="half-block">
-      <app-line-step [title]="'Iterations'"></app-line-step>
+      <app-pe-line-chart [title]="'Iterations'" #lineChart2></app-pe-line-chart>
     </div>
+    <nz-spin nzSimple *ngIf="chartLoading" class="loading-ui"></nz-spin>
   </div>
 
   <div class="table-groups">
     <nz-table #bomTable  nzSize="small"
               nzTableLayout="fixed"
+              [nzLoading]="chartLoading"
               [nzScroll]="{y: '160px'}"
               [nzData]="list" [nzShowPagination]="false" [nzFrontPagination]="false"
               nzBordered>
@@ -100,9 +111,9 @@
       <tr *ngFor="let data of bomTable.data,index as i" [ngClass]="{'table-odd-row':i%2 !== 0}">
         <td nzLeft>{{ data.name }}</td>
         <td >
-          <span>{{ data.id }}</span>
+          <span>{{ data.mae }}</span>
         </td>
-        <td >{{ data.id }}</td>
+        <td >{{ data.mse }}</td>
       </tr>
       </tbody>
     </nz-table>
