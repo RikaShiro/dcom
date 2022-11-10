@@ -12,9 +12,13 @@ export class PueService {
   constructor(private http: HttpClient,
               private urlService: UrlService) { }
 
-  getDataList(condition: any): Observable<ApiRes> {
-    const url = this.urlService.getUrl('/dn/list');
-    return this.http.post<ApiRes>(url, condition);
+  getModelList(): Observable<ApiRes> {
+    const url = this.urlService.getUrl('/kinetic_energy_third_page/predict');
+    return this.http.get<ApiRes>(url);
   }
 
+  getPredictData(type: number): Observable<ApiRes> {
+    const url = this.urlService.getUrl('/kinetic_energy_third_page/predict' + type);
+    return this.http.get<ApiRes>(url);
+  }
 }

@@ -92,6 +92,10 @@
     }
     .block-input{
       width: calc(~"100% - 180px");
+      nz-select{
+        width: 100%;
+        max-width: 390px;
+      }
     }
   }
   .time-groups{
@@ -100,8 +104,21 @@
 
   .charts-groups{
     padding-bottom: 24px;
+    position: relative;
     .half-block{
       height:350px;
+    }
+    .loading-ui{
+      position: absolute;
+      z-index: 2;
+      width: 100%;
+      height:100%;
+      text-align: center;
+      box-sizing: border-box;
+      padding-top:130px;
+      left: 0;
+      top: 0;
+      background-color: rgba(0, 0, 0, 0.1);
     }
   }
   .table-groups{

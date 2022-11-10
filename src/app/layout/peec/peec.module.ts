@@ -6,10 +6,12 @@ import { PeTrainingComponent } from './pe-training/pe-training.component';
 import { PueComponent } from './pue/pue.component';
 import {ShareModule} from '../../common/share.module';
 import {PeecRoutesModule} from './peec-routes.module';
-import {LinesChartComponent} from './cost-status/lines-chart/lines-chart.component';
 import {NgxEchartsModule} from 'ngx-echarts';
 import {StackBarComponent} from './cost-status/stack-bar/stack-bar.component';
 import {ThreeLineChartComponent} from './pue/three-line-chart/three-line-chart.component';
+import {PeecBarComponent} from './cost-status/peec-bar/peec-bar.component';
+import {PeLineChartComponent} from './pe-training/pe-line-chart/pe-line-chart.component';
+import {SensitivityLineComponent} from './pue/sensitivity-line/sensitivity-line.component';
 
 
 
@@ -20,7 +22,10 @@ import {ThreeLineChartComponent} from './pue/three-line-chart/three-line-chart.c
     PeTrainingComponent,
     PueComponent,
     StackBarComponent,
-    ThreeLineChartComponent
+    ThreeLineChartComponent,
+    PeecBarComponent,
+    PeLineChartComponent,
+    SensitivityLineComponent
   ],
   imports: [
     CommonModule,

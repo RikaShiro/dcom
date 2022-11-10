@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EChartsOption} from 'echarts';
+import {ChartType} from '../../../common/const/ChartType';
 
 @Component({
   selector: 'app-hoop-pie',
@@ -13,6 +14,7 @@ export class HoopPieComponent implements OnInit {
     this._pieData = pieData ? pieData : null;
   }
   private _pieData = null;
+  @Input() title: string = '';
   dataLoading = false;
   mergeOption = {};
   data = [];
@@ -35,7 +37,7 @@ export class HoopPieComponent implements OnInit {
         center: ['40%', '50%'],
         avoidLabelOverlap: false,
         label: {
-          show: true,
+          show: false,
           position: 'center'
         },
         emphasis: {
@@ -60,6 +62,48 @@ export class HoopPieComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  setConfig(chart: ChartType, name: string) {
+    this.option = {
+      tooltip: {
+        trigger: 'item'
+      },
+      legend: {
+        top: 'middle',
+        right: 10,
+        orient: 'vertical'
+      },
+      series: [
+        {
+          name: name,
+          type: 'pie',
+          radius: ['50%', '60%'],
+          center: ['40%', '50%'],
+          avoidLabelOverlap: false,
+          label: {
+            show: true,
+            formatter: '{name|{d}}%',
+            rich: {
+              name: {
+                fontSize: 10,
+                color: '#212121'
+              }
+            }
+          },
+          emphasis: {
+            label: {
+              show: true,
+              fontWeight: 'bold',
+            }
+          },
+          labelLine: {
+            show: true
+          },
+          data: chart.data
+        }
+      ]
+    }
   }
 
 }

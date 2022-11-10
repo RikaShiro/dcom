@@ -53,6 +53,7 @@ export class AppInterceptor implements HttpInterceptor {
           return event;
         },
         error: event => {
+          console.log(event);
           if (event.status === 401) {
 
           } else {

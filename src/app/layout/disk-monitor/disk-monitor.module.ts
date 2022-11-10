@@ -7,6 +7,10 @@ import {FaultForecastComponent} from './fault-forecast/fault-forecast.component'
 import {DiskMonitorRoutesModule} from './disk-monitor-routes.module';
 import {ShareModule} from '../../common/share.module';
 import {NgxEchartsModule} from 'ngx-echarts';
+import {OneBarComponent} from './disk-status/one-bar/one-bar.component';
+import {TrendLineComponent} from './disk-status/trend-line/trend-line.component';
+import {DiskLineChartComponent} from './distk-training/disk-line-chart/disk-line-chart.component';
+import {DiskLineStepComponent} from './distk-training/disk-line-step/disk-line-step.component';
 
 
 
@@ -15,7 +19,11 @@ import {NgxEchartsModule} from 'ngx-echarts';
     DiskMonitorComponent,
     DiskStatusComponent,
     DistkTrainingComponent,
-    FaultForecastComponent
+    FaultForecastComponent,
+    OneBarComponent,
+    TrendLineComponent,
+    DiskLineChartComponent,
+    DiskLineStepComponent
   ],
   imports: [
     CommonModule,
