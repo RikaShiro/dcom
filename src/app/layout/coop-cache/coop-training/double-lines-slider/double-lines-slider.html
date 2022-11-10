@@ -1,9 +1,10 @@
-<div echarts [options]="option" [merge]="mergeOption" [loading]="loading"
-     style="height: 100%; width: 100%;"></div>
-<div class="chart-title">{{title}}</div>
-<div class="custom-legend">
-  <div class="legend-block">
-    <span class="legend-title">MSE=</span>
-    <span class="legend-value">{{$.MSE}}</span>
+<nz-spin [nzSpinning]="loading">
+  <div echarts [options]="option" [merge]="mergeOption" [loading]="loading"></div>
+  <div class="chart-title">{{title}}</div>
+  <div class="custom-legend">
+    <div class="legend-block">
+      <span class="legend-title">MSE=</span>
+      <span class="legend-value">{{$.MSE}}</span>
+    </div>
   </div>
-</div>
+</nz-spin>

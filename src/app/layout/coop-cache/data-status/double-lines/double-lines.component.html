@@ -1,2 +1,4 @@
-<div echarts [options]="option" [merge]="mergeOption" [loading]="loading" style="height: 100%; width: 100%;"></div>
-<div class="chart-title">{{title}}</div>
+<nz-spin [nzSpinning]="loading">
+  <div echarts [options]="option" [merge]="mergeOption"></div>
+  <div class="chart-title">{{title}}</div>
+</nz-spin>
