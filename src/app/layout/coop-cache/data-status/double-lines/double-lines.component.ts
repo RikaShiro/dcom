@@ -30,7 +30,7 @@ export class DoubleLinesComponent implements OnChanges {
 
   private _$ = null;
   dataLoading = false;
-  mergeOption: EChartsOption = {};
+  mergeOption = {};
   option: EChartsOption = {
     color: this.selfColors,
     grid: {
@@ -39,15 +39,18 @@ export class DoubleLinesComponent implements OnChanges {
       bottom: 50,
       borderWidth: 1,
       borderColor: '#ddd',
-      show: true,
+      show: false,
     },
   };
 
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    const dataUpdate = '$' in changes && 'loading' in changes;
-    if (!dataUpdate) return;
+    if ('$' in changes && this.$ && this.$.xAxis) {
+      this.updateConfig();
+    }
+  }
+  updateConfig() {
     const series = [];
     for (const k in this.$.data) {
       const option: SeriesOption = {

@@ -50,8 +50,11 @@ export class LineSliderComponent implements OnChanges {
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    const dataUpdate = '$' in changes && 'loading' in changes;
-    if (!dataUpdate) return;
+    if ('$' in changes && this.$ && this.$.xAxis) {
+      this.updateConfig();
+    }
+  }
+  updateConfig() {
     this.mergeOption = {
       xAxis: {
         type: 'category',

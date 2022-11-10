@@ -49,8 +49,11 @@ export class SymbolLineComponent implements OnChanges {
   constructor(private service: TranslationService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    const dataUpdate = '$' in changes && 'loading' in changes;
-    if (!dataUpdate) return;
+    if ('$' in changes && this.$ && this.$.xAxis) {
+      this.updateConfig();
+    }
+  }
+  updateConfig() {
     const series = [];
     let idx = 0;
     for (const k in this.$.data) {

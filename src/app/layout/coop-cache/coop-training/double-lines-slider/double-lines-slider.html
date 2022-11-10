@@ -1,7 +1,7 @@
 <nz-spin [nzSpinning]="loading">
-  <div echarts [options]="option" [merge]="mergeOption" [loading]="loading"></div>
+  <div echarts [options]="option" [merge]="mergeOption"></div>
   <div class="chart-title">{{title}}</div>
-  <div class="custom-legend">
+  <div class="custom-legend" *ngIf="!loading">
     <div class="legend-block">
       <span class="legend-title">MSE=</span>
       <span class="legend-value">{{$.MSE}}</span>

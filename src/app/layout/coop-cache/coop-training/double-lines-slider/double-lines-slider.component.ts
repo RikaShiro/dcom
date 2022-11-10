@@ -64,9 +64,11 @@ export class DoubleLinesSliderComponent implements OnChanges {
   constructor(private service: TranslationService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    const dataUpdate = '$' in changes && 'loading' in changes;
-    if (!dataUpdate) return;
-    this.$.MSE = this.$.MSE.toFixed(4);
+    if ('$' in changes && this.$ && this.$.xAxis) {
+      this.updateConfig();
+    }
+  }
+  updateConfig() {
     const series = [];
     for (const k in this.$.data) {
       const option = {

@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { EChartsOption, SeriesOption, YAXisComponentOption } from 'echarts';
+import { EChartsOption, LegendComponentOption, SeriesOption, YAXisComponentOption } from 'echarts';
 import { TranslationService } from 'src/app/common/service/translation.servcice';
 
 @Component({
@@ -46,8 +46,11 @@ export class DoubleYAxesComponent implements OnChanges {
   constructor(private service: TranslationService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    const dataUpdate = '$' in changes && 'loading' in changes;
-    if (!dataUpdate) return;
+    if ('$' in changes && this.$ && this.$.xAxis) {
+      this.updateConfig();
+    }
+  }
+  updateConfig() {
     const series = [];
     const yAxis = [];
     const legendData = [];
