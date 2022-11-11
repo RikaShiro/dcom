@@ -1,10 +1,10 @@
 {
   "/api/*": {
-    "target3": "http://10.31.109.16:9999",
-    "target": "http://101.34.19.176:5050",
-    "backup": "http://150.158.31.178:5050",
+    "target8": "http://10.31.109.16:9999",
+    "target11": "http://101.34.19.176:5050",
+    "target": "http://150.158.31.178:5050",
 
-    "target8": "https://immtest.fiberhome.work",
+    "target3": "https://immtest.fiberhome.work",
     "changeOrigin": true,
     "secure": true
   },

@@ -48,8 +48,8 @@ export class CacheStrategyComponent implements OnInit {
       }
     });
   }
-  modelChange(selectedModel: string) {
-    if (selectedModel.length > 0) {
+  modelChange(selected: string) {
+    if (selected.length > 0) {
       this.getPredictData();
     }
   }

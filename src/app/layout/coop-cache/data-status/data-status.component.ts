@@ -20,7 +20,7 @@ export class DataStatusComponent implements OnInit {
     { label: '52 Weeks', value: 3 },
   ];
   station = 1;
-  time = 1;
+  time = 2;
   hasLine = false;
   showLabel = true;
 

@@ -115,7 +115,7 @@ export class CoopTrainingComponent implements OnInit {
   }
   postTrainingModel() {
     this.service.postTrainingModel(this.training).subscribe((res) => {
-      console.log(res.data);
+      console.log(res);
       if (res.code === 200) {
       }
     });

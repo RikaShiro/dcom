@@ -7,7 +7,7 @@
         <span class="run-rate">{{trafficData.MSE}}</span>
       </div>
       <div class="run-bt">
-        <span nz-icon nzType="play-circle" nzTheme="outline" class="span-icon-bt"></span>
+        <span nz-icon nzType="play-circle" nzTheme="outline" class="span-icon-bt" (click)="postTrainingModel()"></span>
       </div>
     </div>
   </div>
@@ -58,7 +58,7 @@
     <div class="sub-block">
       <span class="block-title">look back</span>
       <div class="block-input">
-        <nz-input-number [(ngModel)]="training.lookBack" [nzStep]="1" class="training-input">
+        <nz-input-number [(ngModel)]="training.lookBack" [nzMin]="0" [nzStep]="1" class="training-input">
         </nz-input-number>
       </div>
     </div>
@@ -98,7 +98,7 @@
         <span class="run-rate">缓存利用率OPT: 40.01%</span>
       </div>
       <div class="run-bt">
-        <span nz-icon nzType="play-circle" nzTheme="outline" class="span-icon-bt"></span>
+        <span nz-icon nzType="play-circle" nzTheme="outline" class="span-icon-bt" (click)="postCacheModel()"></span>
       </div>
     </div>
   </div>
