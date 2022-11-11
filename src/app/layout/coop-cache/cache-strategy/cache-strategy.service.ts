@@ -10,10 +10,16 @@ import { ApiRes } from 'src/app/common/model/response';
 export class CacheStrategyService {
   constructor(private http: HttpClient, private urlService: UrlService) {}
 
-  getPredictData(): Observable<ApiRes> {
+  getModelList(): Observable<ApiRes> {
+    const url = this.urlService.getUrl('/execution/model-list');
+    return this.http.get<ApiRes>(url);
+  }
+  getPredictData(model: string): Observable<ApiRes> {
     const url = this.urlService.getUrl('/execution/predict');
     const params = new HttpParams({
-      fromString: 'moduleChose=my_module.h5',
+      fromObject: {
+        moduleChose: model,
+      },
     });
     return this.http.get<ApiRes>(url, { params });
   }

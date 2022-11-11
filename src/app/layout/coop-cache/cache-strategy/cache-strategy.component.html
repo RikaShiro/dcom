@@ -5,8 +5,8 @@
     </span>
     <div class="run-group">
       <div class="run-info">
-        <span class="run-time">最近流量预测时间：2022/04/22 12:20:00</span>
-        <span class="run-rate">最近预测选择模型：MSE：0.201 （2022/04/22 12:20:00)</span>
+        <span class="run-time">最近流量预测时间: 2022/04/22 12:20:00</span>
+        <span class="run-rate">最近预测选择模型: MSE: 0.201 (2022/04/22 12:20:00)</span>
       </div>
       <div class="run-bt">
         <span nz-icon nzType="sync" nzTheme="outline" class="span-icon-bt"></span>
@@ -18,8 +18,8 @@
     <div class="select-group">
       <span class="select-title">模型选择</span>
       <div class="select-input">
-        <nz-select [(ngModel)]="selectedModel" (ngModelChange)="modelChange($event)">
-          <nz-option *ngFor="let p of modelData" [nzValue]="p" [nzLabel]="p"></nz-option>
+        <nz-select [(ngModel)]="selectedModel" (ngModelChange)="modelChange($event)" [nzDisabled]="loading">
+          <nz-option *ngFor="let p of modelList" [nzValue]="p" [nzLabel]="p"></nz-option>
         </nz-select>
       </div>
     </div>
@@ -36,8 +36,8 @@
     </span>
     <div class="run-group">
       <div class="run-info">
-        <span class="run-time">最近策略执行时间：2022/04/22 12:20:00</span>
-        <span class="run-rate">最近执行选择模型：缓存利用率OPT：40.01%（2022/04/22 12:20:00)</span>
+        <span class="run-time">最近策略执行时间: 2022/04/22 12:20:00</span>
+        <span class="run-rate">最近执行选择模型: 缓存利用率OPT: 40.01% (2022/04/22 12:20:00)</span>
       </div>
       <div class="run-bt">
         <span nz-icon nzType="play-circle" nzTheme="outline" class="span-icon-bt"></span>
@@ -49,8 +49,8 @@
     <div class="select-group">
       <span class="select-title">模型选择</span>
       <div class="select-input">
-        <nz-select [(ngModel)]="selectedModel" (ngModelChange)="modelChange($event)">
-          <nz-option *ngFor="let p of modelData" [nzValue]="p" [nzLabel]="p"></nz-option>
+        <nz-select [(ngModel)]="selectedModel" (ngModelChange)="modelChange($event)" [nzDisabled]="loading">
+          <nz-option *ngFor="let p of modelList" [nzValue]="p" [nzLabel]="p"></nz-option>
         </nz-select>
       </div>
     </div>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { number } from 'echarts';
+import { CacheParameters } from './CacheParameters';
 import { CoopTrainingService } from './coop-training.service';
+import { TrainingParameters } from './TrainingParameters';
 
 @Component({
   selector: 'app-coop-training',
@@ -7,6 +10,30 @@ import { CoopTrainingService } from './coop-training.service';
   styleUrls: ['./coop-training.component.less'],
 })
 export class CoopTrainingComponent implements OnInit {
+  trainingParameters: TrainingParameters = {
+    trainSize: 67,
+    optimizer: 'adam',
+    loss: 'mse',
+    hiddenSize: 1,
+    lookBack: 1,
+    epochs: 80,
+    batchSize: 1,
+  };
+  cacheParameters: CacheParameters = {
+    hiddenSize: 50,
+    activation: 'relu',
+    solver: 'adam',
+    batchSize: 100,
+    alpha: 0.00001,
+    learningRate: 'constant',
+    learningRateInit: 0.001,
+    randomState: 1,
+    tol: 0.0001,
+    maxIter: 400,
+    beta1: 0.9,
+    beta2: 0.9,
+    earlyStopping: 1,
+  };
   range = [];
   value = 'A-213';
   list = [
@@ -15,12 +42,14 @@ export class CoopTrainingComponent implements OnInit {
   ];
 
   cacheData: any = {};
-  cacheDataLoading: boolean = true;
+  cacheDataLoading = true;
   trafficData: any = {};
-  trafficDataLoading: boolean = true;
+  trafficDataLoading = true;
   constructor(private service: CoopTrainingService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.postTrainingModel();
+    this.postCacheModel();
     this.getCacheData();
     this.getTrafficData();
   }
@@ -80,13 +109,18 @@ export class CoopTrainingComponent implements OnInit {
       }
     });
   }
-  // getDataList(condition: any) {
-  //   this.loading = true;
-  //   this.service.getDataList(condition).subscribe((res) => {
-  //     this.loading = false;
-  //     if (res.code === 200) {
-  //       console.log(res.data);
-  //     }
-  //   });
-  // }
+  postCacheModel() {
+    this.service.postCacheModel(this.cacheParameters).subscribe((res) => {
+      console.log(res);
+      if (res.code === 200) {
+      }
+    });
+  }
+  postTrainingModel() {
+    this.service.postTrainingModel(this.trainingParameters).subscribe((res) => {
+      console.log(res.data);
+      if (res.code === 200) {
+      }
+    });
+  }
 }
