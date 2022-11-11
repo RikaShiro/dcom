@@ -45,3 +45,4 @@ Thumbs.db
 # Others
 *.txt
 proxy.conf.json
+/proxy.conf.json
