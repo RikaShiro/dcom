@@ -10,13 +10,13 @@ import { UrlService } from 'src/app/common/service/url.service';
 export class DataStatusService {
   constructor(private http: HttpClient, private urlService: UrlService) {}
 
-  getInfoData(): Observable<ApiRes> {
+  getInfoData(station: number, time: number): Observable<ApiRes> {
     const url = this.urlService.getUrl('/info/getinfo');
     const params = new HttpParams({
       fromObject: {
-        station: 1,
-        span: 2
-      }
+        station,
+        span: time,
+      },
     });
     return this.http.get<ApiRes>(url, { params });
   }

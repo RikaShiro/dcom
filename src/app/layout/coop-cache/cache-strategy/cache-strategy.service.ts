@@ -14,7 +14,7 @@ export class CacheStrategyService {
     const url = this.urlService.getUrl('/execution/model-list');
     return this.http.get<ApiRes>(url);
   }
-  getPredictData(model: string): Observable<ApiRes> {
+  getPredictData(model: string = 'my_module.h5'): Observable<ApiRes> {
     const url = this.urlService.getUrl('/execution/predict');
     const params = new HttpParams({
       fromObject: {

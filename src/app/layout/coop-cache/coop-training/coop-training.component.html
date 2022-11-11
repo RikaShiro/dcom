@@ -1,8 +1,6 @@
 <div class="container">
   <div class="headers">
-    <span class="title">
-      流量预测模型训练
-    </span>
+    <span class="title">流量预测模型训练</span>
     <div class="run-group">
       <div class="run-info">
         <span class="run-time">最近训练时间: 2022/04/22 12:20:00</span>
@@ -16,58 +14,69 @@
 
   <div class="time-groups">
     <div class="sub-block">
-      <span class="block-title">训练集划分</span>
+      <label class="block-title" for="trainSize">训练集划分</label>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <nz-input-number [(ngModel)]="training.trainSize" [nzMin]="0" [nzMax]="100" [nzStep]="1"
+          [nzFormatter]="formatterPercent" [nzParser]="parserPercent" class="training-input">
+        </nz-input-number>
       </div>
     </div>
 
     <div class="sub-block">
       <span class="block-title">optimizer</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <nz-select [(ngModel)]="training.optimizer" class="training-input">
+          <nz-option nzValue="adam" nzLabel="adam"></nz-option>
+          <nz-option nzValue="sgd" nzLabel="sgd"></nz-option>
+          <nz-option nzValue="adagrad" nzLabel="adagrad"></nz-option>
+          <nz-option nzValue="sgdm" nzLabel="sgdm"></nz-option>
+          <nz-option nzValue="rmsprop" nzLabel="rmsprop"></nz-option>
+        </nz-select>
       </div>
     </div>
 
     <div class="sub-block">
       <span class="block-title">loss</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <nz-select [(ngModel)]="training.loss" class="training-input">
+          <nz-option nzValue="mse" nzLabel="mse"></nz-option>
+          <nz-option nzValue="mae" nzLabel="mae"></nz-option>
+          <nz-option nzValue="msle" nzLabel="msle"></nz-option>
+        </nz-select>
       </div>
     </div>
 
     <div class="sub-block">
-      <span class="block-title">input_size</span>
+      <span class="block-title">hidden size</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <nz-input-number [(ngModel)]="training.hiddenSize" [nzMin]="0" [nzMax]="100" [nzStep]="1"
+          class="training-input">
+        </nz-input-number>
       </div>
     </div>
 
     <div class="sub-block">
-      <span class="block-title">hidden_size</span>
+      <span class="block-title">look back</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
-      </div>
-    </div>
-
-    <div class="sub-block">
-      <span class="block-title">look_back</span>
-      <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <nz-input-number [(ngModel)]="training.lookBack" [nzStep]="1" class="training-input">
+        </nz-input-number>
       </div>
     </div>
 
     <div class="sub-block">
       <span class="block-title">Epochs</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <nz-input-number [(ngModel)]="training.epochs" [nzMin]="0" [nzMax]="1000" [nzStep]="10" class="training-input">
+        </nz-input-number>
       </div>
     </div>
 
     <div class="sub-block">
-      <span class="block-title">batch_size</span>
+      <span class="block-title">batch size</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <nz-input-number [(ngModel)]="training.batchSize" [nzMin]="0" [nzMax]="1000" [nzStep]="10"
+          class="training-input">
+        </nz-input-number>
       </div>
     </div>
 
@@ -75,15 +84,14 @@
 
   <div class="charts-groups">
     <div class="whole-block">
-      <app-double-lines-slider [title]="'Iterations'" [selfColors]="['#1f77b4', '#ff0000']" [$]="trafficData" [loading]="trafficDataLoading">
+      <app-double-lines-slider [title]="'Iterations'" [selfColors]="['#1f77b4', '#ff0000']" [$]="trafficData"
+        [loading]="trafficDataLoading">
       </app-double-lines-slider>
     </div>
   </div>
 
   <div class="headers">
-    <span class="title">
-      协作缓存与负载均衡模型训练
-    </span>
+    <span class="title">协作缓存与负载均衡模型训练</span>
     <div class="run-group">
       <div class="run-info">
         <span class="run-time">最近训练时间: 2022/04/22 12:20:00</span>
@@ -98,104 +106,128 @@
   <div class="setting-groups">
 
     <div class="sub-block">
-      <span class="block-title">learning_rate</span>
+      <span class="block-title">hidden size</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <nz-input-number [(ngModel)]="cache.hiddenSize" [nzMin]="0" [nzMax]="100" [nzStep]="1" class="cache-input">
+        </nz-input-number>
       </div>
     </div>
     <div class="sub-block">
-      <span class="block-title">num_leaves</span>
+      <span class="block-title">activation</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <nz-select [(ngModel)]="cache.activation" class="cache-input">
+          <nz-option nzValue="relu" nzLabel="relu"></nz-option>
+          <nz-option nzValue="identity" nzLabel="identity"></nz-option>
+          <nz-option nzValue="logistic" nzLabel="logistic"></nz-option>
+          <nz-option nzValue="tanh" nzLabel="tanh"></nz-option>
+        </nz-select>
       </div>
     </div>
     <div class="sub-block">
-      <span class="block-title">subsample_freq</span>
+      <span class="block-title">solver</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <nz-select [(ngModel)]="cache.solver" class="cache-input">
+          <nz-option nzValue="adam" nzLabel="adam"></nz-option>
+          <nz-option nzValue="lbfgs" nzLabel="lbfgs"></nz-option>
+          <nz-option nzValue="sgd" nzLabel="sgd"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">batch size</span>
+      <div class="block-input">
+        <nz-input-number [(ngModel)]="cache.batchSize" [nzMin]="0" [nzMax]="1000" [nzStep]="10" class="cache-input">
+        </nz-input-number>
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">alpha</span>
+      <div class="block-input">
+        <nz-input-number [(ngModel)]="cache.alpha" [nzMin]="0" [nzMax]="1" [nzStep]="0.00001" class="cache-input">
+        </nz-input-number>
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">learning rate</span>
+      <div class="block-input">
+        <nz-select [(ngModel)]="cache.learningRate" class="cache-input">
+          <nz-option nzValue="constant" nzLabel="constant"></nz-option>
+          <nz-option nzValue="invscaling" nzLabel="invscaling"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">leanring rate init</span>
+      <div class="block-input">
+        <nz-input-number [(ngModel)]="cache.learningRateInit" [nzMin]="0" [nzMax]="1" [nzStep]="0.001"
+          class="cache-input">
+        </nz-input-number>
+      </div>
+    </div>
+    <div class="sub-block">
+      <span class="block-title">random state</span>
+      <div class="block-input">
+        <nz-input-number [(ngModel)]="cache.randomState" [nzStep]="1" class="cache-input">
+        </nz-input-number>
       </div>
     </div>
 
     <div class="sub-block">
-      <span class="block-title">feature_fraction</span>
+      <span class="block-title">TOL</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <nz-input-number [(ngModel)]="cache.tol" [nzMin]="0" [nzMax]="1" [nzStep]="0.0001" class="cache-input">
+        </nz-input-number>
       </div>
     </div>
     <div class="sub-block">
-      <span class="block-title">bagging_fraction</span>
+      <span class="block-title">max iterations</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <nz-input-number [(ngModel)]="cache.maxIter" [nzMin]="0" [nzStep]="100" class="cache-input">
+        </nz-input-number>
       </div>
     </div>
     <div class="sub-block">
-      <span class="block-title">iterations</span>
+      <span class="block-title">early stopping</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
-      </div>
-    </div>
-
-    <div class="sub-block">
-      <span class="block-title">learning_rate</span>
-      <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <nz-select [(ngModel)]="cache.earlyStopping" class="cache-input">
+          <nz-option [nzValue]="1" nzLabel="True"></nz-option>
+          <nz-option [nzValue]="0" nzLabel="False"></nz-option>
+        </nz-select>
       </div>
     </div>
     <div class="sub-block">
-      <span class="block-title">num_leaves</span>
+      <span class="block-title">beta 1</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <nz-input-number [(ngModel)]="cache.beta1" [nzMin]="0" [nzStep]="0.1" class="cache-input">
+        </nz-input-number>
       </div>
     </div>
     <div class="sub-block">
-      <span class="block-title">subsample_freq</span>
+      <span class="block-title">beta 2</span>
       <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+        <nz-input-number [(ngModel)]="cache.beta2" [nzMin]="0" [nzStep]="0.1" class="cache-input">
+        </nz-input-number>
       </div>
     </div>
-
-    <div class="sub-block">
-      <span class="block-title">feature_fraction</span>
-      <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
-      </div>
-    </div>
-    <div class="sub-block">
-      <span class="block-title">bagging_fraction</span>
-      <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
-      </div>
-    </div>
-    <div class="sub-block">
-      <span class="block-title">iterations</span>
-      <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
-      </div>
-    </div>
-
-
-    <div class="sub-block">
-      <span class="block-title">iterations</span>
-      <div class="block-input">
-        <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
-      </div>
-    </div>
-
   </div>
 
   <div class="charts-groups">
     <div class="half-block">
-      <app-symbol-line [title]="'缓存利用率性能评估'" [names]="['协作缓存', '随机缓存']" [$]="cacheData.util" [unit]="'%'" [loading]="cacheDataLoading"></app-symbol-line>
+      <app-symbol-line [title]="'缓存利用率性能评估'" [names]="['协作缓存', '随机缓存']" [$]="cacheData.util" [unit]="'%'"
+        [loading]="cacheDataLoading"></app-symbol-line>
     </div>
     <div class="half-block">
-      <app-symbol-line [title]="'平均延迟性能评估'" [names]="['协作缓存', '随机缓存']" [$]="cacheData.delay" [loading]="cacheDataLoading"></app-symbol-line>
+      <app-symbol-line [title]="'平均延迟性能评估'" [names]="['协作缓存', '随机缓存']" [$]="cacheData.delay"
+        [loading]="cacheDataLoading"></app-symbol-line>
     </div>
     <div class="half-block">
-      <app-symbol-line [title]="'缓存击中流量性能评估'" [names]="['协作缓存击中', '随机缓存击中', '用户请求']" [$]="cacheData.traffic" [loading]="cacheDataLoading">
+      <app-symbol-line [title]="'缓存击中流量性能评估'" [names]="['协作缓存击中', '随机缓存击中', '用户请求']" [$]="cacheData.traffic"
+        [loading]="cacheDataLoading">
       </app-symbol-line>
     </div>
     <div class="half-block">
-      <app-symbol-line [title]="'缓存击中率性能评估'" [names]="['协作缓存', '随机缓存']" [$]="cacheData.hit" [unit]="'%'" [loading]="cacheDataLoading"></app-symbol-line>
+      <app-symbol-line [title]="'缓存击中率性能评估'" [names]="['协作缓存', '随机缓存']" [$]="cacheData.hit" [unit]="'%'"
+        [loading]="cacheDataLoading"></app-symbol-line>
     </div>
   </div>
 

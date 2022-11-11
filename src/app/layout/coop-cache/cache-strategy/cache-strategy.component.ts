@@ -32,7 +32,6 @@ export class CacheStrategyComponent implements OnInit {
   getPredictData() {
     this.loading = true;
     this.service.getPredictData(this.selectedModel).subscribe((res) => {
-      // console.log(res);
       if (res.code === 200) {
         const $ = res.data;
         this.predictData = {

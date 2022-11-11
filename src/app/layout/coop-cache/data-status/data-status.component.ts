@@ -8,11 +8,19 @@ import { DataStatusService } from './data-status.service';
 })
 export class DataStatusComponent implements OnInit {
   date = 0;
-  rangeList = [
-    { label: '24 Hours', value: 0 },
-    { label: '30 Days', value: 1 },
-    { label: '52 Weeks', value: 2 },
+  stations = [
+    { label: 'ALL', value: 0 },
+    { label: '站点1', value: 1 },
+    { label: '站点2', value: 2 },
+    { label: '站点3', value: 3 },
   ];
+  timeInterval = [
+    { label: '24 Hours', value: 1 },
+    { label: '30 Days', value: 2 },
+    { label: '52 Weeks', value: 3 },
+  ];
+  station = 1;
+  time = 1;
   hasLine = false;
   showLabel = true;
 
@@ -31,7 +39,7 @@ export class DataStatusComponent implements OnInit {
   }
   getInfoData() {
     this.loading = true;
-    this.service.getInfoData().subscribe((res) => {
+    this.service.getInfoData(this.station, this.time).subscribe((res) => {
       if (res.code === 200) {
         const $ = res.data;
         this.cacheData = {

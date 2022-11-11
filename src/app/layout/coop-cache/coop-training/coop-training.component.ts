@@ -10,7 +10,7 @@ import { TrainingParameters } from './TrainingParameters';
   styleUrls: ['./coop-training.component.less'],
 })
 export class CoopTrainingComponent implements OnInit {
-  trainingParameters: TrainingParameters = {
+  training: TrainingParameters = {
     trainSize: 67,
     optimizer: 'adam',
     loss: 'mse',
@@ -19,7 +19,7 @@ export class CoopTrainingComponent implements OnInit {
     epochs: 80,
     batchSize: 1,
   };
-  cacheParameters: CacheParameters = {
+  cache: CacheParameters = {
     hiddenSize: 50,
     activation: 'relu',
     solver: 'adam',
@@ -34,17 +34,14 @@ export class CoopTrainingComponent implements OnInit {
     beta2: 0.9,
     earlyStopping: 1,
   };
-  range = [];
-  value = 'A-213';
-  list = [
-    { id: 12, name: '训练集' },
-    { id: 12, name: '测试集' },
-  ];
 
   cacheData: any = {};
   cacheDataLoading = true;
   trafficData: any = {};
   trafficDataLoading = true;
+
+  formatterPercent = (value: number): string => `${value} %`;
+  parserPercent = (value: string): string => value.replace(' %', '');
   constructor(private service: CoopTrainingService) {}
 
   ngOnInit() {
@@ -110,14 +107,14 @@ export class CoopTrainingComponent implements OnInit {
     });
   }
   postCacheModel() {
-    this.service.postCacheModel(this.cacheParameters).subscribe((res) => {
+    this.service.postCacheModel(this.cache).subscribe((res) => {
       console.log(res);
       if (res.code === 200) {
       }
     });
   }
   postTrainingModel() {
-    this.service.postTrainingModel(this.trainingParameters).subscribe((res) => {
+    this.service.postTrainingModel(this.training).subscribe((res) => {
       console.log(res.data);
       if (res.code === 200) {
       }

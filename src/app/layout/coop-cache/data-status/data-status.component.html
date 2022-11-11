@@ -5,12 +5,12 @@
     </span>
     <div class="select-group">
       <span class="select-title">选择站点:</span>
-      <nz-select [(ngModel)]="date" [nzPlaceHolder]="'选择站点'" class="select-ui">
-        <nz-option *ngFor="let o of rangeList" [nzValue]="o.value" [nzLabel]="o.label"></nz-option>
+      <nz-select [(ngModel)]="station" nzPlaceHolder="选择站点" class="select-ui">
+        <nz-option *ngFor="let i of stations" [nzValue]="i.value" [nzLabel]="i.label"></nz-option>
       </nz-select>
       <span class="select-title">时间段:</span>
-      <nz-select [(ngModel)]="date" [nzPlaceHolder]="'选择时间段'" class="select-ui">
-        <nz-option *ngFor="let o of rangeList" [nzValue]="o.value" [nzLabel]="o.label"></nz-option>
+      <nz-select [(ngModel)]="time" nzPlaceHolder="选择时间段" class="select-ui">
+        <nz-option *ngFor="let i of timeInterval" [nzValue]="i.value" [nzLabel]="i.label"></nz-option>
       </nz-select>
     </div>
   </div>
