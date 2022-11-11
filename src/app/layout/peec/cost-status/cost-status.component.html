@@ -14,11 +14,13 @@
   <div class="chart-block">
     <div class="whole-block">
       <app-lines-chart [title]="'计算中心PUE趋势图'" [barData]="barData" #lineChart></app-lines-chart>
+      <nz-spin nzSimple *ngIf="pueLoading" class="loading-ui"></nz-spin>
     </div>
   </div>
   <div class="chart-block">
     <div class="whole-block">
-      <app-stack-bar [title]="'IT设备与制冷设备耗电量趋势图'" [barData]="stackData" #stackBar></app-stack-bar>
+      <app-stack-bar [title]="'IT设备与制冷设备耗电量趋势图'" #stackBar></app-stack-bar>
+      <nz-spin nzSimple *ngIf="itLoading" class="loading-ui"></nz-spin>
     </div>
   </div>
   <div class="chart-block">
@@ -27,22 +29,27 @@
         [hasLine]="false"
         [title]="'制冷系统耗电量日分布统计（最近1年）'"
         [selfColors]="['#008000']" ></app-peec-bar>
+      <nz-spin nzSimple *ngIf="chartLoading" class="loading-ui"></nz-spin>
     </div>
     <div class="long-block">
       <app-peec-bar  [title]="'制冷设备日均耗电量排名（最近1年）'" [showLabel]="showLabel"  #peecBar2></app-peec-bar>
+      <nz-spin nzSimple *ngIf="chartLoading" class="loading-ui"></nz-spin>
     </div>
   </div>
   <div class="chart-block">
     <div class="short-block">
       <app-peec-bar #peecBar3  [showLabel]="showLabel"  [title]="'制冷系统耗电量周分布统计（最近1年）'"></app-peec-bar>
+      <nz-spin nzSimple *ngIf="chartLoading" class="loading-ui"></nz-spin>
     </div>
     <div class="long-block">
       <app-peec-bar #peecBar4  [title]="'制冷系统耗电量年分布统计（最近1年）'"></app-peec-bar>
+      <nz-spin nzSimple *ngIf="chartLoading" class="loading-ui"></nz-spin>
     </div>
   </div>
   <div class="chart-block">
     <div class="whole-block">
       <app-peec-bar #peecBar5 [selfColors]="['#008000']"  [title]="'制冷系统耗电量月分布统计（最近1年）'"></app-peec-bar>
+      <nz-spin nzSimple *ngIf="chartLoading" class="loading-ui"></nz-spin>
     </div>
   </div>
 </div>

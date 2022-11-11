@@ -24,7 +24,7 @@ export class PeecBarComponent implements OnInit {
   data = [];
   data2 = [0, 0, 0, 0, 0, 0, 0];
   colors = ['#6b9bc3', '#FB765E', '#35EAED', '#459CF4', '#3B54EC', '#A45CEF', '#4AC2A8'];
-  xName = ['APD', 'RFC', 'GAC To', 'MOD To', 'CME TEAM', 'EXCA', 'ERECTION'];
+  xName = [];
   option: EChartsOption = {
     title: {
       text: 'line Chart',
@@ -107,8 +107,13 @@ export class PeecBarComponent implements OnInit {
           fontSize: 10
         }
       },
+      tooltip: {
+        show: true,
+        trigger : 'item'
+      },
+      color: this.selfColors,
       grid: {
-        left: 50,
+        left: 60,
         right: 20,
         bottom: 60,
         borderWidth: 1,

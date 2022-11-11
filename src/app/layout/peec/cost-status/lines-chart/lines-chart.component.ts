@@ -41,7 +41,11 @@ export class LinesChartComponent implements OnInit {
         type: 'value',
       },
       legend: {
-        show: true
+        show: true,
+      },
+      tooltip: {
+        show: true,
+        trigger : 'item'
       },
       color: this.selfColors,
       grid: {

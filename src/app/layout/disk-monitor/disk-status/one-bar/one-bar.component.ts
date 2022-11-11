@@ -60,36 +60,6 @@ export class OneBarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    /*const bar = {
-      type: 'bar',
-      barMaxWidth: 18,
-      data: [30, 32, 34, 45, 23, 34, 54],
-      z: 10,
-      label: {
-        show: this.showLabel,
-        position: 'top'
-      }
-    };
-    const line = {
-      type: 'line',
-      data: [30, 32, 34, 45, 23, 34, 54],
-      lineStyle: {
-        color: 'red',
-        width: 1,
-        type: 'dashed'
-      },
-      label: {
-        show: false
-      }
-    };
-
-    const series: any[] = [];
-    series.push(bar);
-    if (this.hasLine) {
-      series.push(line);
-    }
-    this.mergeOption.series = series;
-    this.mergeOption.color = this.selfColors;*/
   }
 
   setConfig(chart: ChartType) {
@@ -106,6 +76,10 @@ export class OneBarComponent implements OnInit {
           rotate: chart.xAxis ? (chart.xAxis.length > 7 ? 30 : 0) : 0,
           fontSize: 10
         }
+      },
+      tooltip: {
+        show: true,
+        trigger: 'item'
       },
       color: this.selfColors,
       grid: {
