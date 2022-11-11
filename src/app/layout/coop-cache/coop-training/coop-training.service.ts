@@ -16,12 +16,10 @@ export class CoopTrainingService {
     trainingParameters: TrainingParameters
   ): Observable<ApiRes> {
     const url = this.urlService.getUrl('/traffic/train');
-    console.log('click training')
     return this.http.post<ApiRes>(url, trainingParameters);
   }
   postCacheModel(cacheParameters: CacheParameters): Observable<ApiRes> {
     const url = this.urlService.getUrl('/cache/train');
-    console.log('click cache')
     return this.http.post<ApiRes>(url, cacheParameters);
   }
   getTrafficData(): Observable<ApiRes> {

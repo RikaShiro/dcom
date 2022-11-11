@@ -23,7 +23,7 @@ export class CacheStrategyComponent implements OnInit {
       if (res.code === 200) {
         const $ = res.data.modelList;
         if (Array.isArray($) && $.length > 0) {
-          this.modelList = $;
+          this.modelList = $.slice(0, 10);
           this.selectedModel = this.modelList[0];
         }
       }
@@ -39,7 +39,7 @@ export class CacheStrategyComponent implements OnInit {
           data: $.dataSource,
         };
         if ('moduleList' in $) {
-          this.modelList = $.moduleList;
+          this.modelList = $.moduleList.slice(0, 10);
           if (this.selectedModel.length === 0) {
             this.selectedModel = this.modelList[0];
           }
