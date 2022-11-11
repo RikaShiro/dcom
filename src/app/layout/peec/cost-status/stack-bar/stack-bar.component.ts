@@ -17,7 +17,7 @@ export class StackBarComponent implements OnInit {
   @Input() hasLine: boolean = true;
   @Input() showLabel: boolean = false;
   @Input() title: string = '';
-  @Input() selfColors: string[] = ['#6b9bc3', '#ee7d31', '#a5a5a5', '#fec000', '#4472c4', '#A45CEF', '#4AC2A8'];
+  @Input() selfColors: string[] = ['#4472c3', '#ffbf00', '#a5a5a5', '#fec000', '#4472c4', '#A45CEF', '#4AC2A8'];
   private _barData = null;
   dataLoading = false;
   mergeOption: EChartsOption = {};
@@ -60,65 +60,6 @@ export class StackBarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    /*const bar = {
-      type: 'bar',
-      barMaxWidth: 35,
-      data: [30, 32, 34, 45, 23, 34, 54],
-      z: 10,
-      stack: 'all',
-      label: {
-        show: false
-      }
-    };
-    const bar2 = {
-      type: 'bar',
-      barMaxWidth: 35,
-      data: [10, 12, 14, 15, 13, 14, 14],
-      z: 10,
-      stack: 'all',
-      label: {
-        show: false
-      }
-    };
-    const bar3 = {
-      type: 'bar',
-      barMaxWidth: 35,
-      data: [30, 32, 34, 45, 23, 34, 54],
-      z: 10,
-      stack: 'all',
-      label: {
-        show: false
-      }
-    };
-    const bar4 = {
-      type: 'bar',
-      barMaxWidth: 35,
-      data: [30, 32, 34, 45, 23, 34, 54],
-      z: 10,
-      stack: 'all',
-      label: {
-        show: false
-      }
-    };
-    const bar5 = {
-      type: 'bar',
-      barMaxWidth: 35,
-      data: [30, 32, 34, 45, 23, 34, 54],
-      z: 10,
-      stack: 'all',
-      label: {
-        show: false
-      }
-    };
-
-    const series: any[] = [];
-    series.push(bar);
-    series.push(bar3);
-    series.push(bar2);
-    series.push(bar4);
-    series.push(bar5);
-    this.mergeOption.series = series;
-    this.mergeOption.color = this.selfColors;*/
   }
 
 
@@ -136,6 +77,14 @@ export class StackBarComponent implements OnInit {
           rotate: chart.xAxis ? (chart.xAxis.length > 7 ? 30 : 0) : 0,
           fontSize: 10
         }
+      },
+      tooltip: {
+        show: true,
+        trigger : 'axis'
+      },
+      color: this.selfColors,
+      legend: {
+        data: chart.legend
       },
       grid: {
         left: 50,

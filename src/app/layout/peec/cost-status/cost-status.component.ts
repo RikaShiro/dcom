@@ -13,7 +13,8 @@ interface BarObject {
   z: number,
   stack: string,
   label: {
-    show: boolean
+    show: boolean,
+    position?: string
   }
 }
 
@@ -43,6 +44,10 @@ export class CostStatusComponent implements OnInit {
   @ViewChild('peecBar2', {static: false}) peecBar2: PeecBarComponent;
   @ViewChild('peecBar3', {static: false}) peecBar3: PeecBarComponent;
   @ViewChild('peecBar5', {static: false}) peecBar5: PeecBarComponent;
+
+  pueLoading = false;
+  itLoading = false;
+  chartLoading = false;
   constructor(private service: CostStatusService) {
     this.lineChart = new LinesChartComponent();
     this.stackBar = new StackBarComponent();
@@ -64,14 +69,15 @@ export class CostStatusComponent implements OnInit {
   }
 
   getPCData(type: string) {
-    this.loading = true;
+    this.chartLoading = true;
     this.service.getPCData(type).subscribe(res => {
-      this.loading = false;
+      this.chartLoading = false;
       if (res.code === 200) {
-        console.log(res.data, type);
         const data = res.data;
         this.setConfigData(data, type);
       }
+    }, error => {
+      this.chartLoading = false;
     });
   }
 
@@ -85,7 +91,8 @@ export class CostStatusComponent implements OnInit {
       z: 10,
       stack: '',
       label: {
-        show: false
+        show: false,
+        position: 'top'
       }
     };
     for (const key in power) {
@@ -132,12 +139,12 @@ export class CostStatusComponent implements OnInit {
   }
 
   getPCTrend() {
-    this.loading = true;
+    this.itLoading = true;
     this.service.getPCTrend(this.date).subscribe(res => {
-      this.loading = false;
+      this.itLoading = false;
       if (res.code === 200) {
         const data = res.data;
-        if (data['PUE']) {
+        if (data['IT_Power']) {
           const bar: BarObject = {
             type: 'bar',
             barMaxWidth: 35,
@@ -167,29 +174,38 @@ export class CostStatusComponent implements OnInit {
           for (const key in data['Refrigeration_Power']) {
             bar2.data.push(data['Refrigeration_Power'][key]);
           }
-          this.stackData.data?.push(bar);
-          this.stackData.data?.push(bar2);
+          this.stackData.data = [bar, bar2];
         }
+        const list: any[] = [];
         if (data['hour'] && data['minute']) {
-          const list: any[] = [];
           for (const key in data['hour']) {
             const minute = data['minute'][key] < 10 ? '0' + data['minute'][key] : data['minute'][key];
             list.push(data['hour'][key] + ':' + minute);
           }
-          this.stackData.xAxis = list;
+        } else if (data['day']) {
+          for (const key in data['day']) {
+            list.push(data['day'][key]);
+          }
+        } else if (data['month']) {
+          for (const key in data['month']) {
+            list.push(data['month'][key]);
+          }
         }
-        // this.barData.yAxis = ['IT 社保'];
+        this.stackData.xAxis = list;
+        this.stackData.legend = ['IT设备', '制冷设备'];
         setTimeout( () =>{
           this.stackBar.setConfig(this.stackData);
         }, 100);
       }
+    }, error => {
+      this.itLoading = false;
     });
   }
 
   getPueTrend() {
-    this.loading = true;
+    this.pueLoading = true;
     this.service.getPueTrend(this.date).subscribe(res => {
-      this.loading = false;
+      this.pueLoading = false;
       if (res.code === 200) {
         const data = res.data;
         if (data['PUE']) {
@@ -199,22 +215,32 @@ export class CostStatusComponent implements OnInit {
             list.push(data['PUE'][key]);
           }
           this.barData.data = [
-            {type: 'line', data: list}
+            {type: 'line', data: list, name: 'PUE'}
           ];
         }
+        const list: any[] = [];
         if (data['hour'] && data['minute']) {
-          const list: any[] = [];
           for (const key in data['hour']) {
             const minute = data['minute'][key] < 10 ? '0' + data['minute'][key] : data['minute'][key];
             list.push(data['hour'][key] + ':' + minute);
           }
-          this.barData.xAxis = list;
+        } else if (data['day']) {
+          for (const key in data['day']) {
+            list.push(data['day'][key]);
+          }
+        } else if (data['month']) {
+          for (const key in data['month']) {
+            list.push(data['month'][key]);
+          }
         }
+        this.stackData.xAxis = list;
         setTimeout( () =>{
           this.lineChart.setConfig(this.barData);
         }, 100);
 
       }
+    }, error => {
+      this.pueLoading = false;
     });
   }
 
