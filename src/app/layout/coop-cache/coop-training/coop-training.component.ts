@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { number } from 'echarts';
 import { CacheParameters } from './CacheParameters';
 import { CoopTrainingService } from './coop-training.service';
 import { TrainingParameters } from './TrainingParameters';
@@ -107,15 +106,13 @@ export class CoopTrainingComponent implements OnInit {
     });
   }
   postCacheModel() {
-    this.service.postCacheModel(this.cache).subscribe((res) => {
-      console.log(res);
+    this.service.postCacheModel(this.cache).subscribe((res) => {;
       if (res.code === 200) {
       }
     });
   }
   postTrainingModel() {
     this.service.postTrainingModel(this.training).subscribe((res) => {
-      console.log(res);
       if (res.code === 200) {
       }
     });
