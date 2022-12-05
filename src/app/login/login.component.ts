@@ -34,7 +34,10 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/layout/disk-monitor/disk-status']);
       this.loginService.postLogin($).subscribe((res) => {
         console.log(res);
-
+        if (res.code === 200) {
+          const $ = res.data
+          console.log($)
+        }
       });
     } else {
       Object.values(this.loginForm.controls).forEach((control) => {
@@ -44,5 +47,11 @@ export class LoginComponent implements OnInit {
         }
       });
     }
+  }
+  reloadVerificationCode() {
+    this.loginForm.controls['vcode'].setValue('');
+    // this.loginService.getVerificationCode().subscribe(res => {
+    //   console.log(res)
+    // })
   }
 }

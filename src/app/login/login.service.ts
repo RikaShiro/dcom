@@ -13,4 +13,8 @@ export class LoginService {
     const url = this.urlService.getUrl('/login');
     return this.http.post<ApiRes>(url, loginForm);
   }
+  getVerificationCode(): Observable<ApiRes> {
+    const url = this.urlService.getUrl('/capcha');
+    return this.http.get<ApiRes>(url)
+  }
 }
