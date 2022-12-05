@@ -35,7 +35,7 @@ export class DataStatusComponent implements OnInit {
 
   constructor(private service: DataStatusService) {}
   ngOnInit(): void {
-    this.getInfoData();
+    // this.getInfoData();
   }
   getInfoData() {
     this.loading = true;

@@ -45,10 +45,10 @@ export class CoopTrainingComponent implements OnInit {
   constructor(private service: CoopTrainingService) {}
 
   ngOnInit() {
-    this.postTrainingModel();
-    this.postCacheModel();
-    this.getCacheData();
-    this.getTrafficData();
+    // this.postTrainingModel();
+    // this.postCacheModel();
+    // this.getCacheData();
+    // this.getTrafficData();
   }
 
   getCacheData() {
