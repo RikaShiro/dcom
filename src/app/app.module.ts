@@ -9,10 +9,12 @@ import {ShareModule} from './common/share.module';
 import {NZ_I18N, zh_CN} from 'ng-zorro-antd/i18n';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AppInterceptor} from './common/interceptor/app.interceptor';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

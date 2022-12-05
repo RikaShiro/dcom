@@ -1,0 +1,25 @@
+<div class="login-container">
+  <form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="login()">
+    <h2>Sign in</h2>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Username is required!">
+        <nz-input-group nzPrefixIcon="user">
+          <input type="text" nz-input formControlName="username" placeholder="Username" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Password is required">
+        <nz-input-group nzPrefixIcon="lock">
+          <input type="password" nz-input formControlName="password" placeholder="Password" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-input-group>
+        <input type="vcode" nz-input formControlName="vcode" placeholder="varification code">
+      </nz-input-group>
+    </nz-form-item>
+    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Sign in</button>
+  </form>
+</div>
