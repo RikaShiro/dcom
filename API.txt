@@ -3,3 +3,9 @@ https://console-docs.apipost.cn/preview/e11fc1ba9bad98de/51e0d7b69393cc75?target
 https://console-docs.apipost.cn/preview/e11fc1ba9bad98de/51e0d7b69393cc75?target_id=30785d36-a4be-40e9-a86a-a475c4331322
 
 http://101.34.19.176:5050/api/execution/model-list
+
+每个界面有一个用户名+登出按钮
+点击登出按钮返回login界面
+// 如何阻止用户点击返回键后退?
+// 如何记住用户名?
+http://101.34.19.176:5050是可用的 其它不可用

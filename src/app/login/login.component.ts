@@ -24,14 +24,13 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       username: [null, [Validators.required]],
       password: [null, [Validators.required]],
-      vcode: [null, [Validators.required]],
     });
   }
   login(): void {
     if (this.loginForm.valid) {
       const $ = this.loginForm.value;
       delete $.vcode
-      this.router.navigate(['/layout/disk-monitor/disk-status']);
+      // this.router.navigate(['/layout/disk-monitor/disk-status']);
       this.loginService.postLogin($).subscribe((res) => {
         console.log(res);
         if (res.code === 200) {
@@ -47,11 +46,5 @@ export class LoginComponent implements OnInit {
         }
       });
     }
-  }
-  reloadVerificationCode() {
-    this.loginForm.controls['vcode'].setValue('');
-    // this.loginService.getVerificationCode().subscribe(res => {
-    //   console.log(res)
-    // })
   }
 }

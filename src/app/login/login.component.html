@@ -15,13 +15,6 @@
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-row class="vcode-row">
-      <nz-input-group nz-col [nzSpan]="13">
-        <input type="vcode" nz-input formControlName="vcode" placeholder="varification code">
-      </nz-input-group>
-      <img nz-col [nzSpan]="6" src="../../assets/images/logo.png" title="verfication code">
-      <span nz-col [nzSpan]="3" nz-icon nzType="reload" nzTheme="outline" (click)="reloadVerificationCode()"></span>
-    </nz-form-item>
     <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Sign in</button>
   </form>
 </div>

@@ -10,6 +10,7 @@ import { UrlService } from '../common/service/url.service';
 export class LoginService {
   constructor(private http: HttpClient, private urlService: UrlService) {}
   postLogin(loginForm: any): Observable<ApiRes> {
+    console.log(loginForm)
     const url = this.urlService.getUrl('/login');
     return this.http.post<ApiRes>(url, loginForm);
   }
