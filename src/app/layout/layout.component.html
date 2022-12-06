@@ -7,7 +7,7 @@
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <ng-template ngFor let-item [ngForOf]="menu" let-i="index">
         <ng-template [ngIf]="item.show">
-          <li nz-submenu [nzTitle]="item.title" [nzIcon]="item.icon"
+          <li nz-submenu [nzTitle]="item.title" [nzIcon]="item.icon" nzOpen
               *ngIf="item.children && item.children.length > 0">
             <ul>
               <ng-template ngFor let-citem [ngForOf]="item.children" let-i="index">
@@ -17,7 +17,7 @@
                 </li> -->
                 <!-- // 3级菜单 -->
                 <ng-template [ngIf]="citem.show">
-                  <li nz-submenu [nzTitle]="citem.title" [nzIcon]="citem.icon"
+                  <li nz-submenu [nzTitle]="citem.title" [nzIcon]="citem.icon" nzOpen
                       *ngIf="citem.children && citem.children.length > 0">
                     <ul>
                       <ng-template ngFor let-c [ngForOf]="citem.children" let-i="index">
@@ -28,7 +28,8 @@
                       </ng-template>
                     </ul>
                   </li>
-                  <li nz-menu-item *ngIf="!citem.children || citem.children.length === 0" [routerLink]="citem.routerLink"
+                  <li nz-menu-item *ngIf="!citem.children || citem.children.length === 0"
+                      [routerLink]="citem.routerLink"
                       nzMatchRouter>
                     <i nz-icon [nzType]="citem.icon"></i>
                     <span>{{citem.title}}</span>

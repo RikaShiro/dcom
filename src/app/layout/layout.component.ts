@@ -31,10 +31,10 @@ export class LayoutComponent implements OnInit {
         {show: true, title: '动环节能模型训练', icon: 'fund-projection-screen', routerLink: './peec/pe-training', children: []},
         {show: true, title: 'PUE预测', icon: 'setting', routerLink: './peec/pue', children: []}
       ]},
-    {show: true, title: '协作缓存', icon: 'merge-cells', routerLink: '', children: [
+    {show: true, title: '协作缓存与负载均衡调度', icon: 'merge-cells', routerLink: '', children: [
         {show: true, title: '流量状态', icon: 'dashboard', routerLink: './coop-cache/data-status', children: []},
-        {show: true, title: '协作缓存模型训练', icon: 'partition', routerLink: './coop-cache/coop-training', children: []},
-        {show: true, title: '缓存策略执行', icon: 'pull-request', routerLink: './coop-cache/cache-strategy', children: []}
+        {show: true, title: '模型训练', icon: 'partition', routerLink: './coop-cache/coop-training', children: []},
+        {show: true, title: '策略执行', icon: 'pull-request', routerLink: './coop-cache/cache-strategy', children: []}
       ]},
     {show: true, title: '系统信息', icon: 'copyright-circle', routerLink: '', children: [
         {show: true, title: '技术支持', icon: 'audit', routerLink: './sys-info/support', children: []}
