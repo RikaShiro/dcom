@@ -76,6 +76,8 @@ export class PueComponent implements OnInit {
   @ViewChild('lineChart3', {static: false}) lineChart3: ThreeLineChartComponent;
   legends = new PueChart();
   recordMap: any = {};
+  currentModel = '';
+  modelTime = '';
   constructor(private service: PueService,
               private modal: NzModalService) {
     this.lineChart1 = new ThreeLineChartComponent();
@@ -102,6 +104,10 @@ export class PueComponent implements OnInit {
           });
           if (this.modelData.length > 0) {
             this.selectedModel = this.modelData[0].value;
+            this.currentModel = this.modelData[0].label;
+            const start = this.currentModel.indexOf('(');
+            const end = this.currentModel.indexOf(')');
+            this.modelTime = this.currentModel.substring(start + 1, end);
             this.getPredictData();
           }
           for (const key in params) {
@@ -208,6 +214,10 @@ export class PueComponent implements OnInit {
 
   modelChange(event: any) {
     this.selectedModel = event;
+    this.currentModel = this.modelData[event].label;
+    const start = this.currentModel.indexOf('(');
+    const end = this.currentModel.indexOf(')');
+    this.modelTime = this.currentModel.substring(start + 1, end);
     this.getPredictData();
   }
 
