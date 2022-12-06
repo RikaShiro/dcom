@@ -15,6 +15,9 @@
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
-    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Sign in</button>
+    <ng-template #spinTemplate><span nz-icon nzType="loading"></span></ng-template>
+    <nz-spin [nzIndicator]="spinTemplate" [nzSpinning]="loading">
+      <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Sign in</button>
+    </nz-spin>
   </form>
 </div>

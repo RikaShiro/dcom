@@ -14,6 +14,8 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: UntypedFormGroup;
+  loading = false;
+
   constructor(
     private fb: UntypedFormBuilder,
     private loginService: LoginService,
@@ -27,15 +29,14 @@ export class LoginComponent implements OnInit {
     });
   }
   login(): void {
+    this.loading = true;
     if (this.loginForm.valid) {
       const $ = this.loginForm.value;
-      delete $.vcode
-      // this.router.navigate(['/layout/disk-monitor/disk-status']);
       this.loginService.postLogin($).subscribe((res) => {
         console.log(res);
         if (res.code === 200) {
-          const $ = res.data
-          console.log($)
+          const username = res.data.username;
+          // this.router.navigate(['/layout/disk-monitor/disk-status']);
         }
       });
     } else {
@@ -46,5 +47,8 @@ export class LoginComponent implements OnInit {
         }
       });
     }
+    setTimeout(() => {
+      this.loading = false;
+    }, 3000);
   }
 }
