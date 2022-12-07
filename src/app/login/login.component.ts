@@ -32,11 +32,13 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     if (this.loginForm.valid) {
       const $ = this.loginForm.value;
-      this.loginService.postLogin($).subscribe((res) => {
-        console.log(res);
+      const form = new FormData();
+      form.append('username', this.loginForm.get('username')?.value);
+      form.append('password', this.loginForm.get('password')?.value);
+      this.loginService.postLogin(form).subscribe((res) => {
         if (res.code === 200) {
           const username = res.data.username;
-          // this.router.navigate(['/layout/disk-monitor/disk-status']);
+          this.router.navigate(['/layout/disk-monitor/disk-status']);
         }
       });
     } else {
