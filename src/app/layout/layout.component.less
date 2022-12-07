@@ -7,7 +7,6 @@
     height: calc(100vh - 64px);
   }
 
-
   .logo {
     //height: 32px;
     //background: rgba(255, 255, 255, 0.2);
@@ -23,7 +22,7 @@
     padding: 0;
 
     .header {
-      background-color: #0F57BF;
+      background-color: #0f57bf;
       display: flex;
       justify-content: space-between;
       height: 64px;
@@ -53,19 +52,35 @@
 
         a {
           margin-right: 16px;
-          color: #79BEE9;
+          color: #79bee9;
         }
 
-        .out-db-ui{
-          height:40px;
-          line-height:30px;
+        .out-db-ui {
+          height: 40px;
+          line-height: 30px;
           padding: 5px 14px;
-          margin-right:16px;
+          margin-right: 16px;
           display: inline-block;
-          color:#eee;
+          color: #eee;
           background-color: #1890ff;
           border-radius: 3px;
           cursor: pointer;
+        }
+      }
+
+      .sign-out {
+        color: #eee;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 64px;
+        position: absolute;
+        right: 30px;
+        .sign-out-button {
+          margin-left: 20px;
+        }
+        .sign-out-button:hover {
+          cursor: pointer;
+          color: red;
         }
       }
     }
@@ -86,7 +101,6 @@
   }
 }
 
-
 .active-dashboard {
   nz-content {
     margin: 0;
@@ -101,6 +115,4 @@
     //  background-image: url("../../assets/images/banner.png");
     //}
   }
-
-
 }

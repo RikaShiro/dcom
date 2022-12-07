@@ -31,14 +31,17 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.loading = true;
     if (this.loginForm.valid) {
-      const $ = this.loginForm.value;
-      const form = new FormData();
-      form.append('username', this.loginForm.get('username')?.value);
-      form.append('password', this.loginForm.get('password')?.value);
-      this.loginService.postLogin(form).subscribe((res) => {
+      const $ = new FormData();
+      $.append('username', this.loginForm.get('username')?.value);
+      $.append('password', this.loginForm.get('password')?.value);
+      this.loginService.postLogin($).subscribe((res) => {
+        console.log(res);
         if (res.code === 200) {
-          const username = res.data.username;
-          this.router.navigate(['/layout/disk-monitor/disk-status']);
+          localStorage.setItem('username', res.username!);
+          setTimeout(() => {
+            this.loading = false
+            this.router.navigate(['/layout/disk-monitor/disk-status']);
+          }, 1000);
         }
       });
     } else {
@@ -48,9 +51,9 @@ export class LoginComponent implements OnInit {
           control.updateValueAndValidity({ onlySelf: true });
         }
       });
+      setTimeout(() => {
+        this.loading = false
+      }, 2000)
     }
-    setTimeout(() => {
-      this.loading = false;
-    }, 3000);
   }
 }

@@ -56,8 +56,8 @@
           <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
              (click)="isCollapsed = !isCollapsed"></i>数据中心智能运维系统
         </div>
-        <div class="operate">
-          <!--<a style="cursor: auto">{{user.name}}</a>
+        <!-- <div class="operate">
+          <a style="cursor: auto">{{user.name}}</a>
           <app-notification></app-notification>
           <a nz-dropdown [nzDropdownMenu]="dropdownMenu" [nzPlacement]="'bottomRight'">
             {{getRoleName(user.currentUserRoleVo)}}
@@ -81,7 +81,11 @@
             </ul>
           </nz-dropdown-menu>
           <a style="cursor: auto">Online: {{onlineNum}}</a>
-          <a href="assets/智能物料管理系统（IMMS）V2操作指南1.0.doc" download="智能物料管理系统（IMMS）V2操作指南1.0.doc" style="cursor: help">Help</a>-->
+          <a href="assets/智能物料管理系统（IMMS）V2操作指南1.0.doc" download="智能物料管理系统（IMMS）V2操作指南1.0.doc" style="cursor: help">Help</a>
+        </div> -->
+        <div class="sign-out">
+          <span>您好, {{username}} !</span>
+          <span class="sign-out-button" (click)="signOut()">Sign out</span>
         </div>
       </div>
     </nz-header>
