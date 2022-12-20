@@ -2,14 +2,14 @@
   <form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="login()">
     <h2>Sign in</h2>
     <nz-form-item>
-      <nz-form-control nzErrorTip="Username is required!">
+      <nz-form-control [nzErrorTip]="usernameTemplate">
         <nz-input-group nzPrefixIcon="user">
           <input type="text" nz-input formControlName="username" placeholder="Username" />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-control nzErrorTip="Password is required">
+      <nz-form-control [nzErrorTip]="passwordTemplate">
         <nz-input-group nzPrefixIcon="lock">
           <input type="password" nz-input formControlName="password" placeholder="Password" />
         </nz-input-group>
@@ -17,7 +17,19 @@
     </nz-form-item>
     <ng-template #spinTemplate><span nz-icon nzType="loading"></span></ng-template>
     <nz-spin [nzIndicator]="spinTemplate" [nzSpinning]="loading">
-      <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Sign in</button>
+      <button nz-button class="login-form-button login-form-margin" [ngClass]="{'button-loading': loading}" [nzType]="'primary'">Sign in</button>
     </nz-spin>
+
+    <ng-template #usernameTemplate let-control>
+      <ng-container *ngIf="control.hasError('maxlength')">MaxLength is 30</ng-container>
+      <ng-container *ngIf="control.hasError('minlength')">MinLength is 4</ng-container>
+      <ng-container *ngIf="control.hasError('required')">Username is required</ng-container>
+    </ng-template>
+
+    <ng-template #passwordTemplate let-control>
+      <ng-container *ngIf="control.hasError('maxlength')">MaxLength is 30</ng-container>
+      <ng-container *ngIf="control.hasError('minlength')">MinLength is 4</ng-container>
+      <ng-container *ngIf="control.hasError('required')">Password is required</ng-container>
+    </ng-template>
   </form>
 </div>

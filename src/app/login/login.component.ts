@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      username: [null, [Validators.required]],
-      password: [null, [Validators.required]],
+      username: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
+      password: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
     });
   }
   login(): void {
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
       });
       setTimeout(() => {
         this.loading = false
-      }, 2000)
+      }, 1000)
     }
   }
 }

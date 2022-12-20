@@ -9,24 +9,29 @@
     right: 10%;
     width: 400px;
     height: 250px;
-    padding: 20px 30px;
+    padding: 20px 35px;
     background-color: lightgray;
     border-radius: 10px;
 
     h2 {
       text-align: center;
-    }
-    .login-form-margin {
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
     .login-form-forgot {
       float: right;
     }
     .login-form-button {
+      margin-top: 5px;
       width: 100%;
     }
-    nz-spin, nz-spin > * {
-      height: 32px;
+    nz-spin {
+      margin-top: 5px;
+      .button-loading {
+        margin-top: 0;
+      }
+      span {
+        margin-top: 10px;
+      }
     }
   }
 }
