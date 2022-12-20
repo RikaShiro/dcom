@@ -132,7 +132,6 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
     console.log(window.location.href);
     this.username = localStorage.getItem('username')!;
-    // this.router.navigate(['./layout/disk-monitor/disk-status']);
   }
 
   signOut() {

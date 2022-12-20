@@ -13,4 +13,8 @@ export class LoginService {
     const url = this.urlService.getUrl('/login');
     return this.http.post<ApiRes>(url, loginForm);
   }
+  isLoggedIn() {
+    const username = localStorage.getItem('username')
+    return username && username.length >= 4
+  }
 }
