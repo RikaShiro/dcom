@@ -23,10 +23,6 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.loginService.isLoggedIn()) {
-      this.router.navigate(['/layout/disk-monitor/disk-status']);
-      return
-    }
     this.loginForm = this.fb.group({
       username: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       password: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],

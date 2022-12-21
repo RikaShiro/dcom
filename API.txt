@@ -9,3 +9,35 @@ http://101.34.19.176:5050/api/execution/model-list
 // 如何阻止用户点击返回键后退?
 // 如何记住用户名?
 http://101.34.19.176:5050是可用的 其它不可用
+
+  constructor(private loginService: LoginService, private router: Router) {}
+
+  canActivate(
+    _route: ActivatedRouteSnapshot,
+    _state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    if (this.loginService.isLoggedIn()) {
+      return true;
+    } else {
+      window.alert('Sign in is required.');
+      this.router.navigate(['/login']);
+      return false;
+    }
+  }
+
+  canDeactivate(
+    _component: unknown,
+    _currentRoute: ActivatedRouteSnapshot,
+    _currentState: RouterStateSnapshot,
+    _nextState?: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    return !this.loginService.isLoggedIn()
+  }

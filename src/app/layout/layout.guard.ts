@@ -7,12 +7,12 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LoginService } from './login.service';
+import { LoginService } from '../login/login.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LoginGuard implements CanActivate {
+export class LayoutGuard implements CanActivate {
   constructor(private loginService: LoginService, private router: Router) {}
 
   canActivate(
@@ -24,10 +24,11 @@ export class LoginGuard implements CanActivate {
     | boolean
     | UrlTree {
     if (this.loginService.isLoggedIn()) {
-      this.router.navigate(['/layout/disk-monitor/disk-status']);
-      return false;
-    } else {
       return true;
+    } else {
+      window.alert('Sign in is required.');
+      this.router.navigate(['/login']);
+      return false;
     }
   }
 }
