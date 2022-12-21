@@ -7,7 +7,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LoginService } from './login/login.service';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root',
@@ -36,27 +36,12 @@ export class LoginGuard implements CanActivate {
     _component: unknown,
     _currentRoute: ActivatedRouteSnapshot,
     _currentState: RouterStateSnapshot,
-    nextState?: RouterStateSnapshot
+    _nextState?: RouterStateSnapshot
   ):
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    console.log(nextState);
-    const backToLogin = nextState?.url === '/login';
-    console.log(backToLogin)
-    return true
-    if (backToLogin && this.loginService.isLoggedIn()) {
-      return false;
-    } else {
-      return true;
-    }
-    // if (this.loginService.isLoggedIn()) {
-    //   window.alert('cannot return to login page after loggin in');
-    //   this.router.navigate(['/layout/disk-monitor/disk-status']);
-    //   return true;
-    // } else {
-    //   return false;
-    // }
+    return !this.loginService.isLoggedIn()
   }
 }

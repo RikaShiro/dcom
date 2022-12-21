@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
-import { LoginGuard } from './login.guard';
+import { LoginGuard } from './login/login.guard';
 
 const routes: Routes = [
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./layout/layout.module').then((m) => m.LayoutModule),
     canActivate: [LoginGuard],
-    canDeactivate: [LoginGuard]
+    canDeactivate: [LoginGuard],
   },
   {
     path: 'login',

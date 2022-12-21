@@ -14,8 +14,8 @@ export class CacheStrategyComponent implements OnInit {
 
   constructor(private service: CacheStrategyService) {}
   ngOnInit(): void {
-    // this.getModelList();
-    // this.getPredictData();
+    this.getModelList();
+    this.getPredictData();
   }
   getModelList() {
     this.loading = true;

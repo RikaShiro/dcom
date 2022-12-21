@@ -23,10 +23,10 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // if (this.loginService.isLoggedIn()) {
-    //   this.router.navigate(['/layout/disk-monitor/disk-status']);
-    //   return
-    // }
+    if (this.loginService.isLoggedIn()) {
+      this.router.navigate(['/layout/disk-monitor/disk-status']);
+      return
+    }
     this.loginForm = this.fb.group({
       username: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       password: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
@@ -39,13 +39,16 @@ export class LoginComponent implements OnInit {
       $.append('username', this.loginForm.get('username')?.value);
       $.append('password', this.loginForm.get('password')?.value);
       this.loginService.postLogin($).subscribe((res) => {
-        console.log(res);
         if (res.code === 200) {
           localStorage.setItem('username', res.username!);
           setTimeout(() => {
             this.loading = false
             this.router.navigate(['/layout/disk-monitor/disk-status']);
           }, 1000);
+        } else {
+          setTimeout(() => {
+            this.loading = false
+          }, 1000)
         }
       });
     } else {

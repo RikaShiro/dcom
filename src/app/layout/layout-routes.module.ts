@@ -2,22 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout.component';
-import { CoopCacheModule } from './coop-cache/coop-cache.module';
-import { DiskMonitorModule } from './disk-monitor/disk-monitor.module';
-import { PeecModule } from './peec/peec.module';
-import { SysInfoModule } from './sys-info/sys-info.module';
-import { LoginGuard } from '../login.guard';
+import { LoginGuard } from '../login/login.guard';
 
 const routerConfig: Routes = [
   {
     path: '',
-    redirectTo: '/login',
-    pathMatch: 'full',
-  },
-  {
-    path: '',
     component: LayoutComponent,
-    canActivate: [LoginGuard],
     children: [
       {
         path: 'coop-cache',
