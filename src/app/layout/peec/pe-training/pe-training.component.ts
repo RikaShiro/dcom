@@ -25,6 +25,7 @@ export class PeTrainingComponent implements OnInit {
   chartLoading = false;
   @ViewChild('lineChart1', {static: false}) lineChart1: PeLineChartComponent;
   @ViewChild('lineChart2', {static: false}) lineChart2: PeLineChartComponent;
+  isRunning = false;
   constructor(private service: PeTrainingService) {
     this.lineChart1 = new PeLineChartComponent();
     this.lineChart2 = new PeLineChartComponent();
@@ -59,88 +60,119 @@ export class PeTrainingComponent implements OnInit {
     });
   }
 
+  getRealTrainData() {
+    this.currentParams.learning_rate = this.currentParams.learinin_rate;
+    this.isRunning = true;
+    this.service.getRealTrainData(this.currentParams).subscribe(res => {
+      if (res.code ===200) {
+        this.getRealTrainResult(this.currentParams.learning_rate);
+      }
+      this.isRunning = false;
+    }, error => {
+      this.isRunning = false;
+    });
+  }
+
+  getRealTrainResult(rate: any) {
+    const params = {
+      learning_rate: rate
+    };
+    this.service.getRealTrainResult(params).subscribe(res => {
+      if (res.code ===200) {
+        const data = res.data;
+        this.setChartData(data);
+      }
+      this.isRunning = false;
+    }, error => {
+      this.isRunning = false;
+    });
+  }
+
   getTrainData() {
     this.chartLoading = true;
     this.service.getTrainData(this.selectedModel + 1).subscribe(res => {
       this.chartLoading = false;
       if (res.code ===200) {
         const data = res.data;
-        const metric_l1_01 = data.metric_l1_01;
-        const metric_l2_01 = data.metric_l2_01;
-        const sheet = data.sheet;
-        this.list[0].mae = sheet.train_MAE;
-        this.list[0].mse = sheet.train_MSE;
-        this.list[1].mae = sheet.test_MAE;
-        this.list[1].mse = sheet.test_MSE;
-
-        if (metric_l1_01) {
-          const iterations = metric_l1_01.Iterations;
-          const training_l1 = metric_l1_01.training_l1;
-          const valid_1_l1 = metric_l1_01.valid_1_l1;
-          const lineData = new ChartType();
-          const line1: LineObject = {
-            name: 'Training',
-            type: 'line',
-            smooth: true,
-            showSymbol: false,
-            data: []
-          };
-          const line2: LineObject = {
-            name: 'Valid_1',
-            type: 'line',
-            showSymbol: false,
-            smooth: true,
-            data: []
-          };
-          const names = [];
-          for (const key in training_l1) {
-            line1.data?.push(training_l1[key]);
-            line2.data?.push(valid_1_l1[key]);
-            names.push(iterations[key]);
-          }
-          lineData.xAxis = names;
-          lineData.data?.push(line1, line2);
-          lineData.legend = ['Training', 'Valid_1'];
-          this.lineChart1.setConfig(lineData);
-        }
-
-        if (metric_l2_01) {
-          const iterations = metric_l2_01.Iterations;
-          const training_l2 = metric_l2_01.training_l2;
-          const valid_1_l2 = metric_l2_01.valid_1_l2;
-          const lineData = new ChartType();
-          lineData.xAxis = iterations;
-          const line1: LineObject = {
-            name: 'Training',
-            type: 'line',
-            smooth: true,
-            showSymbol: false,
-            data: []
-          };
-          const line2: LineObject = {
-            name: 'Valid_1',
-            type: 'line',
-            showSymbol: false,
-            smooth: true,
-            data: []
-          };
-          const names = [];
-          for (const key in training_l2) {
-            line1.data?.push(training_l2[key]);
-            line2.data?.push(valid_1_l2[key]);
-            names.push(iterations[key]);
-          }
-          lineData.xAxis = names;
-
-          lineData.data?.push(line1, line2);
-          lineData.legend = ['Training', 'Valid_1'];
-          this.lineChart2.setConfig(lineData);
-        }
-
+        this.setChartData(data);
       }
     }, err =>{
       this.chartLoading = false;
     });
+  }
+
+  setChartData(data: any) {
+    const metric_l1_01 = data.metric_l1_01;
+    const metric_l2_01 = data.metric_l2_01;
+    const sheet = data.sheet;
+    this.list[0].mae = sheet.train_MAE;
+    this.list[0].mse = sheet.train_MSE;
+    this.list[1].mae = sheet.test_MAE;
+    this.list[1].mse = sheet.test_MSE;
+
+    if (metric_l1_01) {
+      const iterations = metric_l1_01.Iterations;
+      const training_l1 = metric_l1_01.training_l1;
+      const valid_1_l1 = metric_l1_01.valid_1_l1;
+      const lineData = new ChartType();
+      const line1: LineObject = {
+        name: 'Training',
+        type: 'line',
+        smooth: true,
+        showSymbol: false,
+        data: []
+      };
+      const line2: LineObject = {
+        name: 'Valid_1',
+        type: 'line',
+        showSymbol: false,
+        smooth: true,
+        data: []
+      };
+      const names = [];
+      for (const key in training_l1) {
+        line1.data?.push(training_l1[key]);
+        line2.data?.push(valid_1_l1[key]);
+        names.push(iterations[key]);
+      }
+      lineData.xAxis = names;
+      lineData.data?.push(line1, line2);
+      lineData.legend = ['Training', 'Valid_1'];
+      this.lineChart1.setConfig(lineData);
+    }
+
+    if (metric_l2_01) {
+      const iterations = metric_l2_01.Iterations;
+      const training_l2 = metric_l2_01.training_l2;
+      const valid_1_l2 = metric_l2_01.valid_1_l2;
+      const lineData = new ChartType();
+      lineData.xAxis = iterations;
+      const line1: LineObject = {
+        name: 'Training',
+        type: 'line',
+        smooth: true,
+        showSymbol: false,
+        data: []
+      };
+      const line2: LineObject = {
+        name: 'Valid_1',
+        type: 'line',
+        showSymbol: false,
+        smooth: true,
+        data: []
+      };
+      const names = [];
+      for (const key in training_l2) {
+        line1.data?.push(training_l2[key]);
+        line2.data?.push(valid_1_l2[key]);
+        names.push(iterations[key]);
+      }
+      lineData.xAxis = names;
+
+      lineData.data?.push(line1, line2);
+      lineData.legend = ['Training', 'Valid_1'];
+      this.lineChart2.setConfig(lineData);
+    }
   }
 
   modelChange(event: any) {

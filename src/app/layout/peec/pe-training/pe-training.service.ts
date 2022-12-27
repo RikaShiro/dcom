@@ -21,4 +21,15 @@ export class PeTrainingService {
     const url = this.urlService.getUrl('/kinetic_energy_second_page/train' + type);
     return this.http.get<ApiRes>(url);
   }
+
+  getRealTrainData(condition: any): Observable<ApiRes> {
+    const url = this.urlService.getUrl('/kinetic_energy_second_page/train0');
+    return this.http.post<ApiRes>(url, condition);
+  }
+
+
+  getRealTrainResult(condition: any): Observable<ApiRes> {
+    const url = this.urlService.getUrl('/kinetic_energy_second_page/train0_output');
+    return this.http.post<ApiRes>(url, condition);
+  }
 }
