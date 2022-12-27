@@ -9,7 +9,8 @@
         <span class="run-rate">MAE：0.0035  |  MSE：2.5524e-05</span>
       </div>
       <div class="run-bt">
-        <span nz-icon nzType="play-circle" nzTheme="outline" class="span-icon-bt"></span>
+        <span nz-icon nzType="play-circle" nzTheme="outline" class="span-icon-bt" (click)="getRealTrainData()" *ngIf="!isRunning"></span>
+        <nz-spin nzSimple *ngIf="isRunning"></nz-spin>
       </div>
     </div>
   </div>
