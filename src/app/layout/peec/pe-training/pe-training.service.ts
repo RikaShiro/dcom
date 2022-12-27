@@ -27,9 +27,13 @@ export class PeTrainingService {
     return this.http.post<ApiRes>(url, condition);
   }
 
-
   getRealTrainResult(condition: any): Observable<ApiRes> {
     const url = this.urlService.getUrl('/kinetic_energy_second_page/train0_output');
     return this.http.post<ApiRes>(url, condition);
+  }
+
+  getTrainStatus(): Observable<ApiRes> {
+    const url = this.urlService.getUrl('/kinetic_energy_second_page/in_training')
+    return this.http.get<ApiRes>(url)
   }
 }
