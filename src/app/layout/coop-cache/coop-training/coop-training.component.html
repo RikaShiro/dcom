@@ -7,9 +7,9 @@
         <span class="run-rate">{{trafficData.MSE}}</span>
       </div>
       <div class="run-bt">
-        <span nz-icon nzType="play-circle" nzTheme="outline" *ngIf="!running"
-              class="span-icon-bt" (click)="getTrainingStatus()"></span>
-        <nz-spin nzSimple *ngIf="running"></nz-spin>
+        <span nz-icon nzType="play-circle" nzTheme="outline" *ngIf="!isRunning" class="span-icon-bt"
+          (click)="getTrainingStatus()"></span>
+        <nz-spin nzSimple *ngIf="isRunning"></nz-spin>
       </div>
     </div>
   </div>

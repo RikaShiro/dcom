@@ -1,4 +1,4 @@
-<div  class="container">
+<div class="container">
   <div class="headers">
     <span class="title">
       模型训练
@@ -6,10 +6,11 @@
     <div class="run-group">
       <div class="run-info">
         <span class="run-time">最近训练时间：2022/04/22 12:20:00</span>
-        <span class="run-rate">MAE：0.0035  |  MSE：2.5524e-05</span>
+        <span class="run-rate">MAE：0.0035 | MSE：2.5524e-05</span>
       </div>
       <div class="run-bt">
-        <span nz-icon nzType="play-circle" nzTheme="outline" class="span-icon-bt" (click)="getRealTrainData()" *ngIf="!isRunning"></span>
+        <span nz-icon nzType="play-circle" nzTheme="outline" class="span-icon-bt" (click)="getRealTrainData()"
+          *ngIf="!isRunning"></span>
         <nz-spin nzSimple *ngIf="isRunning"></nz-spin>
       </div>
     </div>
@@ -95,27 +96,23 @@
   </div>
 
   <div class="table-groups">
-    <nz-table #bomTable  nzSize="small"
-              nzTableLayout="fixed"
-              [nzLoading]="chartLoading"
-              [nzScroll]="{y: '160px'}"
-              [nzData]="list" [nzShowPagination]="false" [nzFrontPagination]="false"
-              nzBordered>
+    <nz-table #bomTable nzSize="small" nzTableLayout="fixed" [nzLoading]="chartLoading" [nzScroll]="{y: '160px'}"
+      [nzData]="list" [nzShowPagination]="false" [nzFrontPagination]="false" nzBordered>
       <thead>
-      <tr>
-        <th [nzWidth]="'80px'" nzLeft></th>
-        <th [nzWidth]="'120px'">MAE</th>
-        <th [nzWidth]="'120px'">MSE</th>
-      </tr>
+        <tr>
+          <th [nzWidth]="'80px'" nzLeft></th>
+          <th [nzWidth]="'120px'">MAE</th>
+          <th [nzWidth]="'120px'">MSE</th>
+        </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let data of bomTable.data,index as i" [ngClass]="{'table-odd-row':i%2 !== 0}">
-        <td nzLeft>{{ data.name }}</td>
-        <td >
-          <span>{{ data.mae }}</span>
-        </td>
-        <td >{{ data.mse }}</td>
-      </tr>
+        <tr *ngFor="let data of bomTable.data,index as i" [ngClass]="{'table-odd-row':i%2 !== 0}">
+          <td nzLeft>{{ data.name }}</td>
+          <td>
+            <span>{{ data.mae }}</span>
+          </td>
+          <td>{{ data.mse }}</td>
+        </tr>
       </tbody>
     </nz-table>
   </div>

@@ -34,5 +34,4 @@ export class CoopTrainingService {
     const url = this.urlService.getUrl('/traffic/in-training');
     return this.http.get<ApiRes>(url);
   }
-
 }

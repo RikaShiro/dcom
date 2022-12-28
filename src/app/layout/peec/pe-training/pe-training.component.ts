@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PeTrainingService } from './pe-training.service';
 import { TrainDisk } from '../../disk-monitor/model/TrainDisk';
-import { PeTraining } from '../model/PeTraining';
+import { PeTraining, TrainingObject } from '../model/PeTraining';
 import { ChartType } from '../../../common/const/ChartType';
 import { LineObject } from '../../disk-monitor/disk-status/disk-status.component';
 import { DiskLineChartComponent } from '../../disk-monitor/distk-training/disk-line-chart/disk-line-chart.component';
 import { PeLineChartComponent } from './pe-line-chart/pe-line-chart.component';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-pe-training',
@@ -25,18 +26,22 @@ export class PeTrainingComponent implements OnInit {
   trainingTimeList: { label: string; value: number }[] = [];
   learningRateList: number[] = [];
   chartLoading = false;
+  isRunning = false;
 
   @ViewChild('lineChart1', { static: false }) lineChart1: PeLineChartComponent;
   @ViewChild('lineChart2', { static: false }) lineChart2: PeLineChartComponent;
-  isRunning = false;
-  constructor(private service: PeTrainingService) {
+
+  constructor(
+    private service: PeTrainingService,
+    private msg: NzMessageService
+  ) {
     this.lineChart1 = new PeLineChartComponent();
     this.lineChart2 = new PeLineChartComponent();
   }
 
   ngOnInit(): void {
     this.getModelList();
-    this.getTrainStatus();
+    this.getTrainingStatus();
   }
 
   getModelList() {
@@ -67,56 +72,83 @@ export class PeTrainingComponent implements OnInit {
   getRealTrainData() {
     this.currentParams.learning_rate = this.currentParams.learinin_rate;
     this.isRunning = true;
-    this.service.getRealTrainData(this.currentParams).subscribe(
-      (res) => {
+    const params = [
+      'bagging_fraction',
+      'feature_fraction',
+      'learning_rate',
+      'iterations',
+      'num_leaves',
+      'subsample_freq',
+    ];
+    const $: any = { ...this.currentParams };
+    for (const k in $) {
+      if (!params.includes(k)) {
+        delete $[k]
+      }
+    }
+    console.log(this.currentParams, $);
+    this.service.getRealTrainData($).subscribe({
+      next: (res) => {
         if (res.code === 200) {
           this.getRealTrainResult(this.currentParams.learning_rate);
         }
         this.isRunning = false;
       },
-      (error) => {
+      error: (_error) => {
         this.isRunning = false;
-      }
-    );
+      },
+    });
   }
 
   getRealTrainResult(rate: any) {
     const params = {
       learning_rate: rate,
     };
-    this.service.getRealTrainResult(params).subscribe(
-      (res) => {
+    this.service.getRealTrainResult(params).subscribe({
+      next: (res) => {
         if (res.code === 200) {
           const data = res.data;
           this.setChartData(data);
         }
         this.isRunning = false;
       },
-      (error) => {
+      error: (_error) => {
         this.isRunning = false;
-      }
-    );
+      },
+    });
   }
 
   getTrainData() {
     this.chartLoading = true;
-    this.service.getTrainData(this.selectedModel + 1).subscribe(
-      (res) => {
+    this.service.getTrainData(this.selectedModel + 1).subscribe({
+      next: (res) => {
         this.chartLoading = false;
         if (res.code === 200) {
           const data = res.data;
           this.setChartData(data);
         }
       },
-      (err) => {
+      error: (_error) => {
         this.chartLoading = false;
-      }
-    );
+      },
+    });
   }
 
-  getTrainStatus() {
-    this.service.getTrainStatus().subscribe((res) => {
-      console.log(res);
+  getTrainingStatus() {
+    this.service.getTrainingStatus().subscribe({
+      next: (res) => {
+        console.log(res);
+        if (res.code === 200) {
+          if (res.data) {
+            this.getRealTrainData();
+          } else {
+            this.msg.warning('正在进行训练，请执行完毕再操作。');
+          }
+        }
+      },
+      error: (_error) => {
+        this.isRunning = false;
+      },
     });
   }
 

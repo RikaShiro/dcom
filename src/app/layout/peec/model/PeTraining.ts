@@ -1,4 +1,4 @@
-export class PeTraining{
+export class PeTraining {
   bagging_fraction?: number;
   feature_fraction?: number;
   iterations?: number;
