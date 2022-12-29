@@ -11,5 +11,4 @@ export class SysInfoComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
