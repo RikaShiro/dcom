@@ -86,9 +86,17 @@ export class PeTrainingComponent implements OnInit {
         delete $[k]
       }
     }
-    console.log(this.currentParams, $);
+    // const $: any = {
+    //   learning_rate: 0.01,
+    //   num_leaves: 31,
+    //   subsample_freq: 1,
+    //   feature_fraction: 0.9,
+    //   bagging_fraction: 0.8,
+    //   iterations: 10800,
+    // };
     this.service.getRealTrainData($).subscribe({
       next: (res) => {
+        console.log(res)
         if (res.code === 200) {
           this.getRealTrainResult(this.currentParams.learning_rate);
         }
