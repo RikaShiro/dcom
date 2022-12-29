@@ -72,20 +72,20 @@ export class PeTrainingComponent implements OnInit {
   getRealTrainData() {
     this.currentParams.learning_rate = this.currentParams.learinin_rate;
     this.isRunning = true;
-    const params = [
-      'bagging_fraction',
-      'feature_fraction',
-      'learning_rate',
-      'iterations',
-      'num_leaves',
-      'subsample_freq',
-    ];
-    const $: any = { ...this.currentParams };
-    for (const k in $) {
-      if (!params.includes(k)) {
-        delete $[k]
-      }
-    }
+    // const params = [
+    //   'bagging_fraction',
+    //   'feature_fraction',
+    //   'learning_rate',
+    //   'iterations',
+    //   'num_leaves',
+    //   'subsample_freq',
+    // ];
+    // const $: any = { ...this.currentParams };
+    // for (const k in $) {
+    //   if (!params.includes(k)) {
+    //     delete $[k]
+    //   }
+    // }
     // const $: any = {
     //   learning_rate: 0.01,
     //   num_leaves: 31,
@@ -94,7 +94,7 @@ export class PeTrainingComponent implements OnInit {
     //   bagging_fraction: 0.8,
     //   iterations: 10800,
     // };
-    this.service.getRealTrainData($).subscribe({
+    this.service.getRealTrainData(this.currentParams).subscribe({
       next: (res) => {
         console.log(res)
         if (res.code === 200) {
