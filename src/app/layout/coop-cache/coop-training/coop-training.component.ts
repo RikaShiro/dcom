@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CacheParameters } from './CacheParameters';
 import { CoopTrainingService } from './coop-training.service';
 import { TrainingParameters } from './TrainingParameters';
-import {NzMessageService} from 'ng-zorro-antd/message';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-coop-training',
@@ -39,17 +39,20 @@ export class CoopTrainingComponent implements OnInit {
   cacheDataLoading = true;
   trafficData: any = {};
   trafficDataLoading = true;
+  isRunning = false;
 
-  formatterPercent = (value: number): string => `${value} %`;
-  parserPercent = (value: string): string => value.replace(' %', '');
-  running = false;
-  constructor(private service: CoopTrainingService,
-              private msg: NzMessageService) {}
+  constructor(
+    private service: CoopTrainingService,
+    private msg: NzMessageService
+  ) {}
 
   ngOnInit() {
     this.getCacheData();
     this.getTrafficData();
   }
+
+  formatterPercent = (value: number): string => `${value} %`;
+  parserPercent = (value: string): string => value.replace(' %', '');
 
   getCacheData() {
     this.cacheDataLoading = true;
@@ -106,34 +109,42 @@ export class CoopTrainingComponent implements OnInit {
       }
     });
   }
+
   postCacheModel() {
-    this.service.postCacheModel(this.cache).subscribe((res) => {;
+    this.service.postCacheModel(this.cache).subscribe((res) => {
       if (res.code === 200) {
       }
     });
   }
+
   getTrainingStatus() {
-    this.running = true;
-    this.service.getTrainingStatus().subscribe((res) => {
-      if (res.code === 200) {
-        if (res.data) {
-          this.postCacheModel();
-        } else {
-          this.msg.warning('正在进行训练，请执行完毕再操作。');
+    this.isRunning = true;
+    this.service.getTrainingStatus().subscribe({
+      next: (res) => {
+        if (res.code === 200) {
+          if (res.data) {
+            this.postCacheModel();
+          } else {
+            this.msg.warning('正在进行训练，请执行完毕再操作。');
+          }
         }
-      }
-    }, error => {
-      this.running = false;
+      },
+      error: (_error) => {
+        this.isRunning = false;
+      },
     });
   }
 
   postTrainingModel() {
-    this.service.postTrainingModel(this.training).subscribe((res) => {
-      this.running = false;
-      if (res.code === 200) {
-      }
-    }, error => {
-      this.running = false;
+    this.service.postTrainingModel(this.training).subscribe({
+      next: (res) => {
+        this.isRunning = false;
+        if (res.code === 200) {
+        }
+      },
+      error: (_error) => {
+        this.isRunning = false;
+      },
     });
   }
 }

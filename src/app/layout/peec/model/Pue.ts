@@ -1,6 +1,4 @@
-export class Pue{
-
-}
+export class Pue {}
 
 export class PueChart {
   average_orginPUE?: number;

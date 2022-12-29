@@ -4,40 +4,4 @@ https://console-docs.apipost.cn/preview/e11fc1ba9bad98de/51e0d7b69393cc75?target
 
 http://101.34.19.176:5050/api/execution/model-list
 
-每个界面有一个用户名+登出按钮
-点击登出按钮返回login界面
-// 如何阻止用户点击返回键后退?
-// 如何记住用户名?
-http://101.34.19.176:5050是可用的 其它不可用
-
-  constructor(private loginService: LoginService, private router: Router) {}
-
-  canActivate(
-    _route: ActivatedRouteSnapshot,
-    _state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    if (this.loginService.isLoggedIn()) {
-      return true;
-    } else {
-      window.alert('Sign in is required.');
-      this.router.navigate(['/login']);
-      return false;
-    }
-  }
-
-  canDeactivate(
-    _component: unknown,
-    _currentRoute: ActivatedRouteSnapshot,
-    _currentState: RouterStateSnapshot,
-    _nextState?: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    return !this.loginService.isLoggedIn()
-  }
+https://console-docs.apipost.cn/preview/d55bb310303d7cd0/099bb6c807755aed
