@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FaultForecastService} from './fault-forecast.service';
 import {formatNumberWidth} from '../../../common/utils/utils';
+import {NzMessageService} from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-fault-forecast',
@@ -10,15 +11,24 @@ import {formatNumberWidth} from '../../../common/utils/utils';
 export class FaultForecastComponent implements OnInit {
 
   selectedModel: any = null;
+  selectedModelLabel: string = '-';
+  selectTime: string = '';
   list: any[] = [];
 
   loading = false;
-  modelData: any[] = [];
+  modelData: any[] = []; // 可分组选择
   currentList = [];
-  constructor(private service: FaultForecastService) { }
+  isRunning = false;
+  runningList = [];
+  selectedRunModel: string = '';
+  modelMap: any = {};
+  canRun:boolean = false;
+  constructor(private service: FaultForecastService,
+              private msg: NzMessageService) { }
 
   ngOnInit(): void {
     this.getModelList();
+    this.getRunModelList();
   }
 
   getModelList() {
@@ -30,17 +40,67 @@ export class FaultForecastComponent implements OnInit {
           const model = data.value.model;
           const predict_time = data.value.predict_time;
           const list = [];
-          for (let i = 1, j = 0; i < 7; i++, j++) {
+          for (let i = 1, j = 0; i <= model.length; i++, j++) {
             list.push({value: i, label: model[j]});
+            this.modelMap[model[j]] = true;
           }
-          this.modelData = list;
+          this.modelData.push(...list);
           this.selectedModel = list[0].value;
+          this.selectedModelLabel = list[0].label;
+          const start = this.selectedModelLabel.indexOf('(');
+          const end = this.selectedModelLabel.indexOf(')');
+          this.selectTime = this.selectedModelLabel.substring(start + 1, end);
           this.getDataList();
         }
       }
     });
   }
+  getRunModelList() {
+    this.service.getRunModelList().subscribe(res => {
+      this.loading = false;
+      if (res.code ===200) {
+        const data = res.data;
+        this.runningList = data.model_choice;
+        // this.selectedRunModel = this.runningList[0];
+        const list = [];
+        let index = 1;
+        for (const item of this.runningList) {
+          this.modelMap[item] = false;
+          index++;
+          list.push({value: ('run' + index), label: item});
+        }
+        this.modelData.push(...list);
 
+      }
+    });
+  }
+
+  modelRunChange(event: any) {
+    this.selectedRunModel = event;
+  }
+
+
+  getTrainingStatus() {
+    if (!this.canRun) {
+      this.msg.warning('当前模型为历史模型，请重新选择！')
+      return;
+    }
+    this.isRunning = true;
+    this.service.getTrainingData(this.selectedRunModel).subscribe({
+      next: (res) => {
+        if (res.code === 200) {
+          const data = res.data;
+          if (data['failure']) {
+            this.list = data['failure'];
+            this.list.forEach((item: any) => item.capacity_bytes = formatNumberWidth(item.capacity_bytes, 0));
+          }
+        }
+      },
+      error: (_error) => {
+        this.isRunning = false;
+      },
+    });
+  }
   getDataList() {
     this.loading = true;
     this.service.getDataList(this.selectedModel).subscribe(res => {
@@ -83,6 +143,19 @@ export class FaultForecastComponent implements OnInit {
 
   modelChange(event: any) {
     this.selectedModel = event;
-    this.getDataList();
+    const list = this.modelData.filter( item => item.value === event);
+    if (list && list.length > 0) {
+      this.selectedModelLabel = list[0].label;
+      if (this.modelMap[ this.selectedModelLabel]) {
+        this.getDataList();
+        this.canRun = false;
+      } else {
+        this.list = [];
+        this.canRun = true;
+      }
+      /*const start = this.selectedModelLabel.indexOf('(');
+      const end = this.selectedModelLabel.indexOf(')');
+      this.selectTime = this.selectedModelLabel.substring(start + 1, end);*/
+    }
   }
 }

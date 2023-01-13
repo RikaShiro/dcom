@@ -8,9 +8,11 @@
         <span class="run-time">最近预测时间：{{modelTime}}</span>
         <span class="run-rate">最近预测选择模型：{{currentModel}}</span>
       </div>
-      <div class="run-bt">
-        <span nz-icon nzType="sync" nzTheme="outline" class="span-icon-bt"></span>
-      </div>
+      <!--<div class="run-bt">
+        <span nz-icon nzType="sync" nzTheme="outline" class="span-icon-bt"*ngIf="!isRunning"
+              class="span-icon-bt" (click)="getRunningStatus()"></span>
+        <nz-spin nzSimple *ngIf="isRunning"></nz-spin>
+      </div>-->
     </div>
   </div>
 
@@ -19,8 +21,17 @@
       <span class="select-title">模型选择</span>
       <div class="select-input">
         <nz-select [(ngModel)]="selectedModel" (ngModelChange)="modelChange($event)">
-          <nz-option *ngFor="let p of modelData" [nzValue]="p.value" [nzLabel]="p.label"></nz-option>
+          <nz-option-group nzLabel="历史模型">
+            <nz-option *ngFor="let p of modelData" [nzValue]="p.value" [nzLabel]="p.label"></nz-option>
+          </nz-option-group>
+          <nz-option-group nzLabel="实时运行模型">
+            <nz-option *ngFor="let p of realList" [nzValue]="p.value" [nzLabel]="p.label"></nz-option>
+          </nz-option-group>
         </nz-select>
+      </div>
+      <div class="sub-block">
+        <button nz-button nzSize="default" nzType="primary" [disabled]="!canRun"
+                (click)="getRunningStatus()" [nzLoading]="isRunning">运行</button>
       </div>
     </div>
 
@@ -44,6 +55,30 @@
     </div>-->
   </div>
 
+  <!--<div class="real-model">
+    <div class="sub-block">
+      <span class="block-title">实时模型选择</span>
+      <div class="block-input">
+        <nz-select [(ngModel)]="realModel" >
+          <nz-option *ngFor="let p of realList" [nzValue]="p" [nzLabel]="p"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <span class="block-title">learning_rate</span>
+      <div class="block-input">
+        <nz-select [(ngModel)]="learningRate" >
+          <nz-option *ngFor="let p of learningRateList" [nzValue]="p" [nzLabel]="p"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <button nz-button nzSize="default" nzType="primary" (click)="getRunningStatus()" [nzLoading]="isRunning">运行</button>
+    </div>
+  </div>-->
+
   <div class="table">
     <nz-table #bomTable  nzSize="small"
               nzTableLayout="fixed"
@@ -65,7 +100,7 @@
 
         </td>
         <td >
-          <nz-input-number [(ngModel)]="paramsValues && paramsValues[data.key] ? paramsValues[data.key][selectedModel] : defaultValue"
+          <nz-input-number [(ngModel)]="paramsValues && paramsValues[data.key] ? paramsValues[data.key][selectHisModel] : defaultValue"
                            class="table-input"
                            placeholder="0" [nzMin]="data.min" [nzMax]="data.max" [nzStep]="0.01"></nz-input-number>
         </td>

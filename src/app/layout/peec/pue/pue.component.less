@@ -84,10 +84,13 @@
         margin-right: 12px;
       }
       .select-input{
-        width: 380px;
+        width: 450px;
         nz-select{
           width: 100%;
         }
+      }
+      .sub-block{
+        margin-left: 12px;
       }
     }
 
@@ -130,6 +133,46 @@
     }
   }
 
+  .real-model{
+    width: 100%;
+    height:auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    padding: 12px 0;
+
+    .sub-block, .half-block{
+      height: 50px;
+      line-height: 50px;
+      display: flex;
+      flex-direction: row;
+    }
+    .sub-block{
+      width: 33.3%;
+      button{
+        margin-top: 9px;
+      }
+    }
+    .half-block{
+      width: 50%;
+    }
+    .block-title{
+      width: auto;
+      text-align: right;
+      margin-right: 12px;
+      margin-left:12px;
+    }
+    .block-input{
+      width: calc(~"100% - 120px");
+      nz-select{
+        width: 100%;
+        max-width: 380px;
+      }
+    }
+  }
   .table{
     height: calc(100% - 120px);
     width: 100%;

@@ -4,13 +4,21 @@
       故障预测
     </span>
     <div class="run-group">
-      <div class="run-info">
-        <span class="run-time">最近预测时间：2022/04/22 12:20:00</span>
-        <span class="run-rate">最近预测选择模型：ACC：98.85%  |  AUC：94.36%  （2022/04/22 12:20:00)</span>
-      </div>
-      <div class="run-bt">
-        <span nz-icon nzType="sync" nzTheme="outline" class="span-icon-bt"></span>
-      </div>
+      <!--<div class="run-info">
+        &lt;!&ndash;<span class="run-time">最近预测时间：{{selectTime}}</span>
+        <span class="run-rate">最近预测选择模型：{{this.selectedModelLabel}}</span>&ndash;&gt;
+        <span class="select-title">训练模型选择</span>
+        <div class="select-input">
+          <nz-select [(ngModel)]="selectedRunModel" (ngModelChange)="modelRunChange($event)">
+            <nz-option *ngFor="let p of runningList" [nzValue]="p" [nzLabel]="p"></nz-option>
+          </nz-select>
+        </div>
+      </div>-->
+      <!--<div class="run-bt">
+        <span nz-icon nzType="sync" nzTheme="outline" class="span-icon-bt" *ngIf="!isRunning"
+              class="span-icon-bt" (click)="getTrainingStatus()"></span>
+        <nz-spin nzSimple *ngIf="isRunning"></nz-spin>
+      </div>-->
     </div>
   </div>
 
@@ -22,9 +30,21 @@
           <nz-option *ngFor="let p of modelData" [nzValue]="p.value" [nzLabel]="p.label"></nz-option>
         </nz-select>
       </div>
+
+      <!--<div class="sub-block">
+        <button nz-button nzSize="default" nzType="primary" [disabled]="!canRun"
+                (click)="getRunningStatus()" [nzLoading]="isRunning">运行</button>
+      </div>-->
+      <div class="run-bt">
+        <button nz-button nzSize="default" nzType="primary" [disabled]="!canRun"
+                (click)="getTrainingStatus()" [nzLoading]="isRunning">运行</button>
+        <!--<span nz-icon nzType="sync" nzTheme="outline" class="span-icon-bt" *ngIf="!isRunning"
+              class="span-icon-bt" (click)="getTrainingStatus()"></span>
+        <nz-spin nzSimple *ngIf="isRunning"></nz-spin>-->
+      </div>
     </div>
 
-    <div class="level-group">
+    <!--<div class="level-group">
       <div class="level-block">
         <span class="level-title">故障：</span>
         <span class="level-type level1">1</span>
@@ -41,7 +61,7 @@
         <span class="level-title">正常：</span>
         <span class="level-type level4">4</span>
       </div>
-    </div>
+    </div>-->
   </div>
 
   <div class="table">

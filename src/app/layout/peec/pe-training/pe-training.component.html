@@ -5,8 +5,8 @@
     </span>
     <div class="run-group">
       <div class="run-info">
-        <span class="run-time">最近训练时间：2022/04/22 12:20:00</span>
-        <span class="run-rate">MAE：0.0035 | MSE：2.5524e-05</span>
+        <span class="run-time">最近训练时间：{{currentModel}}</span>
+        <!--<span class="run-rate">MAE：0.0035 | MSE：2.5524e-05</span>-->
       </div>
       <div class="run-bt">
         <span nz-icon nzType="play-circle" nzTheme="outline" class="span-icon-bt" (click)="getRealTrainData()"
@@ -17,14 +17,14 @@
   </div>
 
   <div class="time-groups">
-    <div class="sub-block">
+    <!--<div class="sub-block">
       <span class="block-title">train_time</span>
       <div class="block-input">
         <nz-select [(ngModel)]="selectedModel" (ngModelChange)="modelChange($event)">
           <nz-option *ngFor="let p of trainingTimeList" [nzValue]="p.value" [nzLabel]="p.label"></nz-option>
         </nz-select>
       </div>
-    </div>
+    </div>-->
 
     <div class="sub-block">
       <span class="block-title">训练集划分</span>
@@ -47,7 +47,10 @@
     <div class="sub-block">
       <span class="block-title">learning_rate</span>
       <div class="block-input">
-        <input nz-input placeholder="Please input" [(ngModel)]="currentParams.learinin_rate" />
+        <nz-select [(ngModel)]="selectedModel" (ngModelChange)="modelChange($event)">
+          <nz-option *ngFor="let p of trainingTimeList" [nzValue]="p.value" [nzLabel]="p.label"></nz-option>
+        </nz-select>
+        <!--<input nz-input placeholder="Please input" [(ngModel)]="currentParams.learinin_rate" />-->
       </div>
     </div>
     <div class="sub-block">

@@ -53,4 +53,6 @@ export class CacheStrategyComponent implements OnInit {
       this.getPredictData();
     }
   }
+
+  modelCSChange(select: string) {}
 }

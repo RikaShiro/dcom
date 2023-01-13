@@ -100,7 +100,9 @@
         <span class="run-rate">缓存利用率OPT: 40.01%</span>
       </div>
       <div class="run-bt">
-        <span nz-icon nzType="play-circle" nzTheme="outline" class="span-icon-bt" (click)="postCacheModel()"></span>
+        <span nz-icon nzType="play-circle" nzTheme="outline" class="span-icon-bt" *ngIf="!isCacheRunning"
+              (click)="getCacheTrainingStatus()"></span>
+        <nz-spin nzSimple *ngIf="isCacheRunning"></nz-spin>
       </div>
     </div>
   </div>
