@@ -21,4 +21,5 @@ export class TrainDisk{
   train_data_finish?: string;
   train_data_start?: string;
   value?: any;
+  date?: any;
 }

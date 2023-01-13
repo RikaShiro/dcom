@@ -31,6 +31,8 @@ export class PeTrainingComponent implements OnInit {
   @ViewChild('lineChart1', { static: false }) lineChart1: PeLineChartComponent;
   @ViewChild('lineChart2', { static: false }) lineChart2: PeLineChartComponent;
 
+  currentModel = '';
+  timer: any = null;
   constructor(
     private service: PeTrainingService,
     private msg: NzMessageService
@@ -41,7 +43,7 @@ export class PeTrainingComponent implements OnInit {
 
   ngOnInit(): void {
     this.getModelList();
-    this.getTrainingStatus();
+    // this.getTrainingStatus();
   }
 
   getModelList() {
@@ -51,7 +53,7 @@ export class PeTrainingComponent implements OnInit {
         if (data.value) {
           const model = data.value;
           if (model) {
-            const list: string[] = model.train_time;
+            const list: any[] = model.learinin_rate;
             this.trainingTimeList = list.map((train, index) => {
               return {
                 label: train,
@@ -61,7 +63,8 @@ export class PeTrainingComponent implements OnInit {
             this.learningRateList = model.learinin_rate;
             this.currentParams = model;
             this.selectedModel = this.trainingTimeList[0].value;
-            this.currentParams.learinin_rate = this.learningRateList[0];
+            this.currentModel = model.train_time[0];
+            this.currentParams.learning_rate = list[0];
             this.getTrainData();
           }
         }
@@ -70,12 +73,13 @@ export class PeTrainingComponent implements OnInit {
   }
 
   getRealTrainData() {
-    this.currentParams.learning_rate = this.currentParams.learinin_rate;
+    // this.currentParams.learning_rate = this.currentParams.learinin_rate;
     this.isRunning = true;
     this.service.getRealTrainData(this.currentParams).subscribe({
       next: (res) => {
         if (res.code === 200) {
-          this.getRealTrainResult(this.currentParams.learning_rate);
+          // this.setCheckRunningStatus();
+          // 设置轮询查看是否完成
         }
         this.isRunning = false;
       },
@@ -83,6 +87,26 @@ export class PeTrainingComponent implements OnInit {
         this.isRunning = false;
       },
     });
+  }
+
+  setCheckRunningStatus() {
+    clearTimeout(this.timer);
+    this.timer = setTimeout( () => {
+      this.service.getTrainingStatus().subscribe({
+        next: (res) => {
+          if (res.code === 200) {
+            if (!res.data) {
+              this.getRealTrainResult(this.currentParams.learning_rate);
+            } else {
+              this.setCheckRunningStatus();
+            }
+          }
+        },
+        error: (_error) => {
+          this.isRunning = false;
+        },
+      });
+    }, 180000);
   }
 
   getRealTrainResult(rate: any) {
@@ -123,8 +147,12 @@ export class PeTrainingComponent implements OnInit {
     this.service.getTrainingStatus().subscribe({
       next: (res) => {
         if (res.code === 200) {
-          if (res.data) {
+          if (!res.data) {
             this.getRealTrainData();
+            setTimeout( ()=>{
+              this.setCheckRunningStatus();
+            }, 1000);
+
           } else {
             this.msg.warning('正在进行训练，请执行完毕再操作。');
           }
@@ -212,8 +240,10 @@ export class PeTrainingComponent implements OnInit {
 
   modelChange(event: any) {
     this.selectedModel = event;
-    this.currentParams.learinin_rate =
-      this.learningRateList[this.selectedModel];
+    // this.currentModel = this.trainingTimeList[event].label;
+    this.currentModel = this.currentParams.train_time?.[event];
+    /*this.currentParams.learinin_rate =
+      this.learningRateList[this.selectedModel];*/
     this.getTrainData();
   }
 }

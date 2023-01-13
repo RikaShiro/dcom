@@ -119,3 +119,13 @@ export function formatPercentWithoutDot(value: number) {
     return '-';
   }
 }
+
+export function setParams(params: any, url: string) {
+  let newUrl = url + '?';
+  for (const key in params) {
+    if (params[key]) {
+      newUrl += key + '=' + params[key] + '&';
+    }
+  }
+  return newUrl.substring(0, newUrl.length - 1);
+}

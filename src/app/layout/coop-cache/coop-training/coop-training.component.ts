@@ -40,7 +40,7 @@ export class CoopTrainingComponent implements OnInit {
   trafficData: any = {};
   trafficDataLoading = true;
   isRunning = false;
-
+  isCacheRunning = false;
   constructor(
     private service: CoopTrainingService,
     private msg: NzMessageService
@@ -111,8 +111,40 @@ export class CoopTrainingComponent implements OnInit {
   }
 
   postCacheModel() {
+    this.cacheDataLoading = true;
     this.service.postCacheModel(this.cache).subscribe((res) => {
+      this.cacheDataLoading = false;
+      this.isCacheRunning = false;
       if (res.code === 200) {
+        const $ = res.data;
+        this.cacheData.delay = {
+          data: {
+            cooperateCache: $.ad_ADL,
+            randomCache: $.ad_ADL_ran,
+          },
+        };
+        this.cacheData.hit = {
+          data: {
+            cooperateCache: $.ad_HIT,
+            randomCache: $.ad_HIT_ran,
+          },
+        };
+        this.cacheData.util = {
+          data: {
+            cooperateCache: $.ad_UTIL,
+            randomCache: $.ad_UTIL_ran,
+          },
+        };
+        this.cacheData.traffic = {
+          data: {
+            cooperateCacheHit: $.ad_hitTraffic,
+            randomCacheHit: $.ad_hitTraffic_ran,
+            userRequest: $.ad_reTraffic,
+          },
+        };
+        for (const k in this.cacheData) {
+          this.cacheData[k].xAxis = $.xAxis;
+        }
       }
     });
   }
@@ -122,8 +154,8 @@ export class CoopTrainingComponent implements OnInit {
     this.service.getTrainingStatus().subscribe({
       next: (res) => {
         if (res.code === 200) {
-          if (res.data) {
-            this.postCacheModel();
+          if (!res.data) {
+            this.postTrainingModel();
           } else {
             this.msg.warning('正在进行训练，请执行完毕再操作。');
           }
@@ -136,10 +168,22 @@ export class CoopTrainingComponent implements OnInit {
   }
 
   postTrainingModel() {
+    this.trafficDataLoading = true;
     this.service.postTrainingModel(this.training).subscribe({
       next: (res) => {
+        this.trafficDataLoading = false;
+        this.isRunning = false;
         this.isRunning = false;
         if (res.code === 200) {
+          const $ = res.data;
+          this.trafficData = {
+            xAxis: $.xAxis,
+            data: {
+              dataSource: $.dataSource,
+              predict: $.predict,
+            },
+            MSE: $.MSE.toFixed(4),
+          };
         }
       },
       error: (_error) => {
@@ -147,4 +191,23 @@ export class CoopTrainingComponent implements OnInit {
       },
     });
   }
+
+  getCacheTrainingStatus() {
+    this.isCacheRunning = true;
+    this.service.getCacheTrainingStatus().subscribe({
+      next: (res) => {
+        if (res.code === 200) {
+          if (!res.data) {
+            this.postCacheModel();
+          } else {
+            this.msg.warning('正在进行训练，请执行完毕再操作。');
+          }
+        }
+      },
+      error: (_error) => {
+        this.isCacheRunning = false;
+      },
+    });
+  }
+
 }

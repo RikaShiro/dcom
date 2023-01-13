@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {UrlService} from '../../../common/service/url.service';
 import {Observable} from 'rxjs';
 import {ApiRes} from '../../../common/model/response';
+import {TrainDisk} from '../model/TrainDisk';
+import {setParams} from '../../../common/utils/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -21,4 +23,14 @@ export class DistkTrainingService {
     const url = this.urlService.getUrl('/Hard_disk_monitoring_second_page/train' + type);
     return this.http.get<ApiRes>(url);
   }
+  getTrainingStatus(): Observable<ApiRes> {
+    const url = this.urlService.getUrl('/traffic/in-training');
+    return this.http.get<ApiRes>(url);
+  }
+  onGoTraining(params?: TrainDisk): Observable<ApiRes> {
+    const url = this.urlService.getUrl('/Hard_disk_monitoring_second_page/train0');
+    return this.http.post<ApiRes>(setParams(params, url), {});
+  }
+
+
 }

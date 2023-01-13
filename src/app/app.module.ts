@@ -10,6 +10,7 @@ import {NZ_I18N, zh_CN} from 'ng-zorro-antd/i18n';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AppInterceptor} from './common/interceptor/app.interceptor';
 import { LoginComponent } from './login/login.component';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LoginComponent } from './login/login.component';
   ],
   providers: [
     {provide: NZ_I18N, useValue: zh_CN},
-    {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true},
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
   ],
   bootstrap: [AppComponent]
 })

@@ -5,11 +5,13 @@
     </span>
     <div class="run-group">
       <div class="run-info">
-        <span class="run-time">最近训练时间：2022/04/22 12:20:00</span>
-        <span class="run-rate">ACC：98.85%  |  AUC：94.36%</span>
+        <span class="run-time">最近训练时间：{{selectedLabel}}</span>
+        <!--<span class="run-rate">{{selectedLabel}}</span>-->
       </div>
       <div class="run-bt">
-        <span nz-icon nzType="play-circle" nzTheme="outline" class="span-icon-bt"></span>
+        <span nz-icon nzType="play-circle" nzTheme="outline" *ngIf="!isRunning"
+              class="span-icon-bt" (click)="setRealTraining()"></span>
+        <nz-spin nzSimple *ngIf="isRunning"></nz-spin>
       </div>
     </div>
   </div>
@@ -19,7 +21,7 @@
       <span class="block-title">数据集选择</span>
       <div class="block-input">
         <nz-select [(ngModel)]="selectedModel" (ngModelChange)="modelChange($event)">
-          <nz-option *ngFor="let p of paramsList" [nzValue]="p.value" [nzLabel]="p.train_data"></nz-option>
+          <nz-option *ngFor="let p of paramsList" [nzValue]="p.value" [nzLabel]="p.date"></nz-option>
         </nz-select>
       </div>
     </div>

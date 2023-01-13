@@ -34,4 +34,8 @@ export class CoopTrainingService {
     const url = this.urlService.getUrl('/traffic/in-training');
     return this.http.get<ApiRes>(url);
   }
+  getCacheTrainingStatus(): Observable<ApiRes> {
+    const url = this.urlService.getUrl('/cache/in-training');
+    return this.http.get<ApiRes>(url);
+  }
 }
